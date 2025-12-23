@@ -1,40 +1,101 @@
-/* Menu.module.css */
+/* src/Menu.module.css */
 
 .navContainer {
-  background-color: #18181b; /* Cor escura (Zinc 900) */
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  max-width: 28rem;
-  margin: 0 auto; /* Centralizar */
+  background-color: #000000; /* Cinza bem escuro (Zinc 900) */
+  padding: 1.5rem;
+  border-radius: 7px;
+  width: 100%;
+  max-width: 300px; /* Limita a largura para não ocupar a tela toda */
+  margin: 20px auto; /* Centraliza na tela */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #afafb4;
+
 }
 
-.lista {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.botaoMenu {
+  background: transparent;
+  border: 1px solid rgba(107, 97, 97, 0.89);
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  
+  /* Dica: Adicionei isso para suavizar se você quiser por hover depois */
+  transition: all 0.2s ease;
+  border-radius: 4px; /* Opcional: só pra não ficar muito quadrado */
 }
+
+/* Opcional: Um efeitinho quando passar o mouse */
+.botaoMenu:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* A lista agora é vertical (column) */
+.lista {
+  list-style: none; /* Remove as bolinhas da lista */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0 0 0;
+  max-height: 0;           /* Altura inicial zero (escondido) */
+  opacity: 0;              /* Invisível */
+  overflow: hidden;        /* O que passar da altura, esconde */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 10px;
+}
+
+.listaAberta {
+  max-height: 600px;       /* Um valor maior que o conteúdo real */
+  opacity: 1;              /* Visível */
+  margin-top: 1rem;        /* Dá o espaço agora */
+  
+}
+
+.lista li {
+  opacity: 0;
+  transform: translateY(-20px); /* Começa um pouco pra cima */
+  transition: all 0.3s ease;
+
+}
+
+.listaAberta li {
+  opacity: 1;
+  transform: translateY(0); /* Vai pro lugar certo */
+  
+}
+
+.listaAberta li:nth-child(1) { transition-delay: 0.1s; }
+.listaAberta li:nth-child(2) { transition-delay: 0.2s; }
+.listaAberta li:nth-child(3) { transition-delay: 0.3s; }
+.listaAberta li:nth-child(4) { transition-delay: 0.4s; }
 
 .link {
+  display: block; /* Faz o link ocupar a linha inteira */
+  padding: 12px 16px;
+  color: #c3c3d6bb; /* Texto claro */
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem; /* 14px */
+  border-radius: 6px;
+  background-color: #b0b0c225; /* Fundo do botão */
   font-weight: 500;
-  color: #a1a1aa; /* Cinza claro */
-  transition: all 0.2s ease;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .link:hover {
-  background-color: #27272a;
-  color: #e4e4e7;
+  background-color: #3a3737a9; /* Fica mais claro ao passar o mouse */
+  transform: translateY(1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
-/* Classe especial para quando o item estiver ativo */
-.ativo {
-  background-color: #3f3f46;
-  color: white;
+
+.logoEsup {
+  font-size: 2rem;       /* Tamanho da fonte bem grande (32px) */
+  font-weight: 800;      /* Extra Negrito */
+  color: #3d3434;        /* Branco puro */
+  text-align: center;    /* Centralizado */
+  margin-bottom: 20px;   /* Empurra o botão de menu para baixo */
+  letter-spacing: 4px;   /* Espaça as letras (fica elegante para siglas) */
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(170, 82, 82, 0.3);
 }
