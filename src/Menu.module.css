@@ -1,364 +1,595 @@
-/*header*/
-/*header*/
-/*header*/
-/*header*/
+/* Menu.module.css */
 
-.barraTopo {
-  background: linear-gradient(to right, #0077aacc, #047ea7); /* Azul ESUP */
-  
-  color: white;
-  max-width: auto;;
-  padding: 8px 10%;
-  font-size: 0.85rem;
-  display: flex;
-  justify-content: space-between; /* Um grupo na esquerda, outro na direita */
-  align-items: center;
-  position: relative;
-  
+/* --- 1. DEFINIÇÃO DAS CORES (VARIÁVEIS) --- */
+
+/* Cores do Modo CLARO (Light) */
+* {
+  box-sizing: border-box;
+  /* Essencial para layouts responsivos */
+  margin: 0;
+  padding: 0;
+
 }
 
+body {
+  height: 180vh;
+}
 
+.temaClaro {
+  --bg-page: #f4f4f5;
+  /* Fundo da página */
+  --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
+  /* Azul ESUP */
+  --bg-barra-nav: linear-gradient(to right, #ffffff, #f0f0f0);
+  /* Barra onde fica o menu */
+  --text-nav: #333333;
+  /* Cor do texto do menu */
+  --text-nav-hover: #024689;
+  /* Cor do texto ao passar mouse */
+  --bg-dropdown: #ffffff;
+  /* Fundo do submenu */
+  --bg-dropdown-hover: #f4f4f5;
+  /* Fundo do item submenu hover */
+  --text-dropdown: #555555;
+  /* Texto do submenu */
+  --border-color: #e4e4e7;
+  /* Cor das bordas */
+  --bg-footer: #101012;
+  /* Rodapé (geralmente escuro nos dois) */
+  --text-footer: #a1a1aa;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
 
+/* Cores do Modo ESCURO (Dark) */
+.temaEscuro {
+  --bg-page: #121212;
+  /* Fundo preto suave */
+  --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
+  /* Azul mais escuro */
+  --bg-barra-nav: #1f1f1f;
+  /* Barra de menu escura */
+  --text-nav: #e0e0e0;
+  /* Texto claro */
+  --text-nav-hover: #4fa3e0;
+  /* Azul claro no hover */
+  --bg-dropdown: #2c2c2c;
+  /* Submenu cinza escuro */
+  --bg-dropdown-hover: #3d3d3d;
+  /* Hover submenu */
+  --text-dropdown: #cfcfcf;
+  /* Texto submenu claro */
+  --border-color: #444444;
+  /* Bordas escuras */
+  --bg-footer: #000000;
+  /* Rodapé preto total */
+  --text-footer: #888888;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
 
-/* Os grupos de itens (Esquerda e Direita) */
+/* --- 2. ESTRUTURA GERAL --- */
+
+.layoutPrincipal {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* AQUI A MÁGICA: Usa a variável em vez de cor fixa */
+  background-color: var(--bg-page);
+  color: var(--text-nav);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+/* --- HEADER (Topo Azul) --- */
+.barraTopo {
+  background: var(--bg-barra-topo);
+  /* Variável */
+  color: white;
+  /* Texto do topo azul mantém branco */
+  padding: 9px 10%;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+
+  /* Changes start here */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+}
+
 .grupoIcones {
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: space-around;
 }
 
-/* Cada item individual (Ícone + Texto) */
 .itemTopo {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   transition: all 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha só embaixo do item */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding-bottom: 2px;
+  margin-left: auto;
 }
 
-/* Efeito quando passa o mouse em cima do item */
 .itemTopo:hover {
   opacity: 1;
-  text-decoration: none; /* Opcional: sublinhar igual link */
-  border-bottom-color: #ffffff
-}
-
-
-/*header*/
-/*header*/
-/*header*/
-/*header*/
-
-
-/*meio*/
-/*meio*/
-/*meio*/
-/*meio*/
-
-
-.navContainer1 {
-  background-color: #000000; /* Cinza bem escuro (Zinc 900) */
-  padding: 1.5rem;
-  border-radius: 7px;
-  width: 100%;
-  max-width: 300px; /* Limita a largura para não ocupar a tela toda */
-  margin: 20px auto; /* Centraliza na tela */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  border: 1px solid #afafb4;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  row-gap: initial;
-}
-
-.layoutPrincipal {
-  display: flex;
-  flex-direction: column; /* Um bloco embaixo do outro */
-  min-height: 100vh;      /* Garante que o site tenha NO MÍNIMO a altura da tela */
-  background-color: #1a1a1a; /* Cor de fundo geral */
-  color: white;
-}
-
-.navContainer2 {
-  background-color: #000000; /* Cinza bem escuro (Zinc 900) */
-  padding: 1.5rem;
-  border-radius: 7px;
-  width: 100%;
-  max-width: 300px; /* Limita a largura para não ocupar a tela toda */
-  margin: 20px auto; /* Centraliza na tela */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  border: 1px solid #afafb4;
-display: flex;
-  align-items: center;
-  flex-direction: column;
-  
-}
-
-.botaoMenu {
-  background: transparent;
-  border: 1px solid rgba(107, 97, 97, 0.89);
-  color: white;
-  padding: 8px 12px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  
-
-  align-self: center;
-  /* Dica: Adicionei isso para suavizar se você quiser por hover depois */
-  transition: all 0.2s ease;
-  border-radius: 4px; 
-}
-
-/* Opcional: Um efeitinho quando passar o mouse */
-.botaoMenu:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: white;
-}
-
-/* A lista agora é vertical (column) */
-.lista {
-  list-style: none; /* Remove as bolinhas da lista */
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0 0 0;
-  max-height: 0;           /* Altura inicial zero (escondido) */
-  opacity: 0;              /* Invisível */
-  overflow: hidden;        /* O que passar da altura, esconde */
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 10px;
-}
-
-.listaAberta {
-  max-height: 600px;       /* Um valor maior que o conteúdo real */
-  opacity: 1;              /* Visível */
-  margin-top: 1rem;        /* Dá o espaço agora */
-  
-}
-
-.lista li {
-  opacity: 0;
-  transform: translateY(-20px); /* Começa um pouco pra cima */
-  transition: all 0.3s ease;
-
-}
-
-.listaAberta li {
-  opacity: 1;
-  transform: translateY(0); /* Vai pro lugar certo */
-  
-}
-
-.listaAberta li:nth-child(1) { transition-delay: 0.1s; }
-.listaAberta li:nth-child(2) { transition-delay: 0.2s; }
-.listaAberta li:nth-child(3) { transition-delay: 0.3s; }
-.listaAberta li:nth-child(4) { transition-delay: 0.4s; }
-
-.link {
-  display: block; /* Faz o link ocupar a linha inteira */
-  padding: 12px 16px;
-  color: #c3c3d6bb; /* Texto claro */
   text-decoration: none;
-  border-radius: 6px;
-  background-color: #b0b0c225; /* Fundo do botão */
-  font-weight: 500;
-  text-align: center;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  border-bottom-color: #ffffff;
 }
 
-.link:hover {
-  background-color: #3a3737a9; /* Fica mais claro ao passar o mouse */
-  transform: translateY(1px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+.itemTopo a {
+  text-decoration: none;
+  color: white;
 }
 
-
-.logoEsup {
-  font-size: 2rem;       /* Tamanho da fonte bem grande (32px) */
-  font-weight: 800;      /* Extra Negrito */
-  color: #3d3434;        /* Branco puro */
-  text-align: center;    /* Centralizado */
-  margin-bottom: 20px;   /* Empurra o botão de menu para baixo */
-  letter-spacing: 4px;   /* Espaça as letras (fica elegante para siglas) */
-  text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(170, 82, 82, 0.3);
-}
-
-
-/* O Container Principal agora engloba a página toda */
-
-
-/* 2. O MEIO (Conteúdo Principal) */
+/* --- MEIO (Conteúdo) --- */
 .meio {
-  flex: 1; /* O TRUQUE MÁGICO: Isso diz "ocupe todo o espaço vazio que sobrar" */
+  flex: 1;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza o conteúdo (os menus) */
-  gap: 40px; /* Espaço entre os menus 1 e 2 */
-}
-
-
-.barraBranca {
-  background: linear-gradient(to right, #0077aacc, #047ea7); /* Azul ESUP */
-  position: relative;
-  width: 100%; /* Ocupa a largura toda */
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-
-.itemMenuPrincipal {
-  position: relative; 
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  padding: 10px 0;
-  font-weight: 600;
-  color: #333;
-}
-
-.itemMenuPrincipal:hover {
-  color: #003366;
-}
-
-.submenuDropdown {
-  position: absolute; /* Flutua livremente */
-  top: 100%; /* Começa logo abaixo do pai */
-  left: 0;
-  background-color: white;
-  min-width: 200px; /* Largura mínima da caixa */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e4e4e7;
-  border-radius: 4px;
-  padding: 10px 0;
-  z-index: 100; /* Garante que fique na frente de tudo */
-  display: none; /* escondido por padrão */
-}
-
-.itemMenuPrincipal:hover > .submenuDropdown {
-  display: block;
-  animation: fadeIn 0.2s ease;
-}
-
-
-.itemComSubmenu {
-  position: relative; /* O pai precisa ser relative para o filho se alinhar a ele */
-  display: flex;
-  justify-content: space-between; /* Texto na esquerda, setinha na direita */
-  align-items: center;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: #555;
-  font-size: 0.9rem;
-}
-
-.itemComSubmenu > .submenuDropdown {
-  top: 0;       /* Alinha no topo */
-  left: 100%;   /* Joga para a direita */
-  margin-left: 2px;
-  display: none; /* Garante que comece fechado */
-}
-
-.itemComSubmenu:hover > .submenuDropdown {
-  display: block;
-  animation: fadeInRight 0.2s ease;
-}
-
-/* O Submenu (A caixinha que abre) */
-
-
-/* A MÁGICA: Quando passar o mouse no pai, mostra o filho */
-.itemComSubmenu > .submenuDropdown {
-  top: 0;       /* Alinha com o topo do item pai */
-  left: 100%;   /* Empurra 100% para a direita (sai da caixa pai) */
-  margin-left: 2px; /* Um espacinho para não grudar */
-  display: none;    /* Escondido por padrão */
-}
-
-/* Os links dentro do submenu */
-.linkSubmenu {
-  display: block;
-  padding: 10px 20px;
-  color: #555;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-.linkSubmenu:hover {
-  background-color: #f4f4f5;
-  color: #003366;
-}
-
-/* Uma animaçãozinha suave opcional */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.conteudoMenus {
-  width: 100%;
-  padding: 40px 20px; /* Aqui sim a gente coloca o espaçamento */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
 }
 
-/*meio*/
-/*meio*/
-/*meio*/
-/*meio*/
+/* Barra Branca (Agora adaptável) */
+.barraBranca {
+  background: var(--bg-barra-nav);
+  position: relative;
+  width: 100%;
+  color: var(--text-nav);
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+  transition: background 0.3s ease;
+}
 
+/* Layout 3 Colunas */
+.containerNavegacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+}
 
+.colunaLateral {
+  flex: 1;
+  display: flex;
+}
 
+.colunaCentral {
+  flex: auto;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
 
+.logoClaro {
+  height: 60px;
+  width: auto;
+  display: block;
+  transition: all 0.3s ease;
+}
 
+/* Classe para a logo do Modo ESCURO */
+.logoEscuro {
+  height: 60px;
+  width: auto;
+  display: block;
+  transition: all 0.3s ease;
+}
 
+/* Itens do Menu */
+.itemMenuPrincipal {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: 600;
+  color: var(--text-nav);
+  /* Variável */
+}
 
+.itemMenuPrincipal:hover {
+  color: var(--text-nav-hover);
+  /* Variável */
+}
 
+/* Dropdowns */
+.submenuDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-dropdown);
+  /* Variável */
+  min-width: 200px;
+  box-shadow: 0 10px 15px -3px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  /* Variável */
+  border-radius: 4px;
+  padding: 10px 0;
+  z-index: 100;
+  display: none;
+}
 
+.itemMenuPrincipal:hover>.submenuDropdown {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
 
+.itemComSubmenu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: var(--text-dropdown);
+  /* Variável */
+  font-size: 0.9rem;
+}
 
+.itemComSubmenu>.submenuDropdown {
+  top: 0;
+  left: 100%;
+  margin-left: 2px;
+  display: none;
+}
 
+.itemComSubmenu:hover>.submenuDropdown {
+  display: block;
+  animation: fadeInRight 0.2s ease;
+}
 
+/* Links do Submenu */
+.linkSubmenu {
+  display: block;
+  padding: 10px 20px;
+  color: var(--text-dropdown);
+  /* Variável */
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
 
+.linkSubmenu:hover {
+  background-color: var(--bg-dropdown-hover);
+  /* Variável */
+  color: var(--text-nav-hover);
+}
 
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
-/*rodape*/
-/*rodape*/
-/*rodape*/
-/*rodape*/
+/*Modo escuro e claro botão**/
+.botaoTema {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  /* Branco para destacar no fundo azul/escuro */
+  font-size: 1.3rem;
+  /* Tamanho do ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  /* Deixa o hover redondo */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 15px;
+}
 
+.botaoTema:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  /* Fundo clarinho ao passar o mouse */
+  transform: rotate(15deg);
+  /* Uma leve giradinha charmosa */
+}
+
+/* --- BOTÃO SWITCH (ESTILO DA IMAGEM) --- */
+
+/* O "trilho" do botão (a parte oval) */
+.switchTrack {
+  width: 52px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Fundo translúcido */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  /* Borda bem redonda */
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+  padding: 0;
+  /* Reset de padding de botão padrão */
+}
+
+/* Efeito quando está no modo Escuro (Fundo muda de cor) */
+.switchTrackActive {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fica mais escuro no dark mode */
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* A "bolinha" que se move (Thumb) */
+.switchThumb {
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  left: 3px;
+  /* Posição inicial na esquerda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  /* Cor do ícone dentro da bolinha */
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  /* Animação suave */
+}
+
+/* Quando ativo, empurra a bolinha para a direita */
+.switchTrackActive .switchThumb {
+  transform: translateX(24px);
+  /* Move 24px para a direita */
+  background-color: #fff;
+  /* Mantém branco */
+  color: #000;
+}
+
+/* --- RODAPÉ --- */
 .rodape {
-  background-color: #101012; /* Quase preto */
+  background-color: var(--bg-footer);
+  /* Variável */
   padding: 20px;
   text-align: center;
-  border-top: 1px solid #3f3f46;
+  border-top: 1px solid var(--border-color);
   font-size: 0.8rem;
-  color: #a1a1aa;
+  color: var(--text-footer);
+}
+
+
+/* Esconde o botão hambúrguer no Desktop */
+.menuHamburgerIcon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-nav);
+}
+
+/* O Menu Mobile (Gaveta) - Escondido por padrão */
+.menuMobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fundo escuro transparente */
+  z-index: 998;
+  display: none;
+  /* Só aparece via React/JS */
+}
+
+.menuMobileContainer {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  /* Começa fora da tela na direita */
+  width: 280px;
+  height: 100%;
+  background-color: var(--bg-page);
+  /* Usa a cor do tema */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  /* Permite rolar se o menu for grande */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.menuMobileContainer.aberto {
+  right: 0;
+  /* Entra na tela */
+}
+
+.cabecalhoMobile {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.botaoFechar {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-nav);
+  cursor: pointer;
+}
+
+/* Estilo dos itens no Mobile (Acordeão) */
+.itemMobile {
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px 0;
+}
+
+.tituloMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-nav);
+  cursor: pointer;
+}
+
+.listaSubitensMobile {
+  margin-top: 10px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.3s;
+}
+
+.linkMobile {
+  text-decoration: none;
+  color: var(--text-dropdown);
+  font-size: 0.9rem;
+  padding: 5px 0;
+  display: block;
+}
+
+/* ... (após os estilos de .linkMobile e antes de @media) ... */
+
+/* Novos estilos para os itens do topo dentro do menu mobile */
+.conteudoTopoMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobileTopGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--text-nav);
+}
+
+.mobileTopItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobileTopItem a {
+  text-decoration: none;
+  color: var(--text-nav);
+}
+
+/* Ajuste para o botão de tema no mobile */
+.switchContainerMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-nav);
 }
 
 
 
+/* --- MEDIA QUERIES --- */
 
-/*rodape*/
-/*rodape*/
-/*rodape*/
-/*rodape*/
+@media (max-width: 992px) {
+  /* Tablet e Celular */
+
+  /* 1. Ajuste da Barra Topo Azul */
+  .barraTopo {
+    display: none;
+    /* Agora ela some no mobile */
+  }
+
+  .grupoIcones {
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Permite quebrar linha se não couber */
+    gap: 15px;
+  }
+
+  /* 2. Esconder o Menu Desktop */
+  .colunaCentral {
+    display: none !important;
+  }
+}
+
+.menuHamburgerIcon {
+  display: block !important;
+  /* Força aparecer no celular */
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-nav);
+}
+
+/* 4. Ajustar Layout da Barra Branca */
+.barraBranca {
+  height: auto;
+  padding: 15px 0;
+}
+
+.containerNavegacao {
+  /* Mantém Logo na esquerda e Hambúrguer na direita */
+  justify-content: space-between;
+}
+
+/* A coluna vazia da direita no desktop agora atrapalha, vamos esconder */
+.colunaLateral:last-child {
+  display: none;
+}
+
+/* Ajuste de tamanho da logo no mobile */
+.logoClaro,
+.logoEscuro {
+  height: 40px;
+  display: flex;
+  margin-left: 80%;
+}
+
+@media (min-width: 993px) {
+  .menuHamburgerIcon {
+    display: none !important;
+    /* Força sumir no PC */
+  }
+
+  /* Garante que o menu normal apareça no PC */
+  .colunaCentral {
+    display: flex !important;
+    margin-left: 60%;
+  }
+}

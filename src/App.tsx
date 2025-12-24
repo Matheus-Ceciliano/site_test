@@ -1,11 +1,18 @@
-import { FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook } from 'react-icons/fa';
+import React, { useState } from 'react';
+import {
+  FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp
+} from 'react-icons/fa';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 import styles from './Menu.module.css';
 
+// Importe suas imagens corretamente
+import logoLightMode from './assets/logo-esup.png';
+import logoDarkMode from './assets/logo-esup-white.png';
 
 interface SubItem {
-  label:string; 
-  link?:string;
+  label: string;
+  link?: string;
   subItems?: SubItem[];
 }
 
@@ -14,9 +21,16 @@ interface MenuPrincipal {
   items: SubItem[];
 }
 
-
-
 const menus: MenuPrincipal[] = [
+  {
+    titulo: "A Esup",
+    items: [
+      { label: "Sobre a Esup", link: "#" },
+      { label: "Dirigentes", link: "#" },
+      { label: "Corpo Docente", link: "#" },
+      { label: "Secretaria Geral", link: "#" }
+    ]
+  },
   {
     titulo: "Como Ingressar",
     items: [
@@ -29,13 +43,21 @@ const menus: MenuPrincipal[] = [
   {
     titulo: "Programas",
     items: [
-      // Mantive a lógica de Cascata (Seta ▸) aqui dentro para exemplo
-      { 
-        label: "Graduação Presencial ▸",
+      {
+        label: "Graduação Presencial", // Removi a seta ▸ do texto, usaremos ícone
         subItems: [
           { label: "Direito", link: "#" },
-          { label: "Engenharia de Software", link: "#" },
-          { label: "Psicologia", link: "#" }
+          { label: "Sistema de Informação", link: "#" },
+          { label: "Psicologia", link: "#" },
+          { label: "Administração", link: "#" },
+          { label: "Ciências Contábeis", link: "#" },
+        ]
+      },
+      {
+        label: "Graduação EAD",
+        subItems: [
+          { label: "Processos Gerenciais", link: "#" },
+          { label: "Power BI", link: "#" }
         ]
       },
       { label: "Pós-Graduação", link: "#" },
@@ -51,128 +73,172 @@ const menus: MenuPrincipal[] = [
     ]
   },
   {
-    titulo: "Contatos e Avisos",
+    titulo: "Contatos",
     items: [
       { label: "Fale Conosco", link: "#" },
-      { label: "Ouvidoria", link: "#" },
       { label: "Localização", link: "#" },
-      { label: "Editais e Avisos", link: "#" }
+      { label: "Editais", link: "#" }
     ]
   }
-  
 ];
-
-
 const App = () => {
+  // ... (estados e funções continuam os mesmos) ...
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMenuIndex, setExpandedMenuIndex] = useState<number | null>(null);
 
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
+
+  // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
+  const ThemeSwitch = () => (
+    <button
+      onClick={toggleTheme}
+      className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
+      title="Mudar Tema"
+      type="button"
+    >
+      <div className={styles.switchThumb}>
+        {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
+      </div>
+    </button>
+  );
 
   return (
-    // A caixa mãe que segura as 3 divisões
-    <div className={styles.layoutPrincipal}>
+    <div className={`${styles.layoutPrincipal} ${isDarkMode ? styles.temaEscuro : styles.temaClaro}`}>
 
+      {/* --- MENU MOBILE (GAVETA LATERAL) --- */}
+      {mobileMenuOpen && (
+        <div className={styles.menuMobileOverlay} onClick={toggleMobileMenu}></div>
+      )}
 
-
-
-      {/* --- 1. TOPO (HEADER) --- */}
-      {/* --- BARRA DE TOPO AZUL --- */}
-        <div className={styles.barraTopo}>
-
-          {/* GRUPO ESQUERDA */}
-          <div className={styles.grupoIcones}>
-            
-            <span className={styles.itemTopo}>
-              <FaWhatsapp size={18} />
-              WhatsApp: (62) 3300-4400
-            </span>
-            
-            <span className={styles.itemTopo}>
-              <FaCalendarAlt />
-              Calendário Acadêmico
-            </span>
-
-            <span className={styles.itemTopo}>
-              <FaBook />
-              Biblioteca
-            </span>
-          </div>
-
-          {/* GRUPO DIREITA */}
-          <div className={styles.grupoIcones}>
-            <span className={styles.itemTopo}>
-              <FaUser />
-              Moodle
-            </span>
-
-            <span className={styles.itemTopo}>
-              <FaLaptop />
-              Portal Acadêmico
-            </span>
-          </div>
-
+      <div className={`${styles.menuMobileContainer} ${mobileMenuOpen ? styles.aberto : ''}`}>
+        <div className={styles.cabecalhoMobile}>
+          <button onClick={toggleMobileMenu} className={styles.botaoFechar}>
+            <FaTimes />
+          </button>
         </div>
 
+        {/* --- NOVO: CONTEÚDO DO TOPO DENTRO DO MENU --- */}
+        <div className={styles.conteudoTopoMobile}>
 
-      {/* --- 2. MEIO (MAIN) --- */}
-      <main className={styles.meio}>
+          {/* Botão de Tema com texto */}
+          <div className={styles.switchContainerMobile}>
+            <span>Modo {isDarkMode ? 'Escuro' : 'Claro'}</span>
+            <ThemeSwitch />
+          </div>
 
-        <div className={styles.barraBranca}>
-            <div style={{ display: 'flex', gap: '30px' }}>
-  {menus.map((menu, index) => (
-    
-    // NÍVEL 1: O Botão Principal (ex: GRADUAÇÃO)
-    <div key={index} className={styles.itemMenuPrincipal}>
-      {menu.titulo} ▾
-      
-      {/* O PRIMEIRO DROPDOWN (Vertical) */}
-      <div className={styles.submenuDropdown}>
-        
-        {menu.items.map((subItem, subIndex) => (
-          
-          // VERIFICAÇÃO: Tem subitens? (Engenharia) OU é link normal? (Direito)
-          subItem.subItems ? (
-            
-            // CASO 1: TEM CASCATA (Engenharias)
-            <div key={subIndex} className={styles.itemComSubmenu}>
-              {subItem.label}
-              
-              {/* O SEGUNDO DROPDOWN (Lateral) */}
-              <div className={styles.submenuDropdown}>
-                {subItem.subItems.map((neto, netoIndex) => (
-                  <a key={netoIndex} href={neto.link} className={styles.linkSubmenu}>
-                    {neto.label}
-                  </a>
+          {/* Grupo de Contatos */}
+          <div className={styles.mobileTopGroup}>
+            <span className={styles.mobileTopItem}><FaWhatsapp size={18} /> (62) 3300-4400</span>
+            <span className={styles.mobileTopItem}><FaCalendarAlt /> Calendário Acadêmico</span>
+            <span className={styles.mobileTopItem}><FaBook /> Biblioteca</span>
+          </div>
+
+          {/* Grupo de Portais */}
+          <div className={styles.mobileTopGroup}>
+            <span className={styles.mobileTopItem}><FaUser /> <a target='_blank' href="https://atp.esup.edu.br/?_gl=1*xsldly*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky">Moodle</a></span>
+            <span className={styles.mobileTopItem}><FaLaptop /> <a target='_blank' href="https://sei.esup.edu.br/?_gl=1*1hcx7wm*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky"> Portal Acadêmico</a> </span>
+          </div>
+        </div>
+        {/* -------------------------------------------- */}
+
+        {/* Lista de Menus de Navegação (Seu código anterior) */}
+        {menus.map((menu, index) => (
+          // ... (todo o código do menu acordeão continua igual aqui) ...
+          <div key={index} className={styles.itemMobile}>
+            <div className={styles.tituloMobile} onClick={() => toggleSubmenuMobile(index)}>
+              {menu.titulo}
+              {expandedMenuIndex === index ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
+            </div>
+            {expandedMenuIndex === index && (
+              <div className={styles.listaSubitensMobile}>
+                {menu.items.map((subItem, subIndex) => (
+                  <div key={subIndex}>
+                    {subItem.subItems ? (
+                      <div style={{ marginTop: 10 }}>
+                        <strong style={{ fontSize: '0.85rem', color: 'var(--text-nav)' }}>{subItem.label}</strong>
+                        <div style={{ paddingLeft: 10, borderLeft: '2px solid var(--border-color)', marginTop: 5 }}>
+                          {subItem.subItems.map((neto, netoIndex) => (
+                            <a key={netoIndex} href={neto.link} className={styles.linkMobile}>{neto.label}</a>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <a href={subItem.link} className={styles.linkMobile}>{subItem.label}</a>
+                    )}
+                  </div>
                 ))}
               </div>
-            </div>
-
-          ) : (
-            
-            // CASO 2: LINK NORMAL (Direito)
-            <a key={subIndex} href={subItem.link} className={styles.linkSubmenu}>
-              {subItem.label}
-            </a>
-
-          )
-
+            )}
+          </div>
         ))}
-
       </div>
-    </div>
-  ))}
-  </div>
-</div>
 
-        {/* Menu 1 */}
-       
+
+      {/* --- 1. TOPO (HEADER) - Some no mobile via CSS --- */}
+      <div className={styles.barraTopo}>
+        <div className={styles.grupoIcones}>
+          <span className={styles.itemTopo}><FaWhatsapp size={18} /> (62) 3300-4400</span>
+          <span className={styles.itemTopo}><FaCalendarAlt /> Calendário</span>
+          <span className={styles.itemTopo}><FaBook /> Biblioteca</span>
+        </div>
+
+        <div className={styles.grupoIcones}>
+
+
+          <span className={styles.itemTopo}><FaUser /> <a target='_blan' href="https://atp.esup.edu.br/?_gl=1*xsldly*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky">Moodle </a></span>
+          <span className={styles.itemTopo}><FaLaptop /> <a target='_blank' href="https://sei.esup.edu.br/?_gl=1*1hcx7wm*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky"> Portal Acadêmico</a></span>
+          {/* Usa o componente do botão */}
+          <ThemeSwitch />
+        </div>
+      </div>
+
+      {/* --- 2. MEIO (MAIN) --- */}
+      {/* ... (O resto do seu código permanece idêntico) ... */}
+      <main className={styles.meio}>
+        <div className={styles.barraBranca}>
+          <div className={styles.containerNavegacao}>
+            <div className={styles.colunaLateral}>
+              <img src={isDarkMode ? logoDarkMode : logoLightMode} alt="Logo ESUP" className={isDarkMode ? styles.logoEscuro : styles.logoClaro} />
+            </div>
+            <div className={styles.colunaCentral}>
+              {/* ... menus desktop ... */}
+              {menus.map((menu, index) => (
+                <div key={index} className={styles.itemMenuPrincipal}>
+                  {menu.titulo} ▾
+                  <div className={styles.submenuDropdown}>
+                    {menu.items.map((subItem, subIndex) => (
+                      subItem.subItems ? (
+                        <div key={subIndex} className={styles.itemComSubmenu}>
+                          {subItem.label}
+                          <div className={styles.submenuDropdown}>
+                            {subItem.subItems.map((neto, netoIndex) => (
+                              <a key={netoIndex} href={neto.link} className={styles.linkSubmenu}>{neto.label}</a>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <a key={subIndex} href={subItem.link} className={styles.linkSubmenu}>{subItem.label}</a>
+                      )
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.colunaLateral} style={{ justifyContent: 'flex-end', display: 'flex' }}>
+              <div className={styles.menuHamburgerIcon} onClick={toggleMobileMenu}>
+                <FaBars />
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
 
-
-      {/* --- 3. RODAPÉ (FOOTER) --- */}
       <footer className={styles.rodape}>
         <p>© 2025 Grupo ESUP - Todos os direitos reservados.</p>
-        <p>Feito com React e TypeScript</p>
       </footer>
-
     </div>
   );
 };
