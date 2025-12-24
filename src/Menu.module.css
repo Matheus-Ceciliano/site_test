@@ -1,39 +1,36 @@
-/* Menu.module.css */
+/* Menu.module.css - COMPLETO */
 
-/* --- 1. DEFINIÇÃO DAS CORES (VARIÁVEIS) --- */
-
-/* Cores do Modo CLARO (Light) */
+/* --- 1. RESET GLOBAL (Essencial para responsividade) --- */
 * {
   box-sizing: border-box;
-  /* Essencial para layouts responsivos */
   margin: 0;
   padding: 0;
-
 }
 
+/* --- 2. DEFINIÇÃO DAS CORES (VARIÁVEIS) --- */
 
-
+/* Cores do Modo CLARO (Light) */
 .temaClaro {
   --bg-page: #f4f4f5;
   /* Fundo da página */
   --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
   /* Azul ESUP */
   --bg-barra-nav: linear-gradient(to right, #ffffff, #f0f0f0);
-  /* Barra onde fica o menu */
+  /* Barra menu */
   --text-nav: #333333;
   /* Cor do texto do menu */
   --text-nav-hover: #024689;
-  /* Cor do texto ao passar mouse */
+  /* Cor do texto hover */
   --bg-dropdown: #ffffff;
-  /* Fundo do submenu */
+  /* Fundo submenu */
   --bg-dropdown-hover: #f4f4f5;
-  /* Fundo do item submenu hover */
+  /* Hover submenu */
   --text-dropdown: #555555;
-  /* Texto do submenu */
+  /* Texto submenu */
   --border-color: #e4e4e7;
-  /* Cor das bordas */
+  /* Bordas */
   --bg-footer: #101012;
-  /* Rodapé (geralmente escuro nos dois) */
+  /* Rodapé */
   --text-footer: #a1a1aa;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
@@ -43,63 +40,57 @@
   --bg-page: #121212;
   /* Fundo preto suave */
   --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
-  /* Azul mais escuro */
+  /* Azul escuro */
   --bg-barra-nav: #1f1f1f;
-  /* Barra de menu escura */
+  /* Barra menu escura */
   --text-nav: #e0e0e0;
   /* Texto claro */
   --text-nav-hover: #4fa3e0;
-  /* Azul claro no hover */
+  /* Azul claro hover */
   --bg-dropdown: #2c2c2c;
-  /* Submenu cinza escuro */
+  /* Submenu cinza */
   --bg-dropdown-hover: #3d3d3d;
   /* Hover submenu */
   --text-dropdown: #cfcfcf;
   /* Texto submenu claro */
   --border-color: #444444;
-  /* Bordas escuras */
+  /* Bordas */
   --bg-footer: #000000;
-  /* Rodapé preto total */
+  /* Rodapé preto */
   --text-footer: #888888;
   --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
-/* --- 2. ESTRUTURA GERAL --- */
+/* --- 3. ESTRUTURA GERAL --- */
 
 .layoutPrincipal {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* AQUI A MÁGICA: Usa a variável em vez de cor fixa */
   background-color: var(--bg-page);
   color: var(--text-nav);
   transition: background-color 0.3s ease, color 0.3s ease;
-
+  width: 100%;
+  overflow-x: hidden;
+  /* Evita rolagem lateral acidental */
 }
 
-/* --- HEADER (Topo Azul) --- */
+/* --- 4. HEADER (Topo Azul) --- */
 .barraTopo {
   background: var(--bg-barra-topo);
-  /* Variável */
   color: white;
-  /* Texto do topo azul mantém branco */
-  padding: 9px 10%;
+  padding: 8px 10%;
   font-size: 0.85rem;
   display: flex;
   justify-content: space-between;
-
-  /* Changes start here */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
+  align-items: center;
+  position: relative;
 }
 
 .grupoIcones {
   display: flex;
   gap: 20px;
   align-items: center;
-  justify-content: space-around;
 }
 
 .itemTopo {
@@ -110,7 +101,9 @@
   transition: all 0.2s;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding-bottom: 2px;
-  margin-left: auto;
+  color: white;
+  /* Garante que o texto fique branco */
+  text-decoration: none;
 }
 
 .itemTopo:hover {
@@ -120,11 +113,54 @@
 }
 
 .itemTopo a {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
-/* --- MEIO (Conteúdo) --- */
+/* --- 5. BOTÃO SWITCH (ESTILO CÁPSULA) --- */
+.switchTrack {
+  width: 52px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+  padding: 0;
+}
+
+.switchTrackActive {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.switchThumb {
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  left: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.switchTrackActive .switchThumb {
+  transform: translateX(24px);
+  background-color: #fff;
+  color: #000;
+}
+
+/* --- 6. BARRA DE NAVEGAÇÃO (MEIO) --- */
 .meio {
   flex: 1;
   padding: 0;
@@ -134,7 +170,6 @@
   gap: 40px;
 }
 
-/* Barra Branca (Agora adaptável) */
 .barraBranca {
   background: var(--bg-barra-nav);
   position: relative;
@@ -142,24 +177,27 @@
   color: var(--text-nav);
   height: 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   box-shadow: 0 4px 6px -1px var(--shadow-color);
   transition: background 0.3s ease;
 }
 
-/* Layout 3 Colunas */
 .containerNavegacao {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 0 10px;
+  max-width: 1200px;
+  /* Limita a largura em telas muito grandes */
 }
 
+/* Colunas do Layout */
 .colunaLateral {
   flex: 1;
   display: flex;
+  align-items: center;
 }
 
 .colunaCentral {
@@ -169,22 +207,24 @@
   gap: 30px;
 }
 
+/* --- 7. LOGOS (TAMANHOS DIFERENTES) --- */
 .logoClaro {
   height: 60px;
+  /* Menor para compensar a borda branca se houver */
   width: auto;
   display: block;
   transition: all 0.3s ease;
 }
 
-/* Classe para a logo do Modo ESCURO */
 .logoEscuro {
   height: 60px;
+  /* Maior para dar destaque no fundo escuro */
   width: auto;
   display: block;
   transition: all 0.3s ease;
 }
 
-/* Itens do Menu */
+/* --- 8. MENUS DESKTOP --- */
 .itemMenuPrincipal {
   position: relative;
   height: 100%;
@@ -196,25 +236,20 @@
   padding: 10px 0;
   font-weight: 600;
   color: var(--text-nav);
-  /* Variável */
 }
 
 .itemMenuPrincipal:hover {
   color: var(--text-nav-hover);
-  /* Variável */
 }
 
-/* Dropdowns */
 .submenuDropdown {
   position: absolute;
   top: 100%;
   left: 0;
   background-color: var(--bg-dropdown);
-  /* Variável */
   min-width: 200px;
   box-shadow: 0 10px 15px -3px var(--shadow-color);
   border: 1px solid var(--border-color);
-  /* Variável */
   border-radius: 4px;
   padding: 10px 0;
   z-index: 100;
@@ -234,7 +269,6 @@
   padding: 10px 20px;
   cursor: pointer;
   color: var(--text-dropdown);
-  /* Variável */
   font-size: 0.9rem;
 }
 
@@ -250,12 +284,10 @@
   animation: fadeInRight 0.2s ease;
 }
 
-/* Links do Submenu */
 .linkSubmenu {
   display: block;
   padding: 10px 20px;
   color: var(--text-dropdown);
-  /* Variável */
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 400;
@@ -263,131 +295,12 @@
 
 .linkSubmenu:hover {
   background-color: var(--bg-dropdown-hover);
-  /* Variável */
   color: var(--text-nav-hover);
 }
 
-/* Animações */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+/* --- 9. MOBILE MENU (GAVETA & HAMBURGUER) --- */
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/*Modo escuro e claro botão**/
-.botaoTema {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #ffffff;
-  /* Branco para destacar no fundo azul/escuro */
-  font-size: 1.3rem;
-  /* Tamanho do ícone */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 50%;
-  /* Deixa o hover redondo */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-left: 15px;
-}
-
-.botaoTema:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  /* Fundo clarinho ao passar o mouse */
-  transform: rotate(15deg);
-  /* Uma leve giradinha charmosa */
-}
-
-/* --- BOTÃO SWITCH (ESTILO DA IMAGEM) --- */
-
-/* O "trilho" do botão (a parte oval) */
-.switchTrack {
-  width: 52px;
-  height: 28px;
-  background-color: rgba(255, 255, 255, 0.2);
-  /* Fundo translúcido */
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 30px;
-  /* Borda bem redonda */
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
-  margin-left: 15px;
-  padding: 0;
-  /* Reset de padding de botão padrão */
-}
-
-/* Efeito quando está no modo Escuro (Fundo muda de cor) */
-.switchTrackActive {
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Fica mais escuro no dark mode */
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* A "bolinha" que se move (Thumb) */
-.switchThumb {
-  width: 22px;
-  height: 22px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  position: absolute;
-  left: 3px;
-  /* Posição inicial na esquerda */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #333;
-  /* Cor do ícone dentro da bolinha */
-  font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-  /* Animação suave */
-}
-
-/* Quando ativo, empurra a bolinha para a direita */
-.switchTrackActive .switchThumb {
-  transform: translateX(24px);
-  /* Move 24px para a direita */
-  background-color: #fff;
-  /* Mantém branco */
-  color: #000;
-}
-
-/* --- RODAPÉ --- */
-.rodape {
-  background-color: var(--bg-footer);
-  /* Variável */
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.8rem;
-  color: var(--text-footer);
-}
-
-
-/* Esconde o botão hambúrguer no Desktop */
+/* Por padrão (PC), o ícone fica escondido */
 .menuHamburgerIcon {
   display: none;
   font-size: 1.5rem;
@@ -395,7 +308,7 @@
   color: var(--text-nav);
 }
 
-/* O Menu Mobile (Gaveta) - Escondido por padrão */
+/* Fundo escuro atrás do menu mobile */
 .menuMobileOverlay {
   position: fixed;
   top: 0;
@@ -403,26 +316,22 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Fundo escuro transparente */
   z-index: 998;
-  display: none;
-  /* Só aparece via React/JS */
 }
 
+/* A gaveta do menu */
 .menuMobileContainer {
   position: fixed;
   top: 0;
   right: -300px;
-  /* Começa fora da tela na direita */
+  /* Escondido na direita */
   width: 280px;
   height: 100%;
   background-color: var(--bg-page);
-  /* Usa a cor do tema */
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   z-index: 999;
   transition: right 0.3s ease;
   overflow-y: auto;
-  /* Permite rolar se o menu for grande */
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -430,7 +339,7 @@
 
 .menuMobileContainer.aberto {
   right: 0;
-  /* Entra na tela */
+  /* Aparece na tela */
 }
 
 .cabecalhoMobile {
@@ -447,41 +356,7 @@
   cursor: pointer;
 }
 
-/* Estilo dos itens no Mobile (Acordeão) */
-.itemMobile {
-  border-bottom: 1px solid var(--border-color);
-  padding: 15px 0;
-}
-
-.tituloMobile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: var(--text-nav);
-  cursor: pointer;
-}
-
-.listaSubitensMobile {
-  margin-top: 10px;
-  padding-left: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  animation: fadeIn 0.3s;
-}
-
-.linkMobile {
-  text-decoration: none;
-  color: var(--text-dropdown);
-  font-size: 0.9rem;
-  padding: 5px 0;
-  display: block;
-}
-
-/* ... (após os estilos de .linkMobile e antes de @media) ... */
-
-/* Novos estilos para os itens do topo dentro do menu mobile */
+/* Estilos dos itens dentro do mobile */
 .conteudoTopoMobile {
   display: flex;
   flex-direction: column;
@@ -512,7 +387,6 @@
   color: var(--text-nav);
 }
 
-/* Ajuste para o botão de tema no mobile */
 .switchContainerMobile {
   display: flex;
   justify-content: space-between;
@@ -521,73 +395,114 @@
   color: var(--text-nav);
 }
 
-
-
-/* --- MEDIA QUERIES --- */
-
-@media (max-width: 992px) {
-  /* Tablet e Celular */
-
-  /* 1. Ajuste da Barra Topo Azul */
-  .barraTopo {
-    display: none;
-    /* Agora ela some no mobile */
-  }
-
-  .grupoIcones {
-    justify-content: center;
-    flex-wrap: wrap;
-    /* Permite quebrar linha se não couber */
-    gap: 15px;
-  }
-
-  /* 2. Esconder o Menu Desktop */
-  .colunaCentral {
-    display: none !important;
-  }
-}
-
-.menuHamburgerIcon {
-  display: block !important;
-  /* Força aparecer no celular */
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-nav);
-}
-
-/* 4. Ajustar Layout da Barra Branca */
-.barraBranca {
-  height: auto;
+.itemMobile {
+  border-bottom: 1px solid var(--border-color);
   padding: 15px 0;
 }
 
-.containerNavegacao {
-  /* Mantém Logo na esquerda e Hambúrguer na direita */
-  justify-content: space-between;
-}
 
-/* A coluna vazia da direita no desktop agora atrapalha, vamos esconder */
-.colunaLateral:last-child {
-  display: none;
-}
 
-/* Ajuste de tamanho da logo no mobile */
-.logoClaro,
-.logoEscuro {
-  height: 40px;
+.tituloMobile {
   display: flex;
-  margin-left: 80%;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-nav);
+  cursor: pointer;
 }
 
-@media (min-width: 993px) {
-  .menuHamburgerIcon {
-    display: none !important;
-    /* Força sumir no PC */
+.listaSubitensMobile {
+  margin-top: 10px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.3s;
+}
+
+.linkMobile {
+  text-decoration: none;
+  color: var(--text-dropdown);
+  font-size: 0.9rem;
+  padding: 5px 0;
+  display: block;
+}
+
+/* --- 10. RODAPÉ --- */
+.rodape {
+  background-color: var(--bg-footer);
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-footer);
+}
+
+/* --- 11. ANIMAÇÕES --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
 
-  /* Garante que o menu normal apareça no PC */
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
+
+/* Quando a tela for menor que 992px (Tablet/Celular) */
+@media (max-width: 900px) {
+
+  /* Esconde a barra azul do topo */
+  .barraTopo {
+    display: none !important;
+  }
+
+  /* Esconde o menu horizontal do centro */
   .colunaCentral {
-    display: flex !important;
-    margin-left: 60%;
+    display: none !important;
+  }
+
+  /* Mostra o ícone de hambúrguer */
+  .menuHamburgerIcon {
+    display: block !important;
+  }
+
+  /* Esconde a coluna lateral direita vazia para não ocupar espaço */
+  .colunaLateral:last-child {
+    display: none;
+  }
+
+  /* Ajusta a barra branca para caber o logo e o ícone */
+  .barraBranca {
+    height: 70px;
+    /* Altura menor no mobile */
+    padding: 0 15px;
+  }
+
+  /* Garante que o logo e o icone fiquem nas pontas */
+  .containerNavegacao {
+    justify-content: space-between;
+  }
+
+  /* Ajusta tamanho da logo no mobile */
+  .logoClaro,
+  .logoEscuro {
+    height: 35px;
   }
 }
