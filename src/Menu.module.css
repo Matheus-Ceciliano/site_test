@@ -99,3 +99,45 @@
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(170, 82, 82, 0.3);
 }
+
+
+/* O Container Principal agora engloba a página toda */
+.layoutPrincipal {
+  display: flex;
+  flex-direction: column; /* Um bloco embaixo do outro */
+  min-height: 100vh;      /* Garante que o site tenha NO MÍNIMO a altura da tela */
+  background-color: #1a1a1a; /* Cor de fundo geral */
+  color: white;
+}
+
+
+
+
+/* 1. O TOPO (Cabeçalho) */
+.topo {
+  background-color: #27272a; /* Um cinza um pouco mais claro para destacar */
+  padding: 20px;
+  border-bottom: 1px solid #3f3f46;
+  text-align: center;
+  /* Dica: Se quiser o menu fixo, usaria 'position: sticky' aqui */
+}
+
+/* 2. O MEIO (Conteúdo Principal) */
+.meio {
+  flex: 1; /* O TRUQUE MÁGICO: Isso diz "ocupe todo o espaço vazio que sobrar" */
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo (os menus) */
+  gap: 40px; /* Espaço entre os menus 1 e 2 */
+}
+
+/* 3. O RODAPÉ */
+.rodape {
+  background-color: #101012; /* Quase preto */
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #3f3f46;
+  font-size: 0.8rem;
+  color: #a1a1aa;
+}
