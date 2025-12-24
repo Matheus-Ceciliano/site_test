@@ -1,62 +1,156 @@
-import { useState } from 'react'; 
+import { FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook } from 'react-icons/fa';
+
 import styles from './Menu.module.css';
 
-interface ItemMenu {
-  id: number;
-  texto: string;
-  link: string;
+
+interface SubItem {
+  label:string; 
+  link?:string;
+  subItems?: SubItem[];
 }
 
-const linksDoMenu: ItemMenu[] = [
-  { id: 1, texto: "Início", link: "/" },
-  { id: 2, texto: "Produtos", link: "/produtos" },
-  { id: 3, texto: "Sobre", link: "/sobre" },
-  { id: 4, texto: "Contato", link: "/contato" },
-]; 
+interface MenuPrincipal {
+  titulo: string;
+  items: SubItem[];
+}
+
+
+
+const menus: MenuPrincipal[] = [
+  {
+    titulo: "A ESUP",
+    items: [
+      { label: "Quem Somos", link: "#" },
+      { label: "Documentos", link: "#" }
+    ]
+  },
+  {
+    titulo: "GRADUAÇÃO",
+    items: [
+      { label: "Direito", link: "#" },
+      { 
+        label: "Engenharias ▸", // A setinha indica que tem mais
+        subItems: [ // AQUI ESTÁ A CASCATA
+          { label: "Eng. de Software", link: "#" },
+          { label: "Eng. Civil", link: "#" },
+          { label: "Eng. Elétrica", link: "#" }
+        ]
+      },
+      { label: "Psicologia", link: "#" }
+    ]
+  },
+  {
+    titulo: "PÓS-GRADUAÇÃO",
+    items: [
+        { label: "Mestrado", link: "#" },
+        { label: "Doutorado", link: "#" }
+    ]
+  }
+];
 
 const App = () => {
-  const [menu1Aberto, setMenu1Aberto] = useState(false);
-  const [menu2Aberto, setMenu2Aberto] = useState(false);
+
 
   return (
     // A caixa mãe que segura as 3 divisões
     <div className={styles.layoutPrincipal}>
 
+
+
+
       {/* --- 1. TOPO (HEADER) --- */}
-      <header className={styles.topo}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Minha Loja ESUP</h1>
-      </header>
+      {/* --- BARRA DE TOPO AZUL --- */}
+        <div className={styles.barraTopo}>
+
+          {/* GRUPO ESQUERDA */}
+          <div className={styles.grupoIcones}>
+            
+            <span className={styles.itemTopo}>
+              <FaWhatsapp size={18} />
+              WhatsApp: (62) 3300-4400
+            </span>
+            
+            <span className={styles.itemTopo}>
+              <FaCalendarAlt />
+              Calendário Acadêmico
+            </span>
+
+            <span className={styles.itemTopo}>
+              <FaBook />
+              Biblioteca
+            </span>
+          </div>
+
+          {/* GRUPO DIREITA */}
+          <div className={styles.grupoIcones}>
+            <span className={styles.itemTopo}>
+              <FaUser />
+              Moodle
+            </span>
+
+            <span className={styles.itemTopo}>
+              <FaLaptop />
+              Portal Acadêmico
+            </span>
+          </div>
+
+        </div>
 
 
       {/* --- 2. MEIO (MAIN) --- */}
       <main className={styles.meio}>
-        <p>Bem-vindo ao sistema. Escolha uma opção abaixo:</p>
+
+        <div className={styles.barraBranca}>
+            <div style={{ display: 'flex', gap: '30px' }}>
+  {menus.map((menu, index) => (
+    
+    // NÍVEL 1: O Botão Principal (ex: GRADUAÇÃO)
+    <div key={index} className={styles.itemMenuPrincipal}>
+      {menu.titulo} ▾
+      
+      {/* O PRIMEIRO DROPDOWN (Vertical) */}
+      <div className={styles.submenuDropdown}>
+        
+        {menu.items.map((subItem, subIndex) => (
+          
+          // VERIFICAÇÃO: Tem subitens? (Engenharia) OU é link normal? (Direito)
+          subItem.subItems ? (
+            
+            // CASO 1: TEM CASCATA (Engenharias)
+            <div key={subIndex} className={styles.itemComSubmenu}>
+              {subItem.label}
+              
+              {/* O SEGUNDO DROPDOWN (Lateral) */}
+              <div className={styles.submenuDropdown}>
+                {subItem.subItems.map((neto, netoIndex) => (
+                  <a key={netoIndex} href={neto.link} className={styles.linkSubmenu}>
+                    {neto.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+          ) : (
+            
+            // CASO 2: LINK NORMAL (Direito)
+            <a key={subIndex} href={subItem.link} className={styles.linkSubmenu}>
+              {subItem.label}
+            </a>
+
+          )
+
+        ))}
+
+      </div>
+    </div>
+  ))}
+  </div>
+</div>
+
+
 
         {/* Menu 1 */}
-        <nav className={styles.navContainer}>
-          <div className={styles.logoEsup}>ESUP 1</div>
-          <button onClick={() => setMenu1Aberto(!menu1Aberto)} className={styles.botaoMenu}>
-            {menu1Aberto ? "Fechar X" : "Menu 1 ☰"}
-          </button>
-          <ul className={`${styles.lista} ${menu1Aberto ? styles.listaAberta : ''}`}>
-            {linksDoMenu.map((item) => (
-              <li key={item.id}><a href={item.link} className={styles.link}>{item.texto}</a></li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Menu 2 */}
-        <nav className={styles.navContainer}>
-          <div className={styles.logoEsup} style={{ color: 'cyan' }}>ESUP 2</div>
-          <button onClick={() => setMenu2Aberto(!menu2Aberto)} className={styles.botaoMenu}>
-            {menu2Aberto ? "Fechar X" : "Menu 2 ☰"}
-          </button>
-          <ul className={`${styles.lista} ${menu2Aberto ? styles.listaAberta : ''}`}>
-            {linksDoMenu.map((item) => (
-              <li key={item.id}><a href={item.link} className={styles.link}>{item.texto}</a></li>
-            ))}
-          </ul>
-        </nav>
+       
       </main>
 
 

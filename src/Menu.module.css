@@ -1,6 +1,64 @@
-/* src/Menu.module.css */
+/*header*/
+/*header*/
+/*header*/
+/*header*/
 
-.navContainer {
+.barraTopo {
+  background: linear-gradient(to right, #0077aacc, #047ea7); /* Azul ESUP */
+  
+  color: white;
+  max-width: auto;;
+  padding: 8px 10%;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between; /* Um grupo na esquerda, outro na direita */
+  align-items: center;
+  position: relative;
+  
+}
+
+
+
+
+/* Os grupos de itens (Esquerda e Direita) */
+.grupoIcones {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Cada item individual (Ícone + Texto) */
+.itemTopo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha só embaixo do item */
+  padding-bottom: 2px;
+}
+
+/* Efeito quando passa o mouse em cima do item */
+.itemTopo:hover {
+  opacity: 1;
+  text-decoration: none; /* Opcional: sublinhar igual link */
+  border-bottom-color: #ffffff
+}
+
+
+/*header*/
+/*header*/
+/*header*/
+/*header*/
+
+
+/*meio*/
+/*meio*/
+/*meio*/
+/*meio*/
+
+
+.navContainer1 {
   background-color: #000000; /* Cinza bem escuro (Zinc 900) */
   padding: 1.5rem;
   border-radius: 7px;
@@ -9,7 +67,33 @@
   margin: 20px auto; /* Centraliza na tela */
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
   border: 1px solid #afafb4;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: initial;
+}
 
+.layoutPrincipal {
+  display: flex;
+  flex-direction: column; /* Um bloco embaixo do outro */
+  min-height: 100vh;      /* Garante que o site tenha NO MÍNIMO a altura da tela */
+  background-color: #1a1a1a; /* Cor de fundo geral */
+  color: white;
+}
+
+.navContainer2 {
+  background-color: #000000; /* Cinza bem escuro (Zinc 900) */
+  padding: 1.5rem;
+  border-radius: 7px;
+  width: 100%;
+  max-width: 300px; /* Limita a largura para não ocupar a tela toda */
+  margin: 20px auto; /* Centraliza na tela */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #afafb4;
+display: flex;
+  align-items: center;
+  flex-direction: column;
+  
 }
 
 .botaoMenu {
@@ -20,9 +104,11 @@
   cursor: pointer;
   margin-bottom: 10px;
   
+
+  align-self: center;
   /* Dica: Adicionei isso para suavizar se você quiser por hover depois */
   transition: all 0.2s ease;
-  border-radius: 4px; /* Opcional: só pra não ficar muito quadrado */
+  border-radius: 4px; 
 }
 
 /* Opcional: Um efeitinho quando passar o mouse */
@@ -102,37 +188,164 @@
 
 
 /* O Container Principal agora engloba a página toda */
-.layoutPrincipal {
-  display: flex;
-  flex-direction: column; /* Um bloco embaixo do outro */
-  min-height: 100vh;      /* Garante que o site tenha NO MÍNIMO a altura da tela */
-  background-color: #1a1a1a; /* Cor de fundo geral */
-  color: white;
-}
 
-
-
-
-/* 1. O TOPO (Cabeçalho) */
-.topo {
-  background-color: #27272a; /* Um cinza um pouco mais claro para destacar */
-  padding: 20px;
-  border-bottom: 1px solid #3f3f46;
-  text-align: center;
-  /* Dica: Se quiser o menu fixo, usaria 'position: sticky' aqui */
-}
 
 /* 2. O MEIO (Conteúdo Principal) */
 .meio {
   flex: 1; /* O TRUQUE MÁGICO: Isso diz "ocupe todo o espaço vazio que sobrar" */
-  padding: 40px 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center; /* Centraliza o conteúdo (os menus) */
   gap: 40px; /* Espaço entre os menus 1 e 2 */
 }
 
-/* 3. O RODAPÉ */
+
+.barraBranca {
+  background: linear-gradient(to right, #0077aacc, #047ea7); /* Azul ESUP */
+  position: relative;
+  width: 100%; /* Ocupa a largura toda */
+  padding: 20px 10%; /* Mantém o alinhamento visual com a barra azul */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+
+.itemMenuPrincipal {
+  position: relative; 
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.itemMenuPrincipal:hover {
+  color: #003366;
+}
+
+.submenuDropdown {
+  position: absolute; /* Flutua livremente */
+  top: 100%; /* Começa logo abaixo do pai */
+  left: 0;
+  background-color: white;
+  min-width: 200px; /* Largura mínima da caixa */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  padding: 10px 0;
+  z-index: 100; /* Garante que fique na frente de tudo */
+  display: none; /* escondido por padrão */
+}
+
+.itemMenuPrincipal:hover > .submenuDropdown {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+
+.itemComSubmenu {
+  position: relative; /* O pai precisa ser relative para o filho se alinhar a ele */
+  display: flex;
+  justify-content: space-between; /* Texto na esquerda, setinha na direita */
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.itemComSubmenu > .submenuDropdown {
+  top: 0;       /* Alinha no topo */
+  left: 100%;   /* Joga para a direita */
+  margin-left: 2px;
+  display: none; /* Garante que comece fechado */
+}
+
+.itemComSubmenu:hover > .submenuDropdown {
+  display: block;
+  animation: fadeInRight 0.2s ease;
+}
+
+/* O Submenu (A caixinha que abre) */
+
+
+/* A MÁGICA: Quando passar o mouse no pai, mostra o filho */
+.itemComSubmenu > .submenuDropdown {
+  top: 0;       /* Alinha com o topo do item pai */
+  left: 100%;   /* Empurra 100% para a direita (sai da caixa pai) */
+  margin-left: 2px; /* Um espacinho para não grudar */
+  display: none;    /* Escondido por padrão */
+}
+
+/* Os links dentro do submenu */
+.linkSubmenu {
+  display: block;
+  padding: 10px 20px;
+  color: #555;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.linkSubmenu:hover {
+  background-color: #f4f4f5;
+  color: #003366;
+}
+
+/* Uma animaçãozinha suave opcional */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.conteudoMenus {
+  width: 100%;
+  padding: 40px 20px; /* Aqui sim a gente coloca o espaçamento */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/*meio*/
+/*meio*/
+/*meio*/
+/*meio*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*rodape*/
+/*rodape*/
+/*rodape*/
+/*rodape*/
+
 .rodape {
   background-color: #101012; /* Quase preto */
   padding: 20px;
@@ -141,3 +354,11 @@
   font-size: 0.8rem;
   color: #a1a1aa;
 }
+
+
+
+
+/*rodape*/
+/*rodape*/
+/*rodape*/
+/*rodape*/
