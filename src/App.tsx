@@ -18,32 +18,45 @@ interface MenuPrincipal {
 
 const menus: MenuPrincipal[] = [
   {
-    titulo: "A ESUP",
+    titulo: "Como Ingressar",
     items: [
-      { label: "Quem Somos", link: "#" },
-      { label: "Documentos", link: "#" }
+      { label: "Vestibular", link: "#" },
+      { label: "Transferência Externa", link: "#" },
+      { label: "Portador de Diploma", link: "#" },
+      { label: "Bolsas e Financiamentos", link: "#" }
     ]
   },
   {
-    titulo: "GRADUAÇÃO",
+    titulo: "Programas",
     items: [
-      { label: "Direito", link: "#" },
+      // Mantive a lógica de Cascata (Seta ▸) aqui dentro para exemplo
       { 
-        label: "Engenharias ▸", // A setinha indica que tem mais
-        subItems: [ // AQUI ESTÁ A CASCATA
-          { label: "Eng. de Software", link: "#" },
-          { label: "Eng. Civil", link: "#" },
-          { label: "Eng. Elétrica", link: "#" }
+        label: "Graduação Presencial ▸",
+        subItems: [
+          { label: "Direito", link: "#" },
+          { label: "Engenharia de Software", link: "#" },
+          { label: "Psicologia", link: "#" }
         ]
       },
-      { label: "Psicologia", link: "#" }
+      { label: "Pós-Graduação", link: "#" },
+      { label: "Cursos de Extensão", link: "#" }
     ]
   },
   {
-    titulo: "PÓS-GRADUAÇÃO",
+    titulo: "Egressos",
     items: [
-        { label: "Mestrado", link: "#" },
-        { label: "Doutorado", link: "#" }
+      { label: "Portal do Aluno", link: "#" },
+      { label: "Histórias de Sucesso", link: "#" },
+      { label: "Emissão de Diploma", link: "#" }
+    ]
+  },
+  {
+    titulo: "Contatos e Avisos",
+    items: [
+      { label: "Fale Conosco", link: "#" },
+      { label: "Ouvidoria", link: "#" },
+      { label: "Localização", link: "#" },
+      { label: "Editais e Avisos", link: "#" }
     ]
   }
   
@@ -148,8 +161,6 @@ const App = () => {
   ))}
   </div>
 </div>
-
-
 
         {/* Menu 1 */}
        
