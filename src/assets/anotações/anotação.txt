@@ -1,0 +1,4 @@
+Não mexer mais na barraBranca
+vamos pro resto do site, e se mexer em algo do header não subir pro git, 
+vamos colocar o banner, e começar a adcionar os cursos
+

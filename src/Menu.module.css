@@ -205,7 +205,7 @@
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin-left: 25%;
+  margin-left: 7%;
 }
 
 /* --- 7. LOGOS (TAMANHOS DIFERENTES) --- */
@@ -467,7 +467,7 @@
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
 
 /* Quando a tela for menor que 992px (Tablet/Celular) */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
   /* Esconde a barra azul do topo */
   .barraTopo {
@@ -477,7 +477,7 @@
   /* Esconde o menu horizontal do centro */
   .colunaCentral {
     display: none !important;
-    
+
   }
 
   /* Mostra o ícone de hambúrguer */

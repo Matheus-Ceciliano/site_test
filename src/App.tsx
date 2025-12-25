@@ -144,9 +144,9 @@ const App = () => {
         </div>
         {/* -------------------------------------------- */}
 
-        {/* Lista de Menus de Navegação (Seu código anterior) */}
+
         {menus.map((menu, index) => (
-          // ... (todo o código do menu acordeão continua igual aqui) ...
+
           <div key={index} className={styles.itemMobile}>
             <div className={styles.tituloMobile} onClick={() => toggleSubmenuMobile(index)}>
               {menu.titulo}
