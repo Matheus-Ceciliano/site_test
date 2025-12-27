@@ -89,7 +89,7 @@
 
 .barraTopo > * {
   /* Nome da animação | Duração | Tipo de movimento */
-  animation: aparecerSuave 1.2s ease-out forwards;
+  animation: aparecerSuave 0.7s ease-out forwards;
 }
 
 .grupoIcones {
@@ -197,7 +197,7 @@
   padding: 0 10px;
   max-width: 1200px;
   opacity: 0;
-  animation: aparecerSuave 0.8s ease-out 1s forwards;
+  animation: aparecerSuave 1s ease-out 0.8s forwards;
 }
 
 /* Colunas do Layout */
@@ -288,7 +288,7 @@
   pointer-events: none; /* Opcional: faz o clique "passar direto" se não for link */
   /* Animação */
   opacity: 0;
-  animation: deslizarTexto 1s ease-out 1s forwards;
+  animation: deslizarTexto 1s ease-out 1.4s forwards;
 }
 
 /* Opcional: Estilo diferente para a palavra "Agora!" */
@@ -300,22 +300,6 @@
 .destaqueEspecial1 {
   color: #ffffff;
 }
-
-
-/* A animação de deslizar */
-@keyframes deslizarTexto {
-  from {
-    opacity: 0;
-    transform: translate(-100px, -50%); /* Começa mais à esquerda */
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, -50%); /* Termina na posição original */
-  }
-}
-
-
-
 
 
 
@@ -576,6 +560,17 @@
   to {
     opacity: 1;
     transform: translateY(0);    /* Termina na posição original */
+  }
+}
+
+@keyframes deslizarTexto {
+  from {
+    opacity: 0;
+    transform: translate(-100px, -50%); /* Começa mais à esquerda */
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%); /* Termina na posição original */
   }
 }
 
