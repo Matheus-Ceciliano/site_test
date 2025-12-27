@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import {
-  FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp
-} from 'react-icons/fa';
+import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp} from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 
 import styles from './Menu.module.css';
-
 // Importe suas imagens corretamente
 import logoLightMode from './assets/logo-esup.png';
 import logoDarkMode from './assets/logo-esup-white.png';
+import bannerSite from './assets/banner-site.png';
 
 interface SubItem {
   label: string;
@@ -204,6 +202,7 @@ const App = () => {
               <img src={isDarkMode ? logoDarkMode : logoLightMode} alt="Logo ESUP" className={isDarkMode ? styles.logoEscuro : styles.logoClaro} />
             </div>
             <div className={styles.colunaCentral}>
+
               {/* ... menus desktop ... */}
               {menus.map((menu, index) => (
                 <div key={index} className={styles.itemMenuPrincipal}>
@@ -234,6 +233,23 @@ const App = () => {
             </div>
           </div>
         </div>
+          <div className={styles.containerImagem}>
+            <img 
+              src={bannerSite} 
+              alt="Logo da Faculdade ESUP" 
+              className={styles.bannerSite} />
+
+              <div className={styles.textoHero}>
+                EFETUE <br />
+                SUA <br />
+                <span className={styles.destaqueEspecial}>Matrícula.</span>
+                <br />
+              
+              </div>
+              
+
+          </div>
+
       </main>
 
       <footer className={styles.rodape}>

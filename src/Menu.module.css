@@ -79,12 +79,17 @@
 .barraTopo {
   background: var(--bg-barra-topo);
   color: white;
-  padding: 8px 10%;
+  padding: 12px 10%;
   font-size: 0.85rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.barraTopo > * {
+  /* Nome da animação | Duração | Tipo de movimento */
+  animation: aparecerSuave 1.2s ease-out forwards;
 }
 
 .grupoIcones {
@@ -167,7 +172,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+;
 }
 
 .barraBranca {
@@ -181,6 +186,7 @@
   align-items: center;
   box-shadow: 0 4px 6px -1px var(--shadow-color);
   transition: background 0.3s ease;
+  z-index: 10;
 }
 
 .containerNavegacao {
@@ -190,7 +196,8 @@
   width: 100%;
   padding: 0 10px;
   max-width: 1200px;
-  /* Limita a largura em telas muito grandes */
+  opacity: 0;
+  animation: aparecerSuave 0.8s ease-out 1s forwards;
 }
 
 /* Colunas do Layout */
@@ -198,15 +205,20 @@
   flex: 1;
   display: flex;
   align-items: center;
+
 }
 
+/*opçoes ao lado da imagem*/
 .colunaCentral {
   flex: auto;
   display: flex;
   justify-content: center;
   gap: 30px;
   margin-left: 7%;
+  
+
 }
+
 
 /* --- 7. LOGOS (TAMANHOS DIFERENTES) --- */
 .logoClaro {
@@ -224,6 +236,89 @@
   display: block;
   transition: all 0.3s ease;
 }
+
+
+.containerImagem {
+  position: relative; /* Essencial para o gradiente ficar preso aqui dentro */
+  display: inline-block; /* Ou 'block', dependendo do seu layout */
+  width: 100%; /* Ajuste conforme necessário */
+  max-width: 2048px; /* Opcional: limita ao tamanho da imagem */
+  line-height: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.logo-img {
+  display: block; /* Remove espaços brancos extras abaixo da imagem */
+  position: relative;
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+}
+
+/* Essa é a camada do degradê */
+.containerImagem::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index:1;
+  background: linear-gradient(to left, #0078aa 25%, rgba(255, 255, 255, 0) 60%);
+  /* Garante que o clique passe pelo gradiente se precisar clicar na imagem */
+  pointer-events: none; 
+}
+
+.textoHero {
+  position: absolute;
+  top: 50%; /* Ajuste a altura vertical */
+  left: 78%; /* Ajuste a distância da margem esquerda */
+  transform: translateY(-50%); /* Centraliza verticalmente no ponto top */
+  /* Estilização do Texto */
+  font-family: 'Montserrat', sans-serif; /* Use a fonte do seu projeto */
+  font-size: 3.7rem; /* Texto bem grande */
+  font-weight: 800;  /* Extra negrito */
+  color: #ffffff;    /* Branco */
+  line-height: 1.1;
+  text-transform: uppercase;
+  /* Sombra suave para garantir leitura no fundo azul */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  pointer-events: none; /* Opcional: faz o clique "passar direto" se não for link */
+  /* Animação */
+  opacity: 0;
+  animation: deslizarTexto 1s ease-out 1s forwards;
+}
+
+/* Opcional: Estilo diferente para a palavra "Agora!" */
+.destaqueEspecial {
+  color: #da0b60; /* Um amarelo/dourado para destacar (opcional) */
+  /* Ou mantenha branco se preferir minimalista */  
+}
+
+.destaqueEspecial1 {
+  color: #ffffff;
+}
+
+
+/* A animação de deslizar */
+@keyframes deslizarTexto {
+  from {
+    opacity: 0;
+    transform: translate(-100px, -50%); /* Começa mais à esquerda */
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%); /* Termina na posição original */
+  }
+}
+
+
+
+
+
+
 
 /* --- 8. MENUS DESKTOP --- */
 .itemMenuPrincipal {
@@ -298,6 +393,12 @@
   background-color: var(--bg-dropdown-hover);
   color: var(--text-nav-hover);
 }
+/* --- 8. MENUS DESKTOP --- */
+
+
+
+
+
 
 /* --- 9. MOBILE MENU (GAVETA & HAMBURGUER) --- */
 
@@ -356,6 +457,8 @@
   color: var(--text-nav);
   cursor: pointer;
 }
+
+
 
 /* Estilos dos itens dentro do mobile */
 .conteudoTopoMobile {
@@ -461,6 +564,18 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+/* Define a animação: começa invisível e um pouco 'caída', e sobe ficando visível */
+@keyframes aparecerSuave {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Começa 10px para baixo */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    /* Termina na posição original */
   }
 }
 
