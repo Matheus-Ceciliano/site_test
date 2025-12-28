@@ -244,6 +244,7 @@
   max-width: 2048px; /* Opcional: limita ao tamanho da imagem */
   line-height: 0;
   z-index: 1;
+  aspect-ratio: auto;
   overflow: hidden;
 }
 
@@ -253,6 +254,14 @@
   width: 100%;
   height: auto;
   opacity: 0.8;
+}
+
+.bannerSite {
+  width: 100%;
+  height: 100%; /* Força a imagem a ocupar toda a altura do container */
+  object-fit: cover;
+  object-position: center center;
+  
 }
 
 /* Essa é a camada do degradê */
@@ -294,58 +303,107 @@
   /* Ou mantenha branco se preferir minimalista */  
 }
 
-.carouselContainer {
+
+/* --- CARROSSEL DE CURSOS --- */
+/* --- CARROSSEL DE CURSOS --- */
+/* --- CARROSSEL DE CURSOS --- */
+
+.sectionCarrossel {
   width: 100%;
-  max-width: 900px;
-  height: 400px;
-  margin: 40px auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
   overflow: hidden;
-  border-radius: 12px;
-  position: relative;
+}
+
+.tituloSecao {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.janelaCarrossel {
   width: 100%;
-  height: 500px; /* Ajuste a altura conforme seu design */
-  background-color: #000;
+  overflow: hidden; /* Corta o que está fora da tela */
+  position: relative;
 }
 
 .trilhoImagens {
-  display: flex; /* Coloca as imagens uma ao lado da outra */
-  height: 100%;
-  /* A mágica do movimento suave: */
-  transition: transform 0.6s ease-in-out; 
+  display: flex;
+  transition: transform 0.6s ease-in-out; /* Animação suave */
+  width: 100%;
 }
 
-.slideItem {
-  min-width: 100%; /* Garante que o slide ocupe 100% da janela */
-  height: 100%;
-  /* Aqui criamos o ESPAÇAMENTO entre as imagens */
- 
-  box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+.cardSlide {
+  /* Garante que caibam exatamente 3 itens (100 / 3 = 33.33%) */
+  min-width: 33.333%;
+  flex: 0 0 33.333%;
+  box-sizing: border-box;
+  padding: 0 15px; /* Espaço entre os cards */
+}
+
+/* --- Estilo Interno do Card --- */
+.wrapperImagem {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.226);
+  
 }
 
 .imagemSlide {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cobre a área sem distorcer */
-  border-radius: 8px; /* Opcional: borda na imagem */
-  display: block;
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
   object-fit: cover;
-  opacity: 0; /* Invisível */
-  transition: opacity 1.5s ease-in-out; /* O segredo do efeito suave */
-  z-index: 1;
+  transition: transform 0.3s;
+  
 }
 
-.ativo {
-  opacity: 1; /* Visível */
-  z-index: 2;
+.cardSlide:hover .imagemSlide {
+  transform: scale(1.05); /* Zoom na imagem ao passar o mouse */
 }
+
+.conteudoCard {
+  
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  min-height: 180px; /* Altura mínima para alinhar os textos */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tituloCard {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #004aad; /* Cor azul institucional */
+}
+
+.descricaoCard {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.linkCard {
+  color: #0078aa;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.95rem;
+  align-self: flex-start;
+}
+
+.linkCard:hover {
+  text-decoration: underline;
+}
+/* --- CARROSSEL DE CURSOS --- */
 
 
 /* --- 8. MENUS DESKTOP --- */
@@ -662,3 +720,64 @@
     height: 35px;
   }
 }
+
+@media (max-width: 768px) {
+  .cardSlide {
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+
+
+/*responsividade da imagem hero e texto*/
+/*responsividade da imagem hero e texto*/
+/*responsividade da imagem hero e texto*/
+
+@media (max-width: 1919px) {
+  .textoHero {
+    display: none;
+  }
+
+  .containerImagem::after {
+    display: none;
+    content: none;
+  }
+}
+
+/* --- 2. Tablets e Notebooks Pequenos (< 1024px) --- */
+/* Aqui começamos a mudar o formato da imagem para ela não ficar muito fina */
+@media (max-width: 1024px) {
+  .containerImagem {
+    /* Define um formato retangular padrão (4 de largura por 3 de altura) */
+    aspect-ratio: 4 / 3;
+    width: 100%;
+  }
+
+  .bannerSite {
+    width: 100%;
+    height: 100%; /* Ocupa todo o container */
+    /* IMPORTANTE: 'cover' é o que faz o RECORTE acontecer. 
+       Se usar 'contain', a imagem diminui e sobra espaço. */
+    object-fit: cover; 
+    object-position: center center;
+  }
+}
+
+/* --- 3. Celulares (< 768px) --- */
+/* Aqui o recorte fica quadrado para destacar bem no mobile */
+@media (max-width: 768px) {
+  .containerImagem {
+    /* Transforma em um quadrado perfeito */
+    aspect-ratio: 1 / 1; 
+    /* Se quiser mais alto (estilo Stories), use: aspect-ratio: 9 / 16; */
+  }
+
+  .bannerSite {
+    /* No mobile, foca no topo (rosto) para não cortar a cabeça */
+    object-position: center top; 
+  }
+}
+/*responsividade da imagem hero e texto*/
+/*responsividade da imagem hero e texto*/
+/*responsividade da imagem hero e texto*/

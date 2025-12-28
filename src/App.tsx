@@ -5,23 +5,26 @@ import styles from './Menu.module.css';
 // Importe suas imagens corretamente
 import logoLightMode from './assets/logo-esup.png';
 import logoDarkMode from './assets/logo-esup-white.png';
-import bannerSite from './assets/banner-site.png';
+
 import banner1 from './assets/direito.webp';
 import banner2 from './assets/adm.jpeg';
 import banner3 from './assets/contabeis.jpg';
+import banner4 from './assets/pedagogia-semipresencial.jpg';
+import banner5 from './assets/sis-info.jpg';
+import banner6 from './assets/process-gerenciais.jpg';
 
 
+    interface SubItem {
+      label: string;
+      link?: string;
+      subItems?: SubItem[];
+    }
+    interface MenuPrincipal {
+      titulo: string;
+      items: SubItem[];
+    }   
+    
 
-
-interface SubItem {
-  label: string;
-  link?: string;
-  subItems?: SubItem[];
-}
-interface MenuPrincipal {
-  titulo: string;
-  items: SubItem[];
-}   
       const slidesContent = [
     {
       image: banner1,
@@ -40,6 +43,24 @@ interface MenuPrincipal {
       titulo: "Ciências Contábeis",
       descricao: "Prepare-se para atuar na gestão financeira e tributária de grandes empresas.",
       link: "/curso-contabeis"
+    },
+    {
+      image: banner4,
+      titulo: "Psicologia",
+      descricao: "Explore a mente humana com práticas clínicas e pesquisa inovadora.",
+      link: "/curso-psicologia"
+    },
+    {
+      image: banner5,
+      titulo: "Sistemas de Informação",
+      descricao: "Capacite-se em tecnologia da informação e desenvolvimento de software.",
+      link: "/curso-sisinfo"
+    },
+    {
+      image: banner6,
+      titulo: "Processos Gerenciais (EAD)",   
+      descricao: "Curso a distância focado em gestão eficiente e tomada de decisões estratégicas.",
+      link: "/curso-processos-gerenciais"
     }
   ];
     
@@ -106,40 +127,52 @@ interface MenuPrincipal {
     ];
 
 
-  
+  //costantes principais//
+   //costantes principais//
+    //costantes principais//
 
-  const App = () => {
+
+
+    
+    const App = () => {
     // ... (estados e funções continuam os mesmos) ...
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [expandedMenuIndex, setExpandedMenuIndex] = useState<number | null>(null);
-    const [indexAtual, setIndexAtual] = useState(0);''
+      
+    // CONFIGURAÇÃO: Mostra 3 itens por vez
+        const [indexAtual, setIndexAtual] = useState(0);
+        const itensVisiveis = 3;
+        const totalSlides = slidesContent.length;
+          
+    // Lógica de Autoplay (Passa a cada 4 segundos)
       useEffect(() => {
         const intervalo = setInterval(() => {
-          setIndexAtual((prevIndex) => 
-            prevIndex ===  slidesContent.length - 1 ? 0 : prevIndex + 1
-          );
-        }, 5000); // Muda a imagem a cada 5 segundos
+          setIndexAtual((prevIndex) => {
+            // Se chegar no ponto limite (total - visiveis), volta para o 0
+            return prevIndex >= totalSlides - itensVisiveis ? 0 : prevIndex + 1;
+          });
+        }, 4000); // 4000ms = 4 segundos
         return () => clearInterval(intervalo);
-      }, []);
+      }, [totalSlides]);
 
-    const toggleTheme = () => setIsDarkMode(!isDarkMode);
-    const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-    const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
+      const toggleTheme = () => setIsDarkMode(!isDarkMode);
+      const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+      const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
 
-    // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
-    const ThemeSwitch = () => (
-      <button
-        onClick={toggleTheme}
-        className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
-        title="Mudar Tema"
-        type="button"
-      >
-        <div className={styles.switchThumb}>
-          {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
-        </div>
-      </button>
-    );
+      // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
+      const ThemeSwitch = () => (
+        <button
+          onClick={toggleTheme}
+          className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
+          title="Mudar Tema"
+          type="button"
+        >
+          <div className={styles.switchThumb}>
+            {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
+          </div>
+        </button>
+      );
 
  
   
@@ -161,8 +194,6 @@ interface MenuPrincipal {
 
         {/* --- NOVO: CONTEÚDO DO TOPO DENTRO DO MENU --- */}
         <div className={styles.conteudoTopoMobile}>
-
-          {/* Botão de Tema com texto */}
           <div className={styles.switchContainerMobile}>
             <span>Modo {isDarkMode ? 'Escuro' : 'Claro'}</span>
             <ThemeSwitch />
@@ -230,7 +261,7 @@ interface MenuPrincipal {
           <span className={styles.itemTopo}><FaUser /> <a target='_blan' href="https://atp.esup.edu.br/?_gl=1*xsldly*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky">Moodle </a></span>
           <span className={styles.itemTopo}><FaLaptop /> <a target='_blank' href="https://sei.esup.edu.br/?_gl=1*1hcx7wm*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky"> Portal Acadêmico</a></span>
           {/* Usa o componente do botão */}
-          <ThemeSwitch />
+          <ThemeSwitch/>
         </div>
       </div>
 
@@ -276,10 +307,29 @@ interface MenuPrincipal {
         </div>
 
           <div className={styles.containerImagem}>
-            <img 
-              src={bannerSite} 
-              alt="Logo da Faculdade ESUP" 
-              className={styles.bannerSite} />
+           <img 
+  /* src principal (fallback para navegadores antigos) */
+        src="https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-2048x533.png"
+        
+        /* alt text */
+        alt="Vestibular 2026.1 Matrículas Abertas"
+        
+        /* Suas classes de estilo (CSS Modules) */
+        className={styles.bannerSite} 
+        
+        /* A MÁGICA AQUI: Lista de resoluções */
+        srcSet="
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site.png 3840w, 
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-300x78.png 300w, 
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-1024x267.png 1024w, 
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-768x200.png 768w, 
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-1536x400.png 1536w, 
+          https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-2048x533.png 2048w
+        "
+        
+        /* Diz ao navegador qual espaço a imagem vai ocupar na tela */
+        sizes="(max-width: 3840px) 100vw, 3840px"
+      />
               <div className={styles.textoHero}>
                 EFETUE <br />
                 SUA <br />
@@ -289,50 +339,45 @@ interface MenuPrincipal {
            </div>
 
 
-         
-          <section className={styles.heroSection}>
-        
-        {/* LADO ESQUERDO: O Carrossel */}
-        <div className={styles.carouselContainer}>
-          <div 
-            className={styles.trilhoImagens} 
-            style={{ transform: `translateX(-${indexAtual * 100}%)` }}
-          >
-            {slidesContent.map((item, index) => (
-              <div key={index} className={styles.slideItem}>
-                <img
-                  src={item.image} // Agora pegamos .image do objeto
-                  alt={item.titulo}
-                  className={styles.imagemSlide}
-                />
+            <section className={styles.sectionCarrossel}>
+              <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
+              {/* Janela que esconde os itens fora de visão */}
+              <div className={styles.janelaCarrossel}>
+
+                {/* O Trilho que move os itens */}
+                <div 
+                  className={styles.trilhoImagens}
+                  style={{ 
+                    // Move X% para a esquerda baseado no índice atual
+                    transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)` 
+                  }}
+                >
+                  {slidesContent.map((item, index) => (
+                    <div key={index} className={styles.cardSlide}>
+                      {/* Imagem */}
+                      <div className={styles.wrapperImagem}>
+                        <img
+                          src={item.image}
+                          alt={item.titulo}
+                          className={styles.imagemSlide}
+                        />
+                      </div>
+
+                      {/* Texto / Descrição */}
+                      <div className={styles.conteudoCard}>
+                        <h3 className={styles.tituloCard}>{item.titulo}</h3>
+                        <p className={styles.descricaoCard}>{item.descricao}</p>
+                        <a href={item.link} className={styles.linkCard}>
+                          Saiba Mais →
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-          
-          {/* Opcional: Texto "Matricule-se" flutuante ainda pode ficar aqui se quiser */}
-        </div>
+    </section>
 
-        {/* LADO DIREITO: A Descrição Dinâmica */}
-        <div className={styles.infoContainer}>
-          
-          {/* A chave 'key' faz a animação reiniciar a cada troca de index */}
-          <div key={indexAtual} className={styles.conteudoAnimado}>
-            <h1 className={styles.tituloSlide}>
-              {slidesContent[indexAtual].titulo}
-            </h1>
-            
-            <p className={styles.descricaoSlide}>
-              {slidesContent[indexAtual].descricao}
-            </p>
-
-            <a href={slidesContent[indexAtual].link} className={styles.botaoSaibaMais}>
-              Saiba Mais
-            </a>
-          </div>
-
-        </div>
-
-      </section>
+         
           
 
         
