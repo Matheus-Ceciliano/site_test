@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft} from 'react-icons/fa';
+import { FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { FaBriefcase, FaLightbulb, FaUsers } from 'react-icons/fa';
-import { FaAward, FaGraduationCap} from 'react-icons/fa';
+import { FaAward, FaGraduationCap } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './Menu.module.css';
 // Importe suas imagens corretamente
@@ -16,184 +16,184 @@ import banner5 from './assets/sis-info.jpg';
 import banner6 from './assets/process-gerenciais.jpg';
 
 
-    interface SubItem {
-      label: string;
-      link?: string;
-      subItems?: SubItem[];
-    }
-    interface MenuPrincipal {
-      titulo: string;
-      items: SubItem[];
-    }   
-    
+interface SubItem {
+  label: string;
+  link?: string;
+  subItems?: SubItem[];
+}
+interface MenuPrincipal {
+  titulo: string;
+  items: SubItem[];
+}
 
-      const slidesContent = [
-    {
-      image: banner1,
-      titulo: "Curso de Direito",
-      descricao: "Formação de excelência com corpo docente renomado e núcleo de prática jurídica ativo.",
-      link: "/curso-direito"
-    },
-    {
-      image: banner2,
-      titulo: "Administração",
-      descricao: "Desenvolva habilidades de liderança e gestão estratégica para o mercado moderno.",
-      link: "/curso-adm"
-    },
-    {
-      image: banner3,
-      titulo: "Ciências Contábeis",
-      descricao: "Prepare-se para atuar na gestão financeira e tributária de grandes empresas.",
-      link: "/curso-contabeis"
-    },
-    {
-      image: banner4,
-      titulo: "Psicologia",
-      descricao: "Explore a mente humana com práticas clínicas e pesquisa inovadora.",
-      link: "/curso-psicologia"
-    },
-    {
-      image: banner5,
-      titulo: "Sistemas de Informação",
-      descricao: "Capacite-se em tecnologia da informação e desenvolvimento de software.",
-      link: "/curso-sisinfo"
-    },
-    {
-      image: banner6,
-      titulo: "Processos Gerenciais (EAD)",   
-      descricao: "Curso a distância focado em gestão eficiente e tomada de decisões estratégicas.",
-      link: "/curso-processos-gerenciais"
-    }
-  ];
-    
 
-    const menus: MenuPrincipal[] = [
+const slidesContent = [
+  {
+    image: banner1,
+    titulo: "Curso de Direito",
+    descricao: "Formação de excelência com corpo docente renomado e núcleo de prática jurídica ativo.",
+    link: "/curso-direito"
+  },
+  {
+    image: banner2,
+    titulo: "Administração",
+    descricao: "Desenvolva habilidades de liderança e gestão estratégica para o mercado moderno.",
+    link: "/curso-adm"
+  },
+  {
+    image: banner3,
+    titulo: "Ciências Contábeis",
+    descricao: "Prepare-se para atuar na gestão financeira e tributária de grandes empresas.",
+    link: "/curso-contabeis"
+  },
+  {
+    image: banner4,
+    titulo: "Psicologia",
+    descricao: "Explore a mente humana com práticas clínicas e pesquisa inovadora.",
+    link: "/curso-psicologia"
+  },
+  {
+    image: banner5,
+    titulo: "Sistemas de Informação",
+    descricao: "Capacite-se em tecnologia da informação e desenvolvimento de software.",
+    link: "/curso-sisinfo"
+  },
+  {
+    image: banner6,
+    titulo: "Processos Gerenciais (EAD)",
+    descricao: "Curso a distância focado em gestão eficiente e tomada de decisões estratégicas.",
+    link: "/curso-processos-gerenciais"
+  }
+];
+
+
+const menus: MenuPrincipal[] = [
+  {
+    titulo: "A Esup",
+    items: [
+      { label: "Sobre a Esup", link: "#" },
+      { label: "Dirigentes", link: "#" },
+      { label: "Corpo Docente", link: "#" },
+      { label: "Secretaria Geral", link: "#" }
+    ]
+  },
+  {
+    titulo: "Como Ingressar",
+    items: [
+      { label: "Vestibular", link: "#" },
+      { label: "Transferência Externa", link: "#" },
+      { label: "Portador de Diploma", link: "#" },
+      { label: "Bolsas e Financiamentos", link: "#" }
+    ]
+  },
+  {
+    titulo: "Programas",
+    items: [
       {
-        titulo: "A Esup",
-        items: [
-          { label: "Sobre a Esup", link: "#" },
-          { label: "Dirigentes", link: "#" },
-          { label: "Corpo Docente", link: "#" },
-          { label: "Secretaria Geral", link: "#" }
+        label: "Graduação Presencial", // Removi a seta ▸ do texto, usaremos ícone
+        subItems: [
+          { label: "Direito", link: "#" },
+          { label: "Sistema de Informação", link: "#" },
+          { label: "Psicologia", link: "#" },
+          { label: "Administração", link: "#" },
+          { label: "Ciências Contábeis", link: "#" },
         ]
       },
       {
-        titulo: "Como Ingressar",
-        items: [
-          { label: "Vestibular", link: "#" },
-          { label: "Transferência Externa", link: "#" },
-          { label: "Portador de Diploma", link: "#" },
-          { label: "Bolsas e Financiamentos", link: "#" }
+        label: "Graduação EAD",
+        subItems: [
+          { label: "Processos Gerenciais", link: "#" },
+          { label: "Power BI", link: "#" }
         ]
       },
-      {
-        titulo: "Programas",
-        items: [
-          {
-            label: "Graduação Presencial", // Removi a seta ▸ do texto, usaremos ícone
-            subItems: [
-              { label: "Direito", link: "#" },
-              { label: "Sistema de Informação", link: "#" },
-              { label: "Psicologia", link: "#" },
-              { label: "Administração", link: "#" },
-              { label: "Ciências Contábeis", link: "#" },
-            ]
-          },
-          {
-            label: "Graduação EAD",
-            subItems: [
-              { label: "Processos Gerenciais", link: "#" },
-              { label: "Power BI", link: "#" }
-            ]
-          },
-          { label: "Pós-Graduação", link: "#" },
-          { label: "Cursos de Extensão", link: "#" }
-        ]
-      },
-      {
-        titulo: "Egressos",
-        items: [
-          { label: "Portal do Aluno", link: "#" },
-          { label: "Histórias de Sucesso", link: "#" },
-          { label: "Emissão de Diploma", link: "#" }
-        ]
-      },
-      {
-        titulo: "Contatos",
-        items: [
-          { label: "Fale Conosco", link: "#" },
-          { label: "Localização", link: "#" },
-          { label: "Editais", link: "#" }
-        ]
+      { label: "Pós-Graduação", link: "#" },
+      { label: "Cursos de Extensão", link: "#" }
+    ]
+  },
+  {
+    titulo: "Egressos",
+    items: [
+      { label: "Portal do Aluno", link: "#" },
+      { label: "Histórias de Sucesso", link: "#" },
+      { label: "Emissão de Diploma", link: "#" }
+    ]
+  },
+  {
+    titulo: "Contatos",
+    items: [
+      { label: "Fale Conosco", link: "#" },
+      { label: "Localização", link: "#" },
+      { label: "Editais", link: "#" }
+    ]
+  }
+];
+
+
+//costantes principais//
+//costantes principais//
+//costantes principais//
+
+
+
+
+const App = () => {
+  // ... (estados e funções continuam os mesmos) ...
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMenuIndex, setExpandedMenuIndex] = useState<number | null>(null);
+
+  // CONFIGURAÇÃO: Mostra 3 itens por vez
+  const [indexAtual, setIndexAtual] = useState(0);
+  const [itensVisiveis, setItensVisiveis] = useState(3);
+  const totalSlides = slidesContent.length;
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItensVisiveis(1);
+      } else {
+        setItensVisiveis(3);
       }
-    ];
-
-
-  //costantes principais//
-   //costantes principais//
-    //costantes principais//
-
-
-
-    
-    const App = () => {
-    // ... (estados e funções continuam os mesmos) ...
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [expandedMenuIndex, setExpandedMenuIndex] = useState<number | null>(null);
-      
-    // CONFIGURAÇÃO: Mostra 3 itens por vez
-        const [indexAtual, setIndexAtual] = useState(0);
-        const [itensVisiveis, setItensVisiveis] = useState(3); 
-        const totalSlides = slidesContent.length;
-          
-           useEffect(() => {
-      const handleResize = () => {
-        if (window.innerWidth < 768) {
-          setItensVisiveis(1);
-        } else {
-          setItensVisiveis(3);
-        }
-      };
-      handleResize();
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    // 2. Funções de Navegação Manual
-    const avancarSlide = () => {
-      const maxIndex = totalSlides - itensVisiveis;
-      // Se estiver no último, volta para o 0 (Loop)
-      setIndexAtual((prev) => (prev >= maxIndex ? 0 : prev + 1));
     };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    const voltarSlide = () => {
-      const maxIndex = totalSlides - itensVisiveis;
-      // Se estiver no 0, vai para o último (Loop)
-      setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
-    };
+  // 2. Funções de Navegação Manual
+  const avancarSlide = () => {
+    const maxIndex = totalSlides - itensVisiveis;
+    // Se estiver no último, volta para o 0 (Loop)
+    setIndexAtual((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const voltarSlide = () => {
+    const maxIndex = totalSlides - itensVisiveis;
+    // Se estiver no 0, vai para o último (Loop)
+    setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
 
 
-      const toggleTheme = () => setIsDarkMode(!isDarkMode);
-      const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-      const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
 
-      // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
-      const ThemeSwitch = () => (
-        <button
-          onClick={toggleTheme}
-          className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
-          title="Mudar Tema"
-          type="button"
-        >
-          <div className={styles.switchThumb}>
-            {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
-          </div>
-        </button>
-      );
+  // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
+  const ThemeSwitch = () => (
+    <button
+      onClick={toggleTheme}
+      className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
+      title="Mudar Tema"
+      type="button"
+    >
+      <div className={styles.switchThumb}>
+        {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
+      </div>
+    </button>
+  );
 
-  
-  
+
+
   return (
     <div className={`${styles.layoutPrincipal} ${isDarkMode ? styles.temaEscuro : styles.temaClaro}`}>
 
@@ -278,7 +278,7 @@ import banner6 from './assets/process-gerenciais.jpg';
           <span className={styles.itemTopo}><FaUser /> <a target='_blan' href="https://atp.esup.edu.br/?_gl=1*xsldly*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky">Moodle </a></span>
           <span className={styles.itemTopo}><FaLaptop /> <a target='_blank' href="https://sei.esup.edu.br/?_gl=1*1hcx7wm*_gcl_au*MTE3NzI3MzM5OC4xNzY2MjY1Mjky"> Portal Acadêmico</a></span>
           {/* Usa o componente do botão */}
-          <ThemeSwitch/>
+          <ThemeSwitch />
         </div>
       </div>
 
@@ -323,19 +323,19 @@ import banner6 from './assets/process-gerenciais.jpg';
           </div>
         </div>
 
-          <div className={styles.containerImagem}>
-           <img 
-  /* src principal (fallback para navegadores antigos) */
-        src="https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-2048x533.png"
-        
-        /* alt text */
-        alt="Vestibular 2026.1 Matrículas Abertas"
-        
-        /* Suas classes de estilo (CSS Modules) */
-        className={styles.bannerSite} 
-        
-        /* A MÁGICA AQUI: Lista de resoluções */
-        srcSet="
+        <div className={styles.containerImagem}>
+          <img
+            /* src principal (fallback para navegadores antigos) */
+            src="https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-2048x533.png"
+
+            /* alt text */
+            alt="Vestibular 2026.1 Matrículas Abertas"
+
+            /* Suas classes de estilo (CSS Modules) */
+            className={styles.bannerSite}
+
+            /* A MÁGICA AQUI: Lista de resoluções */
+            srcSet="
           https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site.png 3840w, 
           https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-300x78.png 300w, 
           https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-1024x267.png 1024w, 
@@ -343,17 +343,17 @@ import banner6 from './assets/process-gerenciais.jpg';
           https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-1536x400.png 1536w, 
           https://esup.edu.br/wp-content/uploads/2025/12/Banner-1-vestibular-site-2048x533.png 2048w
         "
-        
-        /* Diz ao navegador qual espaço a imagem vai ocupar na tela */
-        sizes="(max-width: 3840px) 100vw, 3840px"
-      />
-              <div className={styles.textoHero}>
-                EFETUE <br />
-                SUA <br />
-                <span className={styles.destaqueEspecial}>Matrícula.</span>
-                <br />
-              </div>
-           </div>
+
+            /* Diz ao navegador qual espaço a imagem vai ocupar na tela */
+            sizes="(max-width: 3840px) 100vw, 3840px"
+          />
+          <div className={styles.textoHero}>
+            EFETUE <br />
+            SUA <br />
+            <span className={styles.destaqueEspecial}>Matrícula.</span>
+            <br />
+          </div>
+        </div>
 
 
         <section className={styles.sectionCarrossel}>
@@ -361,11 +361,11 @@ import banner6 from './assets/process-gerenciais.jpg';
 
 
 
-              <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
-              {/* Janela que esconde os itens fora de visão */}
-              <div className={styles.janelaCarrossel}>
-                {/* O Trilho que move os itens */}
-                {/* BOTÃO ESQUERDA (ANTERIOR) */}
+          <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
+          {/* Janela que esconde os itens fora de visão */}
+          <div className={styles.janelaCarrossel}>
+            {/* O Trilho que move os itens */}
+            {/* BOTÃO ESQUERDA (ANTERIOR) */}
             <button className={`${styles.botaoCarrossel} ${styles.botaoEsquerda}`} onClick={voltarSlide}>
               <FaChevronLeft />
             </button>
@@ -374,20 +374,20 @@ import banner6 from './assets/process-gerenciais.jpg';
             </button>
 
             {/* TRILHO (Igual ao anterior) */}
-            <div 
+            <div
               className={styles.trilhoImagens}
-              style={{ 
-                transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)` 
+              style={{
+                transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)`
               }}
             >
               {slidesContent.map((item, index) => (
 
 
-               <div key={index} className={styles.cardSlide}>
-  
+                <div key={index} className={styles.cardSlide}>
+
                   {/* ADICIONE ESTA DIV 'cardInterior' ENVOLVENDO TUDO */}
                   <div className={styles.cardInterior}>
-                    
+
                     {/* Imagem */}
                     <div className={styles.wrapperImagem}>
                       <img
@@ -411,54 +411,54 @@ import banner6 from './assets/process-gerenciais.jpg';
               ))}
             </div>
           </div>
-            
 
 
-              <section className={styles.sectionDiferenciais}>
-          
-          {/* Card 1: Empregabilidade (Delay 0s) */}
-          <div className={styles.cardBalao} style={{ animationDelay: '0s' }}>
-            <span className={styles.iconeBalao}>
-              <FaBriefcase />
-            </span>
-            <h3 className={styles.tituloBalao}>Conexão com o Mercado</h3>
-            <p className={styles.textoBalao}>
-              Núcleo de carreiras ativo e parcerias com grandes empresas para facilitar seu acesso a estágios e vagas exclusivas.
-            </p>
-          </div>
 
-          {/* Card 2: Prática (Delay 1.5s - para desencontrar o movimento) */}
-          <div className={styles.cardBalao} style={{ animationDelay: '1.5s' }}>
-            <span className={styles.iconeBalao}>
-              <FaLightbulb />
-            </span>
-            <h3 className={styles.tituloBalao}>Ensino Prático</h3>
-            <p className={styles.textoBalao}>
-              Metodologias ativas e simulações empresariais para que você resolva desafios reais desde o primeiro semestre.
-            </p>
-          </div>
+          <section className={styles.sectionDiferenciais}>
 
-          {/* Card 3: Networking (Delay 3s) */}
-          <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
-            <span className={styles.iconeBalao}>
-              <FaUsers />
-            </span>
-            <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
-            <p className={styles.textoBalao}>
-              Um ambiente que conecta você a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.
-            </p>
-          </div>
+            {/* Card 1: Empregabilidade (Delay 0s) */}
+            <div className={styles.cardBalao} style={{ animationDelay: '0s' }}>
+              <span className={styles.iconeBalao}>
+                <FaBriefcase />
+              </span>
+              <h3 className={styles.tituloBalao}>Conexão com o Mercado</h3>
+              <p className={styles.textoBalao}>
+                Núcleo de carreiras ativo e parcerias com grandes empresas para facilitar seu acesso a estágios e vagas exclusivas.
+              </p>
+            </div>
 
-  
-         
+            {/* Card 2: Prática (Delay 1.5s - para desencontrar o movimento) */}
+            <div className={styles.cardBalao} style={{ animationDelay: '1.5s' }}>
+              <span className={styles.iconeBalao}>
+                <FaLightbulb />
+              </span>
+              <h3 className={styles.tituloBalao}>Ensino Prático</h3>
+              <p className={styles.textoBalao}>
+                Metodologias ativas e simulações empresariais para que você resolva desafios reais desde o primeiro semestre.
+              </p>
+            </div>
 
-      
-                      
+            {/* Card 3: Networking (Delay 3s) */}
+            <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
+              <span className={styles.iconeBalao}>
+                <FaUsers />
+              </span>
+              <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
+              <p className={styles.textoBalao}>
+                Um ambiente que conecta você a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.
+              </p>
+            </div>
+
+
+
+
+
+
           </section>
 
         </section>
 
-        
+
 
       </main>
 
@@ -469,4 +469,4 @@ import banner6 from './assets/process-gerenciais.jpg';
   );
 };
 
-  export default App;
+export default App;
