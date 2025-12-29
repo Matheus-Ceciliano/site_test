@@ -385,7 +385,7 @@
 
 .cardInterior {
   
-  border: 1px solid #eee; /* Borda no card todo */
+  border: 1px solid rgba(128, 128, 128, 0.1); /* Borda no card todo */
   border-radius: 12px;    /* Arredondamento único */
   overflow: hidden;       /* Garante que a imagem não vaze os cantos */
   background: var(--bg-page);
@@ -476,19 +476,23 @@
 /* --- Seção Diferenciais (Fundo Amarelo) --- */
 
 .sectionDiferenciais {
+  position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: 1100px;
-  padding: 40px;
+  padding: 70px;
+  gap: 50px;
   position: relative;
   background: var(--bg-page);
   overflow: hidden; /* Evita scrollbar se o balão subir demais */
   transition: background-color 0.3s ease;
+  flex-wrap: wrap;         /* Permite quebrar de linha se a tela for pequena */
+  justify-content: center;
+  DISPLAY: FLEX;
 }
 
-.cardBalao {
-  position: absolute; /* O segredo: tira eles do fluxo normal */
+  .cardBalao {
+ 
   background: var(--bg-page); /* Usa a variável do tema */
   width: 280px;
   padding: 25px;
@@ -502,53 +506,37 @@
   
   /* Garante que fiquem acima do fundo */
   z-index: 2;
+    background: var(--bg-page); /* Usa a variável do tema */
+    width: 280px;
+    padding: 25px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    /* Transição suave para o hover */
+    transition: all 0.4s ease;
+    /* Garante que fiquem acima do fundo */
+    z-index: 2;
 }
 
 .cardBalao:nth-child(1) {
-  top: 2%;
-  left: 2%;
-  /* Animação longa (20s) para parecer um deriva lenta */
+  
   animation: derivaComplexa1 20s ease-in-out infinite alternate;
 }
 
 /* Balão 2 (Direita Meio) */
 .cardBalao:nth-child(2) {
-  top: 38%;
-  right: 4%; /* Usamos right para posicionar do outro lado */
+
   animation: derivaComplexa2 25s ease-in-out infinite alternate-reverse;
 }
 
 /* Balão 3 (Centro Inferior) */
 .cardBalao:nth-child(3) {
-  bottom:10%;
-  top: auto;
-  left:20%;
-  margin-left: -140px; /* Centraliza (metade da largura) */
+
+  
   animation: derivaComplexa3 22s ease-in-out infinite alternate;
 }
-/* Balão 4: Cursos (Canto Superior Direito) */
-.cardBalao:nth-child(4) {
-  top: 5%;
-  right: 3%;
-  animation: derivaComplexa2 22s ease-in-out infinite alternate;
-  animation-delay: 2s; /* Atraso para desencontrar */
-}
 
-/* Balão 5: Professores (Esquerda Baixo) */
-.cardBalao:nth-child(5) {
-  bottom:42%;
-  left: 5%;
-  animation: derivaComplexa1 24s ease-in-out infinite alternate-reverse;
-  animation-delay: 1s;
-}
-
-/* Balão 6: Alunos (Canto Inferior Direito) */
-.cardBalao:nth-child(6) {
-  bottom: 5%;
-  right: 5%;
-  animation: derivaComplexa3 26s ease-in-out infinite alternate;
-  animation-delay: 3s;
-}
 
 /* Efeito ao passar o mouse: para de mexer e destaca */
 .cardBalao:hover {
@@ -874,22 +862,31 @@
 
 @keyframes derivaComplexa1 {
   0%   { transform: translate(0, 0) rotate(0deg); }
-  33%  { transform: translate(50px, -40px) rotate(2deg); }
-  66%  { transform: translate(20px, 60px) rotate(-1deg); }
-  100% { transform: translate(80px, 20px) rotate(3deg); }
+  /* Antes: 50px, -40px -> Agora: 12px, -10px */
+  33%  { transform: translate(12px, -10px) rotate(0.5deg); }
+  /* Antes: 20px, 60px -> Agora: 5px, 15px */
+  66%  { transform: translate(5px, 15px) rotate(-0.2deg); }
+  /* Antes: 80px, 20px -> Agora: 20px, 5px */
+  100% { transform: translate(20px, 5px) rotate(0.8deg); }
 }
 
 @keyframes derivaComplexa2 {
   0%   { transform: translate(0, 0) rotate(0deg); }
-  33%  { transform: translate(-60px, 30px) rotate(-2deg); }
-  66%  { transform: translate(-30px, -70px) rotate(1deg); }
-  100% { transform: translate(0px, -20px) rotate(-3deg); }
+  /* Antes: -60px, 30px -> Agora: -15px, 8px */
+  33%  { transform: translate(-15px, 8px) rotate(-0.5deg); }
+  /* Antes: -30px, -70px -> Agora: -8px, -18px */
+  66%  { transform: translate(-8px, -18px) rotate(0.2deg); }
+  /* Antes: 0px, -20px -> Agora: 0px, -5px */
+  100% { transform: translate(0px, -5px) rotate(-0.8deg); }
 }
 
 @keyframes derivaComplexa3 {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(-40px, 40px) scale(1.02); }
-  100% { transform: translate(40px, -30px) scale(1); }
+  /* Antes: -40px, 40px -> Agora: -10px, 10px */
+  /* Reduzi o scale de 1.02 para 1.01 para ser quase imperceptível */
+  50%  { transform: translate(-10px, 10px) scale(1.01); } 
+  /* Antes: 40px, -30px -> Agora: 10px, -8px */
+  100% { transform: translate(10px, -8px) scale(1); }
 }
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
@@ -1032,10 +1029,8 @@
 
   .cardBalao:nth-child(1),
   .cardBalao:nth-child(2),
-  .cardBalao:nth-child(3),
-  .cardBalao:nth-child(4),
-  .cardBalao:nth-child(5),
-  .cardBalao:nth-child(6) {
+  .cardBalao:nth-child(3)
+  {
     position: relative;
     top: auto; left: auto; right: auto; bottom: auto;
     margin: 0 0 5% 0;

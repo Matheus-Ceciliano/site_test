@@ -449,26 +449,8 @@ import banner6 from './assets/process-gerenciais.jpg';
             </p>
           </div>
 
-              <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
-          <span className={styles.iconeBalao}><FaUsers /></span>
-          <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
-          <p className={styles.textoBalao}>Conecte-se a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.</p>
-        </div>
-
   
-          {/* 4. Nota MEC */}
-          <div className={styles.cardBalao}> 
-            <span className={styles.iconeBalao}><FaAward /></span>
-            <h3 className={styles.tituloBalao}>Nota 4 MEC</h3>
-            <p className={styles.textoBalao}>A Faculdade ESUP é Nota 4 no MEC (escala até 5), demonstrando alta qualidade de ensino.</p>
-          </div>
-
-          {/* 5. Professores */}
-          <div className={styles.cardBalao}>
-            <span className={styles.iconeBalao}><FaGraduationCap /></span>
-            <h3 className={styles.tituloBalao}>Melhores Professores</h3>
-            <p className={styles.textoBalao}>Professores de mercado com amplo conhecimento teórico e profunda experiência prática.</p>
-          </div>
+         
 
       
                       
