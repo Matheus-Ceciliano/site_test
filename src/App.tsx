@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft} from 'react-icons/fa';
 import { FaBriefcase, FaLightbulb, FaUsers } from 'react-icons/fa';
+import { FaAward, FaGraduationCap, FaChartLine } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './Menu.module.css';
 // Importe suas imagens corretamente
@@ -146,39 +147,31 @@ import banner6 from './assets/process-gerenciais.jpg';
         const [itensVisiveis, setItensVisiveis] = useState(3); 
         const totalSlides = slidesContent.length;
           
-            useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItensVisiveis(1); // Mobile: mostra 1 por vez
-      } else {
-        setItensVisiveis(3); // Desktop: mostra 3 por vez
-      }
+           useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth < 768) {
+          setItensVisiveis(1);
+        } else {
+          setItensVisiveis(3);
+        }
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // 2. Funções de Navegação Manual
+    const avancarSlide = () => {
+      const maxIndex = totalSlides - itensVisiveis;
+      // Se estiver no último, volta para o 0 (Loop)
+      setIndexAtual((prev) => (prev >= maxIndex ? 0 : prev + 1));
     };
 
-    // Executa ao carregar
-    handleResize();
-
-    // Adiciona o "ouvinte" para caso o usuário redimensione a tela
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-
-  useEffect(() => {
-    const intervalo = setInterval(() => {
-      setIndexAtual((prevIndex) => {
-        // O limite muda dependendo se é mobile ou desktop
-        const maxIndex = totalSlides - itensVisiveis;
-        
-        // Se já chegou no fim, volta para o 0, senão vai para o próximo
-        return prevIndex >= maxIndex ? 0 : prevIndex + 1;
-      });
-    }, 4000);
-
-    return () => clearInterval(intervalo);
-  }, [totalSlides, itensVisiveis]);
-    // Lógica de Autoplay (Passa a cada 4 segundos)
-    
+    const voltarSlide = () => {
+      const maxIndex = totalSlides - itensVisiveis;
+      // Se estiver no 0, vai para o último (Loop)
+      setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
+    };
 
 
       const toggleTheme = () => setIsDarkMode(!isDarkMode);
@@ -199,9 +192,6 @@ import banner6 from './assets/process-gerenciais.jpg';
         </button>
       );
 
-    
-
- 
   
   
   return (
@@ -367,41 +357,62 @@ import banner6 from './assets/process-gerenciais.jpg';
 
 
         <section className={styles.sectionCarrossel}>
+
+
+
+
               <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
               {/* Janela que esconde os itens fora de visão */}
               <div className={styles.janelaCarrossel}>
-
                 {/* O Trilho que move os itens */}
-                <div 
-                  className={styles.trilhoImagens}
-                  style={{ 
-                    // Move X% para a esquerda baseado no índice atual
-                    transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)` 
-                  }}
-                >
-                  {slidesContent.map((item, index) => (
-                    <div key={index} className={styles.cardSlide}>
-                      {/* Imagem */}
-                      <div className={styles.wrapperImagem}>
-                        <img
-                          src={item.image}
-                          alt={item.titulo}
-                          className={styles.imagemSlide}
-                        />
-                      </div>
+                {/* BOTÃO ESQUERDA (ANTERIOR) */}
+            <button className={`${styles.botaoCarrossel} ${styles.botaoEsquerda}`} onClick={voltarSlide}>
+              <FaChevronLeft />
+            </button>
+            <button className={`${styles.botaoCarrossel} ${styles.botaoDireita}`} onClick={avancarSlide}>
+              <FaChevronRight />
+            </button>
 
-                      {/* Texto / Descrição */}
-                      <div className={styles.conteudoCard}>
-                        <h3 className={styles.tituloCard}>{item.titulo}</h3>
-                        <p className={styles.descricaoCard}>{item.descricao}</p>
-                        <a href={item.link} className={styles.linkCard}>
-                          Saiba Mais →
-                        </a>
-                      </div>
+            {/* TRILHO (Igual ao anterior) */}
+            <div 
+              className={styles.trilhoImagens}
+              style={{ 
+                transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)` 
+              }}
+            >
+              {slidesContent.map((item, index) => (
+
+
+               <div key={index} className={styles.cardSlide}>
+  
+                  {/* ADICIONE ESTA DIV 'cardInterior' ENVOLVENDO TUDO */}
+                  <div className={styles.cardInterior}>
+                    
+                    {/* Imagem */}
+                    <div className={styles.wrapperImagem}>
+                      <img
+                        src={item.image}
+                        alt={item.titulo}
+                        className={styles.imagemSlide}
+                      />
                     </div>
-                  ))}
+
+                    {/* Conteúdo */}
+                    <div className={styles.conteudoCard}>
+                      <h3 className={styles.tituloCard}>{item.titulo}</h3>
+                      <p className={styles.descricaoCard}>{item.descricao}</p>
+                      <a href={item.link} className={styles.linkCard}>
+                        Saiba Mais →
+                      </a>
+                    </div>
+
+                  </div> {/* Fim da cardInterior */}
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+            
+
 
               <section className={styles.sectionDiferenciais}>
           
@@ -438,13 +449,32 @@ import banner6 from './assets/process-gerenciais.jpg';
             </p>
           </div>
 
-        </section>
+              <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
+          <span className={styles.iconeBalao}><FaUsers /></span>
+          <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
+          <p className={styles.textoBalao}>Conecte-se a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.</p>
+        </div>
+
+  
+          {/* 4. Nota MEC */}
+          <div className={styles.cardBalao}> 
+            <span className={styles.iconeBalao}><FaAward /></span>
+            <h3 className={styles.tituloBalao}>Nota 4 MEC</h3>
+            <p className={styles.textoBalao}>A Faculdade ESUP é Nota 4 no MEC (escala até 5), demonstrando alta qualidade de ensino.</p>
+          </div>
+
+          {/* 5. Professores */}
+          <div className={styles.cardBalao}>
+            <span className={styles.iconeBalao}><FaGraduationCap /></span>
+            <h3 className={styles.tituloBalao}>Melhores Professores</h3>
+            <p className={styles.textoBalao}>Professores de mercado com amplo conhecimento teórico e profunda experiência prática.</p>
+          </div>
+
+      
+                      
+          </section>
 
         </section>
-                  
-            
-         
-          
 
         
 
