@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft} from 'react-icons/fa';
 import { FaBriefcase, FaLightbulb, FaUsers } from 'react-icons/fa';
-import { FaAward, FaGraduationCap, FaChartLine } from 'react-icons/fa';
+import { FaAward, FaGraduationCap} from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './Menu.module.css';
 // Importe suas imagens corretamente
