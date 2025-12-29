@@ -142,19 +142,47 @@ import banner6 from './assets/process-gerenciais.jpg';
       
     // CONFIGURAÇÃO: Mostra 3 itens por vez
         const [indexAtual, setIndexAtual] = useState(0);
-        const itensVisiveis = 3;
+        const [itensVisiveis, setItensVisiveis] = useState(3); 
         const totalSlides = slidesContent.length;
           
+            useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItensVisiveis(1); // Mobile: mostra 1 por vez
+      } else {
+        setItensVisiveis(3); // Desktop: mostra 3 por vez
+      }
+    };
+
+    // Executa ao carregar
+    handleResize();
+
+    // Adiciona o "ouvinte" para caso o usuário redimensione a tela
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setIndexAtual((prevIndex) => {
+        // O limite muda dependendo se é mobile ou desktop
+        const maxIndex = totalSlides - itensVisiveis;
+        
+        // Se já chegou no fim, volta para o 0, senão vai para o próximo
+        return prevIndex >= maxIndex ? 0 : prevIndex + 1;
+      });
+    }, 4000);
+
+    return () => clearInterval(intervalo);
+  }, [totalSlides, itensVisiveis]);
     // Lógica de Autoplay (Passa a cada 4 segundos)
-      useEffect(() => {
-        const intervalo = setInterval(() => {
-          setIndexAtual((prevIndex) => {
-            // Se chegar no ponto limite (total - visiveis), volta para o 0
-            return prevIndex >= totalSlides - itensVisiveis ? 0 : prevIndex + 1;
-          });
-        }, 4000); // 4000ms = 4 segundos
-        return () => clearInterval(intervalo);
-      }, [totalSlides]);
+    
+
+
+
+
+
 
       const toggleTheme = () => setIsDarkMode(!isDarkMode);
       const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -173,6 +201,8 @@ import banner6 from './assets/process-gerenciais.jpg';
           </div>
         </button>
       );
+
+    
 
  
   

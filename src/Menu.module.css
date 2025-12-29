@@ -273,7 +273,7 @@
   width: 100%;
   height: 100%;
   z-index:1;
-  background: linear-gradient(to left, #0078aa 25%, rgba(255, 255, 255, 0) 60%);
+  background: linear-gradient(to left, #0078aa 30%, rgba(255, 255, 255, 0) 60%);
   /* Garante que o clique passe pelo gradiente se precisar clicar na imagem */
   pointer-events: none; 
 }
@@ -628,6 +628,12 @@
   color: var(--text-footer);
 }
 
+
+
+
+
+/* --- 11. ANIMAÇÕES --- */
+/* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
 @keyframes fadeIn {
   from {
@@ -675,9 +681,14 @@
     transform: translate(0, -50%); /* Termina na posição original */
   }
 }
+/* --- 11. ANIMAÇÕES --- */
+/* --- 11. ANIMAÇÕES --- */
+/* --- 11. ANIMAÇÕES --- */
+
+
 
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
-
+/* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
 /* Quando a tela for menor que 992px (Tablet/Celular) */
 @media (max-width: 1000px) {
 
@@ -764,20 +775,30 @@
   }
 }
 
-/* --- 3. Celulares (< 768px) --- */
-/* Aqui o recorte fica quadrado para destacar bem no mobile */
 @media (max-width: 768px) {
-  .containerImagem {
-    /* Transforma em um quadrado perfeito */
-    aspect-ratio: 1 / 1; 
-    /* Se quiser mais alto (estilo Stories), use: aspect-ratio: 9 / 16; */
+  
+  /* 1. Faz o card ocupar 100% da largura disponível */
+  .cardSlide {
+    min-width: 100%;
+    flex: 0 0 100%;
+    padding: 0 10px; /* Reduzi um pouco o padding para aproveitar a tela */
   }
 
-  .bannerSite {
-    /* No mobile, foca no topo (rosto) para não cortar a cabeça */
-    object-position: center top; 
+  /* 2. Ajustes opcionais para ficar mais bonito no celular */
+  .wrapperImagem {
+    height: 220px; /* Um pouco mais alto para destacar a imagem */
+  }
+
+  .conteudoCard {
+    min-height: auto; /* Deixa a altura flexível conforme o texto */
+    padding: 15px;
+  }
+
+  .tituloSecao {
+    font-size: 1.5rem; /* Diminui um pouco o título da seção */
   }
 }
+
 /*responsividade da imagem hero e texto*/
 /*responsividade da imagem hero e texto*/
 /*responsividade da imagem hero e texto*/
