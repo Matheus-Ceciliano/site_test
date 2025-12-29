@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import { FaBriefcase, FaLightbulb, FaUsers } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './Menu.module.css';
 // Importe suas imagens corretamente
@@ -178,10 +179,6 @@ import banner6 from './assets/process-gerenciais.jpg';
   }, [totalSlides, itensVisiveis]);
     // Lógica de Autoplay (Passa a cada 4 segundos)
     
-
-
-
-
 
 
       const toggleTheme = () => setIsDarkMode(!isDarkMode);
@@ -369,7 +366,7 @@ import banner6 from './assets/process-gerenciais.jpg';
            </div>
 
 
-            <section className={styles.sectionCarrossel}>
+        <section className={styles.sectionCarrossel}>
               <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
               {/* Janela que esconde os itens fora de visão */}
               <div className={styles.janelaCarrossel}>
@@ -405,8 +402,47 @@ import banner6 from './assets/process-gerenciais.jpg';
                   ))}
                 </div>
               </div>
-    </section>
 
+              <section className={styles.sectionDiferenciais}>
+          
+          {/* Card 1: Empregabilidade (Delay 0s) */}
+          <div className={styles.cardBalao} style={{ animationDelay: '0s' }}>
+            <span className={styles.iconeBalao}>
+              <FaBriefcase />
+            </span>
+            <h3 className={styles.tituloBalao}>Conexão com o Mercado</h3>
+            <p className={styles.textoBalao}>
+              Núcleo de carreiras ativo e parcerias com grandes empresas para facilitar seu acesso a estágios e vagas exclusivas.
+            </p>
+          </div>
+
+          {/* Card 2: Prática (Delay 1.5s - para desencontrar o movimento) */}
+          <div className={styles.cardBalao} style={{ animationDelay: '1.5s' }}>
+            <span className={styles.iconeBalao}>
+              <FaLightbulb />
+            </span>
+            <h3 className={styles.tituloBalao}>Ensino Prático</h3>
+            <p className={styles.textoBalao}>
+              Metodologias ativas e simulações empresariais para que você resolva desafios reais desde o primeiro semestre.
+            </p>
+          </div>
+
+          {/* Card 3: Networking (Delay 3s) */}
+          <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
+            <span className={styles.iconeBalao}>
+              <FaUsers />
+            </span>
+            <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
+            <p className={styles.textoBalao}>
+              Um ambiente que conecta você a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.
+            </p>
+          </div>
+
+        </section>
+
+        </section>
+                  
+            
          
           
 

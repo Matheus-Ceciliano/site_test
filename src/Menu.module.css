@@ -312,8 +312,15 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 80px 20px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  flex-wrap: wrap; /* Para empilhar no celular */
+  background: var(--bg-page);
+  transition: background-color 0.3s ease;
 }
 
 .tituloSecao {
@@ -404,9 +411,100 @@
   text-decoration: underline;
 }
 /* --- CARROSSEL DE CURSOS --- */
+/* --- CARROSSEL DE CURSOS --- */
+/* --- CARROSSEL DE CURSOS --- */
 
+
+/* --- Seção Diferenciais (Fundo Amarelo) --- */
+/* --- Seção Diferenciais (Fundo Amarelo) --- */
+/* --- Seção Diferenciais (Fundo Amarelo) --- */
+
+.sectionDiferenciais {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 650px;
+  padding: 40px;
+  position: relative;
+  background: var(--bg-page);
+  overflow: hidden; /* Evita scrollbar se o balão subir demais */
+  transition: background-color 0.3s ease;
+}
+
+.cardBalao {
+  position: absolute; /* O segredo: tira eles do fluxo normal */
+  background: var(--bg-page); /* Usa a variável do tema */
+  width: 280px;
+  padding: 25px;
+  border-radius: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  
+  /* Transição suave para o hover */
+  transition: all 0.4s ease;
+  
+  /* Garante que fiquem acima do fundo */
+  z-index: 2;
+}
+
+.cardBalao:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  /* Animação longa (20s) para parecer um deriva lenta */
+  animation: derivaComplexa1 20s ease-in-out infinite alternate;
+}
+
+/* Balão 2 (Direita Meio) */
+.cardBalao:nth-child(2) {
+  top: 35%;
+  right: 5%; /* Usamos right para posicionar do outro lado */
+  animation: derivaComplexa2 25s ease-in-out infinite alternate-reverse;
+}
+
+/* Balão 3 (Centro Inferior) */
+.cardBalao:nth-child(3) {
+  bottom: 15%;
+  left: 50%;
+  margin-left: -140px; /* Centraliza (metade da largura) */
+  animation: derivaComplexa3 22s ease-in-out infinite alternate;
+}
+
+/* Efeito ao passar o mouse: para de mexer e destaca */
+.cardBalao:hover {
+  animation-play-state: paused;
+  box-shadow: 0 20px 40px rgba(0, 120, 170, 0.2); /* Sombra azulada */
+  border-color: #004aad;
+  z-index: 10; /* Traz para frente de tudo */
+  transform: scale(1.05); /* Leve aumento */
+}
+
+.iconeBalao {
+  font-size: 3rem;
+  color: #004aad; /* Azul ESUP */
+  margin-bottom: 20px;
+  display: block;
+}
+
+.tituloBalao {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: 800;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.textoBalao {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
 
 /* --- 8. MENUS DESKTOP --- */
+/* --- 8. MENUS DESKTOP --- */
+/* --- 8. MENUS DESKTOP --- */
+
+
 .itemMenuPrincipal {
   position: relative;
   height: 100%;
@@ -681,6 +779,38 @@
     transform: translate(0, -50%); /* Termina na posição original */
   }
 }
+
+@keyframes flutuar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); } /* Sobe */
+  100% { transform: translateY(0px); }
+}
+
+/*balao de diferencial*/
+/*balao de diferencial*/
+/*balao de diferencial*/
+
+
+
+@keyframes derivaComplexa1 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(50px, -40px) rotate(2deg); }
+  66%  { transform: translate(20px, 60px) rotate(-1deg); }
+  100% { transform: translate(80px, 20px) rotate(3deg); }
+}
+
+@keyframes derivaComplexa2 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(-60px, 30px) rotate(-2deg); }
+  66%  { transform: translate(-30px, -70px) rotate(1deg); }
+  100% { transform: translate(0px, -20px) rotate(-3deg); }
+}
+
+@keyframes derivaComplexa3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-40px, 40px) scale(1.02); }
+  100% { transform: translate(40px, -30px) scale(1); }
+}
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
@@ -689,6 +819,7 @@
 
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
+
 /* Quando a tela for menor que 992px (Tablet/Celular) */
 @media (max-width: 1000px) {
 
@@ -802,3 +933,41 @@
 /*responsividade da imagem hero e texto*/
 /*responsividade da imagem hero e texto*/
 /*responsividade da imagem hero e texto*/
+
+
+@media (max-width: 768px) {
+  .sectionDiferenciais {
+    min-height: auto;
+    padding: 60px 20px;
+    display: flex; /* Liga o flexbox de volta */
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .cardBalao, 
+  .cardBalao:nth-child(1), 
+  .cardBalao:nth-child(2), 
+  .cardBalao:nth-child(3) {
+    position: relative; /* Desliga o absoluto */
+    top: auto; left: auto; right: auto; bottom: auto;
+    margin: 0;
+    width: 100%;
+    max-width: 320px;
+    animation: none !important; /* Desliga as animações no mobile */
+    transform: none !important;
+  }
+  
+  /* Reativa uma animação de flutuar simples só para cima e baixo no mobile se quiser */
+  .cardBalao {
+       animation: flutuarSimplesMobile 3s ease-in-out infinite alternate !important;
+  }
+}
+
+@keyframes flutuarSimplesMobile {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
+/* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
