@@ -137,10 +137,10 @@
 }
 
 .backdrop-text {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Abril Fatface', serif;
   font-size: 4rem;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.1); /* Texto gigante quase transparente */
+  color: rgba(0, 0, 0, 0.425); /* Texto gigante quase transparente */
   margin: 0;
   line-height: 1;
 }
@@ -164,5 +164,36 @@
   100% {
     /* Move 80px para a esquerda */
     transform: translateX(470px); 
+  }
+}
+
+/*responsividade*/
+/*responsividade*/
+/*responsividade*/
+
+@media (max-width: 1919px) {
+
+  /* 1. Esconde a decoração de fundo (O quadrado e o texto DEV) */
+  .backdrop-decoration {
+    display: none !important;
+  }
+
+  /* 2. Reseta o Notebook */
+  .notebook-container {
+    /* Desativa a animação de ir para o lado */
+    animation: none !important; 
+    
+    /* Força ele a ficar na posição original (centro) */
+    transform: translateX(0) !important; 
+    
+    /* Garante que fique centralizado */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px; /* Mantém o tamanho máximo original */
+  }
+
+  /* 3. Garante que o container pai centralize o item restante */
+  .div-container {
+    justify-content: center;
   }
 }

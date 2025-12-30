@@ -520,6 +520,24 @@
 /* --- CARROSSEL DE CURSOS --- */
 /* --- CARROSSEL DE CURSOS --- */
 
+.notebookWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  /* Removemos alturas fixas para deixar o conteúdo definir a altura */
+  min-height: 400px; 
+  
+  /* Garante que não tenha overflow horizontal que quebre o mobile */
+  overflow: hidden; 
+  
+  /* Espaçamento padrão para Desktop */
+  padding: 20px 0;
+  margin-top: 20px; 
+}
+
 
 /* --- Seção Diferenciais (Fundo Amarelo) --- */
 /* --- Seção Diferenciais (Fundo Amarelo) --- */
@@ -1205,5 +1223,13 @@
   }
 }
 
+
+@media (max-width: 768px) {
+  .notebookWrapper {
+    padding: 10px;
+    margin-top: 10px;
+    min-height: auto; /* No mobile, deixa a altura automática */
+  }
+}
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
