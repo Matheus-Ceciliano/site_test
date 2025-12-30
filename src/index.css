@@ -3,11 +3,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   /* Deixa o fundo do site todo escuro para combinar com seu menu */
-  background-color: #242424;
+
   color: #ffffffde;
 }
+
+
 
 body {
   margin: 0;
