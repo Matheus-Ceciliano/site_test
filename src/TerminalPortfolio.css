@@ -118,8 +118,8 @@
   z-index: 0;         /* Fica atrás do notebook (que tem z-index 1 ou mais) */
   /* Tamanho e Estilo */
   width: 600px;       /* Ajuste o tamanho conforme quiser */
-  height: 350px;
-  background: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%); /* Um roxo degradê bonito */
+  height: 450px;
+  background: var(--bg-page-135);
   border-radius: 20px;
   opacity: 0; /* Começa invisível */
   /* Centralização do texto 'DEV' (Opcional) */
@@ -163,6 +163,16 @@
   }
 }
 
+@keyframes slideFromRight {
+  from {
+    opacity: 0; /* Começa invisível */
+    transform: translateX(150px); /* Começa 100px deslocado para a DIREITA */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px); /* Termina na posição original (FINAL) */
+  }
+}
 /*responsividade*/
 /*responsividade*/
 /*responsividade*/
@@ -173,23 +183,12 @@
   .backdrop-decoration {
     display: none !important;
   }
-
-  /* 2. Reseta o Notebook */
   .notebook-container {
-    /* Desativa a animação de ir para o lado */
-    animation: none !important; 
-    
-    /* Força ele a ficar na posição original (centro) */
-    transform: translateX(0) !important; 
-    
-    /* Garante que fique centralizado */
-    margin: 0 auto;
-    width: 100%;
-    max-width: 800px; /* Mantém o tamanho máximo original */
+    /* AQUI ESTÁ O TRUQUE:
+       Ao redefinir a propriedade 'animation' aqui dentro, 
+       o navegador CANCELA a 'slideNotebook' e roda apenas a 'slideFromRight'.
+    */
+    animation: slideFromRight 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
   }
-
-  /* 3. Garante que o container pai centralize o item restante */
-  .div-container {
-    justify-content: center;
-  }
+  
 } 

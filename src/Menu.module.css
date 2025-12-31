@@ -5,6 +5,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition:  0.7s ease,
+    color 0.7s ease,
+    border-color 0.7s ease,
+    fill 0.7s ease,        /* Para ícones SVG */
+    stroke 0.7s ease,      /* Para linhas de SVG */
+    box-shadow 0.7s ease;  /* Para sombras de cards */
 }
 
 /* --- 2. DEFINIÇÃO DAS CORES (VARIÁVEIS) --- */
@@ -13,6 +19,7 @@
 .temaClaro {
   --bg-page1: linear-gradient(to top, #a1a0a0d9, #f4f4f5);
   --bg-page: #f4f4f5;
+  --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
   /* Cor clara *
   /* Cor um pouco mais escura para dar o efeito */
   /* Fundo da página */
@@ -42,6 +49,7 @@
 .temaEscuro {
   --bg-page1: linear-gradient(to top, #2c2b2bd0, #121212);
   --bg-page: #121212;
+  --bg-page-135: linear-gradient(-135deg, #121212 20%, #f3f160d5 100%);
   /* Fundo preto suave */
   --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
   /* Azul escuro */
@@ -73,17 +81,16 @@
   min-height: 100vh;
   background-color: var(--bg-page);
   color: var(--text-nav);
-  transition: background-color 0.3s ease, color 0.3s ease;
   width: 100%;
 
-
-
-  /* Evita rolagem lateral acidental */
 }
+ 
+
 
 /* --- 4. HEADER (Topo Azul) --- */
 .barraTopo {
   background: var(--bg-barra-topo);
+
   color: white;
   padding: 12px 10%;
   font-size: 0.85rem;
@@ -97,9 +104,10 @@
 
 }
 
-.barraTopo>* {
+.barraTop > * {
   /* Nome da animação | Duração | Tipo de movimento */
   animation: aparecerSuave 0.7s ease-out forwards;
+  
 }
 
 .grupoIcones {
@@ -182,11 +190,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  ;
+  
+
 }
 
 .barraBranca {
   background: var(--bg-barra-nav);
+  
   position: relative;
   width: 100%;
   color: var(--text-nav);
@@ -195,7 +205,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 6px -1px var(--shadow-color);
-  transition: background 0.3s ease;
+  
   z-index: 10;
 }
 
@@ -346,7 +356,7 @@
   flex-wrap: wrap;
   /* Para empilhar no celular */
   background: var(--bg-page);
-  transition: background-color 0.3s ease;
+  
 }
 
 .botaoCarrossel {
@@ -369,7 +379,7 @@
   z-index: 10;
   /* Garante que fique acima das imagens */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s, transform 0.2s;
+  
   font-size: 1.2rem;
 }
 
@@ -1124,9 +1134,6 @@
   }
 }
 
-/*responsividade da imagem hero e texto*/
-/*responsividade da imagem hero e texto*/
-/*responsividade da imagem hero e texto*/
 
 /*balao de diferencial*/
 /*balao de diferencial*/
