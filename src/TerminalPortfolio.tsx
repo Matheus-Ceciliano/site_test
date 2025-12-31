@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Certifique-se de criar este arquivo CSS (código abaixo)
 import './TerminalPortfolio.css'; 
-// Importe a imagem do notebook aqui se ela estiver na pasta assets
-// Se estiver na pasta public, use o caminho string direto no src (ex: "/notebook.png")
 import notebookImg from './assets/notebook.png';
 import wallpaperImg from './assets/wallpaper.png';
 
@@ -18,10 +15,11 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
   
   // FRASES QUE VÃO APARECER NA TELA
   const texts: string[] = [
-    "Olá! Eu sou Matheus.",
-    "Estudante de Sistemas de Informação.",
-    "Desenvolvedor Front-end React.",
-    "Apaixonado por Tecnologia e Inovação."
+        "Matrículas abertas para 2026.",
+        "Garanta já a sua vaga.",
+        "O seu futuro começa agora!",
+        "Venha transformar sua carreira!",
+        "Agende seu vestibular hoje!",
   ];
 
   const [textIndex, setTextIndex] = useState(0);
@@ -91,7 +89,7 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
                 <span className="dot yellow"></span>
                 <span className="dot green"></span>
               </div>
-              <span className="terminal-title">bash — portfolio</span>
+              <span className="terminal-title">Faculdade Esup</span>
             </div>
 
             {/* Área de texto */}

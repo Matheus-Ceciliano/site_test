@@ -1,9 +1,12 @@
+
+
+
 .div-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 10%;
+  margin-top: 6%;
   z-index: 1;
   position: relative;
 }
@@ -32,18 +35,14 @@
 .notebook-screen {
  position: absolute;
   z-index: 2;
-  
   /* Removemos a imagem daqui, pois ela agora tem sua própria div */
   background-color: #151515; 
-  
   border-radius: 2px;
   overflow: hidden; /* Importante para cortar a imagem se vazar */
-
   /* Centralização do Terminal */
   display: flex;
   justify-content: center;
   align-items: center;
-
   /* Seus valores de calibração (mantenha os que ajustou) */
   top: 4%;       
   left: 11%;     
@@ -117,20 +116,17 @@
 .backdrop-decoration {
   position: absolute; /* Tira do fluxo para ficar atrás */
   z-index: 0;         /* Fica atrás do notebook (que tem z-index 1 ou mais) */
-  
   /* Tamanho e Estilo */
-  width: 500px;       /* Ajuste o tamanho conforme quiser */
+  width: 600px;       /* Ajuste o tamanho conforme quiser */
   height: 350px;
-  background: linear-gradient(135deg, #616063d5 0%, #a9abb1d5 100%); /* Um roxo degradê bonito */
+  background: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%); /* Um roxo degradê bonito */
   border-radius: 20px;
   opacity: 0; /* Começa invisível */
-  
   /* Centralização do texto 'DEV' (Opcional) */
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   padding: 20px;
-
   /* A ANIMAÇÃO: Vai para a Direita */
   animation: slideBackdrop 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
   animation-delay: 0.4s; /* Espera meio segundo para começar */
@@ -196,4 +192,4 @@
   .div-container {
     justify-content: center;
   }
-}
+} 

@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import {FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft} from 'react-icons/fa';
 import { FaBriefcase, FaLightbulb, FaUsers } from 'react-icons/fa';
 import { FaAward, FaGraduationCap, } from 'react-icons/fa';
-import { FiSun, FiMoon } from 'react-icons/fi';
+
 import styles from './Menu.module.css';
 import TerminalPortfolio from './TerminalPortfolio';
+import { ThemeContext } from './themeContext';
+import ThemeSwitch from './themeSwitch';
+
 // Importe suas imagens corretamente
 import logoLightMode from './assets/logo-esup.png';
 import logoDarkMode from './assets/logo-esup-white.png';
@@ -14,6 +17,8 @@ import banner3 from './assets/contabeis.jpg';
 import banner4 from './assets/pedagogia-semipresencial.jpg';
 import banner5 from './assets/sis-info.jpg';
 import banner6 from './assets/process-gerenciais.jpg';
+
+
 
     interface SubItem {
       label: string;
@@ -129,10 +134,17 @@ import banner6 from './assets/process-gerenciais.jpg';
   const App = () => {
     // ... (estados e funções continuam os mesmos) ...
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const toggleTheme = () => setIsDarkMode(!isDarkMode);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [expandedMenuIndex, setExpandedMenuIndex] = useState<number | null>(null);
+
+  // Funções do Menu Mobile (Adicionadas pois faltavam no código original)
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const toggleSubmenuMobile = (index: number) => {
+    setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
+  };
       
-    // CONFIGURAÇÃO: Mostra 3 itens por vez
+    // CONFIGURAÇÃO Carrossel
         const [indexAtual, setIndexAtual] = useState(0);
         const [itensVisiveis, setItensVisiveis] = useState(3); 
         const totalSlides = slidesContent.length;
@@ -163,26 +175,6 @@ import banner6 from './assets/process-gerenciais.jpg';
       setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
     };
 
-
-      const toggleTheme = () => setIsDarkMode(!isDarkMode);
-      const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-      const toggleSubmenuMobile = (index: number) => setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
-
-      // --- COMPONENTE DO BOTÃO DE TEMA (Para reusar) ---
-      const ThemeSwitch = () => (
-        <button
-          onClick={toggleTheme}
-          className={`${styles.switchTrack} ${isDarkMode ? styles.switchTrackActive : ''}`}
-          title="Mudar Tema"
-          type="button"
-        >
-          <div className={styles.switchThumb}>
-            {isDarkMode ? <FiMoon size={12} /> : <FiSun size={12} color="#f59e0b" />}
-          </div>
-        </button>
-      );
-
-
   //costantes principais//
    //costantes principais//
     //costantes principais//
@@ -191,6 +183,7 @@ import banner6 from './assets/process-gerenciais.jpg';
   
   
   return (
+  <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
     <div className={`${styles.layoutPrincipal} ${isDarkMode ? styles.temaEscuro : styles.temaClaro}`}>
 
       {/* --- MENU MOBILE (GAVETA LATERAL) --- */}
@@ -322,7 +315,6 @@ import banner6 from './assets/process-gerenciais.jpg';
 
     </div>
 
-
       <section className={styles.sectionCarrossel}>
               <h2 className={styles.tituloSecao}>Conheça Nossos Cursos</h2>
               {/* Janela que esconde os itens fora de visão */}
@@ -366,7 +358,10 @@ import banner6 from './assets/process-gerenciais.jpg';
               ))}
             </div>
           </div>
-        <section className={styles.sectionDiferenciais}>
+       
+        </section>
+
+               <section className={styles.sectionDiferenciais}>
           
           {/* Card 1: Empregabilidade (Delay 0s) */}
           <div className={styles.cardBalao} style={{ animationDelay: '0s' }}>
@@ -401,22 +396,16 @@ import banner6 from './assets/process-gerenciais.jpg';
             </p>
           </div>
 
-              <div className={styles.cardBalao} style={{ animationDelay: '0.5s' }}>
-          <span className={styles.iconeBalao}><FaUsers /></span>
-          <h3 className={styles.tituloBalao}>Networking Estratégico</h3>
-          <p className={styles.textoBalao}>Conecte-se a uma rede valiosa de alunos, ex-alunos e professores atuantes no mercado.</p>
-        </div>
-
   
           {/* 4. Nota MEC */}
-          <div className={styles.cardBalao}> 
+          <div className={styles.cardBalao} style={{ animationDelay: '0.5'}}> 
             <span className={styles.iconeBalao}><FaAward /></span>
             <h3 className={styles.tituloBalao}>Nota 4 MEC</h3>
             <p className={styles.textoBalao}>A Faculdade ESUP é Nota 4 no MEC (escala até 5), demonstrando alta qualidade de ensino.</p>
           </div>
 
           {/* 5. Professores */}
-          <div className={styles.cardBalao}>
+          <div className={styles.cardBalao}  style={{ animationDelay: '0.5'}}> 
             <span className={styles.iconeBalao}><FaGraduationCap /></span>
             <h3 className={styles.tituloBalao}>Melhores Professores</h3>
             <p className={styles.textoBalao}>Professores de mercado com amplo conhecimento teórico e profunda experiência prática.</p>
@@ -426,16 +415,13 @@ import banner6 from './assets/process-gerenciais.jpg';
                       
           </section>
 
-        </section>
-
-        
-
       </main>
 
       <footer className={styles.rodape}>
         <p>© 2025 Grupo ESUP - Todos os direitos reservados.</p>
       </footer>
     </div>
+  </ThemeContext.Provider>
   );
 };
 

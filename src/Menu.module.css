@@ -546,7 +546,6 @@
 .sectionDiferenciais {
   width: 100%;
   background: var(--bg-page1);
-
   padding: 70px;
   gap: 50px;
   position: relative;
@@ -555,7 +554,6 @@
   /* Evita scrollbar se o balão subir demais */
   transition: background-color 0.3s ease;
   flex-wrap: wrap;
-  /* Permite quebrar de linha se a tela for pequena */
   justify-content: center;
   DISPLAY: FLEX;
 }
@@ -570,10 +568,9 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   text-align: center;
   border: 1px solid rgba(128, 128, 128, 0.1);
-
+  flex: 1 1 30%;
   /* Transição suave para o hover */
   transition: all 0.4s ease;
-
   /* Garante que fiquem acima do fundo */
   z-index: 2;
 
@@ -1142,6 +1139,7 @@
   .cardBalao {
     width: 100%;
     animation: none;
+    flex: 1 1 100%; /* Em telas pequenas, ocupa 100% da largura */
 
   }
 

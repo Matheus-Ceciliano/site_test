@@ -1,0 +1,98 @@
+/* 1. O Container Principal (A caixa invisível que segura tudo) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;  /* Largura total */
+  height: 25px; /* Altura total */
+  margin-left: 15px; /* Margem para separar do menu */
+}
+
+/* 2. Esconde o Input Checkbox padrão do navegador */
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 3. O Trilho (Fundo que muda de cor) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #64748b4f; /* Cinza (Modo CLARO) */
+  transition: .4s;
+   border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 34px;
+}
+
+/* 4. A Bolinha Branca (Antes de mover) */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 60%;
+  z-index: 1; /* Fica atrás do ícone */
+}
+
+/* --- ESTADOS ATIVOS (Quando clicado/Dark Mode) --- */
+
+/* Muda a cor do fundo para Azul */
+input:checked + .slider {
+  background-color: #3a3b3b; 
+}
+
+/* Move a bolinha para a direita */
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* --- ÍCONES (Para ficarem dentro da bolinha) --- */
+
+.iconContainer {
+  position: absolute;
+  top: 51%;
+  left: 2px; /* Começa na mesma posição da bolinha */
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  width: 19px; /* Mesmo tamanho da bolinha */
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* Garante que o ícone fique NA FRENTE da bolinha */
+  transition: .4s; /* Mesma velocidade da bolinha */
+  pointer-events: none; /* O clique atravessa o ícone e vai pro botão */
+}
+
+/* Move o container de ícones junto com a bolinha quando marcado */
+input:checked ~ .iconContainer {
+  transform: translate(27px, -50%);
+}
+
+/* Estilo individual dos ícones */
+.sunIcon, .moonIcon {
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+/* Lógica de aparecer/sumir */
+.moonIcon {
+  opacity: 1; /* Lua aparece no modo claro */
+  color: #64748b;
+}
+
+.sunIcon {
+  opacity: 0; /* Sol começa escondido */
+  color: #fbbf24;
+}
+
+/* Inverte a visibilidade quando ativado */
+input:checked ~ .iconContainer .moonIcon { opacity: 0; }
+input:checked ~ .iconContainer .sunIcon { opacity: 1; }
