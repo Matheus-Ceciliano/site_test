@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './TerminalPortfolio.css'; 
 import notebookImg from './assets/notebook.png';
 import wallpaperImg from './assets/wallpaper.png';
-import styles from './themeSwitch.module.css';
+
 
 interface TerminalPortfolioProps {
   typingSpeed?: number;
