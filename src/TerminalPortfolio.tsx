@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaArrowRight } from 'react-icons/fa';
 import './TerminalPortfolio.css'; 
 import notebookImg from './assets/notebook.png';
 import wallpaperImg from './assets/wallpaper.png';
@@ -9,12 +10,75 @@ interface TerminalPortfolioProps {
   deletingSpeed?: number;
 }
 
+const TARGET_DATE = new Date(2026, 1, 20).getTime(); // 20 de Fev de 2026
+
+const CtaPanel = () => {
+  const [timeLeft, setTimeLeft] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const difference = TARGET_DATE - now;
+      if (difference > 0) {
+        setTimeLeft({
+          dias: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          horas: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutos: Math.floor((difference / 1000 / 60) % 60),
+          segundos: Math.floor((difference / 1000) % 60),
+        });
+      } else {
+        setTimeLeft({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+      }
+    };
+    const timer = setInterval(calculateTimeLeft, 1000);
+    calculateTimeLeft();
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatNumber = (num: number) => num.toString().padStart(2, '0');
+
+  return (
+    <div className="cta-content">
+      <h3 className="cta-title">Últimos dias para sua Bolsa</h3>
+      <p className="cta-subtitle">A condição especial encerra em:</p>
+
+      <div className="cta-timer-container">
+        <div className="cta-timer-box">
+          <span className="cta-timer-number">{formatNumber(timeLeft.dias)}</span>
+          <span className="cta-timer-label">Dias</span>
+        </div>
+        <div className="cta-timer-box">
+          <span className="cta-timer-number">{formatNumber(timeLeft.horas)}</span>
+          <span className="cta-timer-label">Hrs</span>
+        </div>
+        <div className="cta-timer-box">
+          <span className="cta-timer-number">{formatNumber(timeLeft.minutos)}</span>
+          <span className="cta-timer-label">Min</span>
+        </div>
+        <div className="cta-timer-box">
+          <span className="cta-timer-number">{formatNumber(timeLeft.segundos)}</span>
+          <span className="cta-timer-label">Seg</span>
+        </div>
+      </div>
+
+      <button className="cta-button" onClick={() => alert("Redirecionar!")}>
+        Garantir minha vaga
+        <FaArrowRight size={12} />
+      </button>
+    </div>
+  );
+};
+
+// =========================================================
+// 2. COMPONENTE PRINCIPAL (TERMINAL)
+// =========================================================
+
 const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
   typingSpeed = 100,
   deletingSpeed = 50,
 }) => {
   
-  // FRASES QUE VÃO APARECER NA TELA
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const texts: string[] = [
         "Matrículas abertas para 2026.",
         "Garanta já a sua vaga.",
@@ -60,13 +124,18 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
     return () => clearTimeout(ticker);
   }, [displayedText, isDeleting, delta, textIndex, typingSpeed, deletingSpeed, texts]);
 
+  // =========================================================
+// 2. COMPONENTE PRINCIPAL (TERMINAL)
+// =========================================================
+
   return (
     <div className="div-container">
 
-        <div className="backdrop-decoration">
         {/* Você pode escrever algo aqui ou deixar vazio apenas como forma geométrica */}
-        <h3 className="backdrop-text">Matriculas abertas</h3> 
+        <div className="backdrop-decoration">
+        <CtaPanel /> 
       </div>
+
 
       <div className="notebook-container">
         <img 

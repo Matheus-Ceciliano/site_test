@@ -5,10 +5,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition:  0.7s ease,
-    color 0.7s ease,
+  transition:  0.7s ease -0.5s ,
+    color 0.7s ease ,
     border-color 0.7s ease,
-    fill 0.7s ease,        /* Para ícones SVG */
+    fill 0.7s ease 1s,        /* Para ícones SVG */
     stroke 0.7s ease,      /* Para linhas de SVG */
     box-shadow 0.7s ease;  /* Para sombras de cards */
 }
@@ -17,7 +17,7 @@
 
 /* Cores do Modo CLARO (Light) */
 .temaClaro {
-  --bg-page1: linear-gradient(to top, #a1a0a0d9, #f4f4f5);
+  --bg-page1: linear-gradient(to bottom, #f4f4f5, #a1a0a0d9);
   --bg-page: #f4f4f5;
   --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
   /* Cor clara *
@@ -562,7 +562,7 @@
   background: var(--bg-page1);
   overflow: hidden;
   /* Evita scrollbar se o balão subir demais */
-  transition: background-color 0.3s ease;
+  transition: background-color 1s ease 0.5s;
   flex-wrap: wrap;
   justify-content: center;
   DISPLAY: FLEX;

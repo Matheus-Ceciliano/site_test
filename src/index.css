@@ -8,6 +8,20 @@
   color: #ffffffde;
 }
 
+:root {
+  /* 1. Variável da Sombra (Baseada no amarelo #f3f160) */
+  --backdrop-shadow: rgba(243, 241, 96, 0.4);
+
+  /* 2. Gradiente do TEMA CLARO (Padrão) */
+  --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
+}
+
+/* 3. Gradiente do TEMA ESCURO 
+   O CSS vai usar isso quando o elemento pai (body ou html) tiver a classe 'dark' 
+   ou o atributo data-theme='dark'. Ajuste o seletor conforme seu projeto.
+*/
+
+
 
 
 body {

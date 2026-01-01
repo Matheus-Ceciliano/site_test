@@ -35,11 +35,9 @@
 .notebook-screen {
  position: absolute;
   z-index: 2;
-  /* Removemos a imagem daqui, pois ela agora tem sua própria div */
   background-color: #151515; 
   border-radius: 2px;
   overflow: hidden; /* Importante para cortar a imagem se vazar */
-  /* Centralização do Terminal */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,39 +105,111 @@
   flex-grow: 1;
 }
 
+.prompt-line { display: flex; flex-wrap: wrap; }
 .prompt-user { color: #bd93f9; margin-right: 10px; font-weight: bold; }
 .typing-text { color: #f8f8f2; }
 .cursor { display: inline-block; animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+
 
 
 .backdrop-decoration {
-  position: absolute; /* Tira do fluxo para ficar atrás */
-  z-index: 0;         /* Fica atrás do notebook (que tem z-index 1 ou mais) */
-  /* Tamanho e Estilo */
-  width: 600px;       /* Ajuste o tamanho conforme quiser */
-  height: 450px;
+  position: absolute;
+  z-index: 0;
+  
+  /* Dimensões */
+  width: 500px;
+  height: 400px; /* Ajustei um pouco para caber o conteúdo */
+  /* Estilo Dourado (Gradiente) */
   background: var(--bg-page-135);
-  border-radius: 20px;
-  opacity: 0; /* Começa invisível */
-  /* Centralização do texto 'DEV' (Opcional) */
+  border-radius: 16px;
+  box-shadow: 0 10px 25px var(--backdrop-shadow);
+  
+  /* Comportamento de layout */
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding: 20px;
-  /* A ANIMAÇÃO: Vai para a Direita */
+  justify-content: flex-end; /* Centraliza o conteudo do CTA */
+  align-items: center;
+  padding: 50px;
+  
+  /* Animação */
+  opacity: 0;
   animation: slideBackdrop 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-  animation-delay: 0.4s; /* Espera meio segundo para começar */
+  animation-delay: 0.4s;
 }
 
-.backdrop-text {
-  font-family: 'Abril Fatface', serif;
-  font-size: 4rem;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.425); /* Texto gigante quase transparente */
-  margin: 0;
-  line-height: 1;
+.cta-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif; /* Use a fonte do seu site */
 }
+
+.cta-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.cta-timer-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.cta-timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-timer-number {
+  background: rgba(0, 0, 0, 0.1);
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  min-width: 50px;
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(5px);
+}
+
+.cta-timer-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.cta-button {
+  background-color: #000;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   KEYFRAMES (ANIMAÇÕES)
+   ========================================= */
+
+
+@keyframes blink { 50% { opacity: 0; } }
+
 @keyframes slideBackdrop {
   0% {
     opacity: 0;
@@ -148,7 +218,7 @@
   100% {
     opacity: 1;
    
-    transform: translateX(-400px) 
+    transform: translateX(-410px) 
   }
 }
 
@@ -183,6 +253,7 @@
   .backdrop-decoration {
     display: none !important;
   }
+
   .notebook-container {
     /* AQUI ESTÁ O TRUQUE:
        Ao redefinir a propriedade 'animation' aqui dentro, 
