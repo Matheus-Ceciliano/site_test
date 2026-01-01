@@ -1,4 +1,5 @@
 /* Menu.module.css - COMPLETO */
+@import url('https://fonts.googleapis.com');
 
 /* --- 1. RESET GLOBAL (Essencial para responsividade) --- */
 * {
@@ -304,42 +305,6 @@
   pointer-events: none;
 }
 
-.textoHero {
-  position: absolute;
-  top: 50%;
-  /* Ajuste a altura vertical */
-  left: 78%;
-  /* Ajuste a distância da margem esquerda */
-  transform: translateY(-50%);
-  /* Centraliza verticalmente no ponto top */
-  font-family: 'Montserrat', sans-serif;
-  /* Use a fonte do seu projeto */
-  font-size: 3.6rem;
-  /* Texto bem grande */
-  font-weight: 800;
-  /* Extra negrito */
-  color: #ffffff;
-  /* Branco */
-  line-height: 1.1;
-  text-transform: uppercase;
-  /* Sombra suave para garantir leitura no fundo azul */
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  pointer-events: none;
-  /* Opcional: faz o clique "passar direto" se não for link */
-  /* Animação */
-  opacity: 0;
-  animation: deslizarTexto 1s ease-out 1.4s forwards;
-}
-
-/* Opcional: Estilo diferente para a palavra "Agora!" */
-.destaqueEspecial {
-  color: #da0b60;
-  /* Um amarelo/dourado para destacar (opcional) */
-  /* Ou mantenha branco se preferir minimalista */
-}
-
-
 /* --- CARROSSEL DE CURSOS --- */
 /* --- CARROSSEL DE CURSOS --- */
 /* --- CARROSSEL DE CURSOS --- */
@@ -397,16 +362,25 @@
 
 
 .tituloSecao {
-  font-family: "Funnel Display", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
   font-size: 2.5rem;
   /* Equivalente a aprox. 64px */
   font-weight: 800;
   /* Deixa bem grosso (Bold) */
-  line-height: 1.1;
+  line-height: 1.5;
   /* Aperta um pouco o espaço entre as linhas */
   color: var(--text-nav);
   padding: 2%;
   padding-top: 5%;
+}
+
+.palavraAnimada {
+  display: inline-block; /* Necessário para o transform funcionar */
+  opacity: 0; /* Começa invisível */
+  will-change: transform, opacity;
+  /* Nome da animação | Duração | Curva | Mantém o estado final (forwards) */
+  animation: subirSuave 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .janelaCarrossel {
@@ -526,6 +500,13 @@
   text-decoration: underline;
 }
 
+.cardVemDaEsquerda,
+.cardVemDaDireita,
+.cardFadeInCentro,
+.botaoAnimado {
+  opacity: 1;
+  transform: none;
+}
 /* --- CARROSSEL DE CURSOS --- */
 /* --- CARROSSEL DE CURSOS --- */
 /* --- CARROSSEL DE CURSOS --- */
@@ -1008,6 +989,22 @@
   }
 }
 
+
+@keyframes subirSuave {
+  0% {
+    opacity: 0;
+    /* Começa um pouco abaixo e levemente menor */
+    transform: translateY(30px) scale(0.95); 
+    /* Filtro leve (se pesar no mobile, remova essa linha) */
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
@@ -1236,6 +1233,71 @@
     padding: 10px;
     margin-top: 10px;
     min-height: auto; /* No mobile, deixa a altura automática */
+  }
+}
+
+
+/*carrossel animaçao*/
+@media (min-width: 1024px) {
+
+  /* 1. Prepara os elementos (esconde antes de animar) */
+  .cardVemDaEsquerda,
+  .cardVemDaDireita,
+  .cardFadeInCentro,
+  .botaoAnimado {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* 2. Regras de Ativação (quando .animarEntrada é adicionado) */
+  
+  /* Esquerda */
+  .animarEntrada .cardVemDaEsquerda {
+    animation: entrarPelaEsquerda 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  }
+
+  /* Direita */
+  .animarEntrada .cardVemDaDireita {
+    animation: entrarPelaDireita 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+  }
+
+  /* Centro */
+  .animarEntrada .cardFadeInCentro {
+    animation: fadeInSimples 2s ease 0.6s forwards;
+  }
+
+  /* Botões */
+  .animarEntrada .botaoAnimado {
+    /* O transform: translateY(-50%) é crucial aqui pois o botão é absolute */
+    animation: fadeInComScale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.3s forwards;
+  }
+
+  /* 3. Keyframes (Definições) */
+  @keyframes entrarPelaEsquerda {
+    0% { opacity: 0; transform: translateX(-150px) scale(0.9); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes entrarPelaDireita {
+    0% { opacity: 0; transform: translateX(150px) scale(0.9); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes fadeInSimples {
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInComScale {
+    0% {
+      opacity: 0;
+      /* Começa pequeno e centralizado verticalmente */
+      transform: translateY(-50%) scale(0.5); 
+    }
+    100% {
+      opacity: 1;
+      /* Termina tamanho normal e centralizado */
+      transform: translateY(-50%) scale(1); 
+    }
   }
 }
 /* --- 12. MEDIA QUERIES (A Lógica da Responsividade) --- */
