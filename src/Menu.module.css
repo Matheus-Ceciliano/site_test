@@ -1,5 +1,5 @@
 /* Menu.module.css - COMPLETO */
-@import url('https://fonts.googleapis.com');
+
 
 /* --- 1. RESET GLOBAL (Essencial para responsividade) --- */
 * {
@@ -575,16 +575,25 @@
 /* Balão 2 (Direita Meio) */
 .cardBalao:nth-child(2) {
 
-  animation: derivaComplexa2 25s ease-in-out infinite alternate-reverse;
+  animation: derivaComplexa2 20s ease-in-out infinite alternate-reverse;
 }
 
 /* Balão 3 (Centro Inferior) */
 .cardBalao:nth-child(3) {
 
-
-  animation: derivaComplexa3 22s ease-in-out infinite alternate;
+  animation: derivaComplexa3 20s ease-in-out infinite alternate;
 }
 
+.cardBalao:nth-child(4) {
+
+  animation: derivaComplexa4 20s ease-in-out infinite alternate-reverse;
+}
+
+/* Balão 3 (Centro Inferior) */
+.cardBalao:nth-child(5) {
+
+  animation: derivaComplexa5 20s ease-in-out infinite alternate;
+}
 
 /* Efeito ao passar o mouse: para de mexer e destaca */
 .cardBalao:hover {
@@ -968,11 +977,49 @@
 
   /* Antes: 0px, -20px -> Agora: 0px, -5px */
   100% {
-    transform: translate(0px, -5px) rotate(-0.8deg);
+    transform: translate(0, 0) rotate(0 deg);
   }
 }
 
 @keyframes derivaComplexa3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  /* Antes: -40px, 40px -> Agora: -10px, 10px */
+  /* Reduzi o scale de 1.02 para 1.01 para ser quase imperceptível */
+  50% {
+    transform: translate(-10px, 10px) scale(1.01);
+  }
+
+  /* Antes: 40px, -30px -> Agora: 10px, -8px */
+  100% {
+    transform: translate(10px, -8px) scale(1);
+  }
+}
+
+@keyframes derivaComplexa4 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  /* Antes: -60px, 30px -> Agora: -15px, 8px */
+  33% {
+    transform: translate(-15px, 8px) rotate(-0.5deg);
+  }
+
+  /* Antes: -30px, -70px -> Agora: -8px, -18px */
+  66% {
+    transform: translate(-8px, -18px) rotate(0.2deg);
+  }
+
+  /* Antes: 0px, -20px -> Agora: 0px, -5px */
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes derivaComplexa5 {
   0% {
     transform: translate(0, 0) scale(1);
   }
