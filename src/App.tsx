@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import { 
   FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, 
   FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft,
-  FaBriefcase, FaLightbulb, FaUsers, FaAward, FaGraduationCap 
-} from 'react-icons/fa';
-
+  FaBriefcase, FaLightbulb, FaUsers, FaAward, FaGraduationCap} from 'react-icons/fa';
+import { StructureSection } from './structureSection';
 // Hook de Animação (Deve ser instalado: npm install react-intersection-observer)
 import { useInView } from 'react-intersection-observer';
-
 // Estilos e Componentes
 import styles from './Menu.module.css';
 import TerminalPortfolio from './TerminalPortfolio';
@@ -410,6 +408,18 @@ const App = () => {
               <p className={styles.textoBalao}>Professores de mercado com amplo conhecimento teórico e profunda experiência prática.</p>
             </div>
           </section>
+
+          <h2 style={{
+            textAlign:'center',
+            fontFamily:'serif',
+            marginTop:'80px',
+            marginBottom: '40px',
+            fontSize: '2.5rem'
+          }}>
+            Nossa estrutura
+          </h2>
+
+          <StructureSection />
         </main>
 
         <footer className={styles.rodape}>

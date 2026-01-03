@@ -629,6 +629,152 @@
   line-height: 1.6;
 }
 
+
+/*imagens*/
+/*imagens*/
+/*imagens*/
+
+.waterfallContainer {
+  position: relative;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.cardContainer {
+  width: 600px; /* Largura fixa igual aos blocos da imagem */
+  background: var(--bg-page);
+  border-radius: 8px;
+  padding: 12px;
+  position: relative;
+  margin-bottom: 60px; /* Espaço vertical para a seta */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  opacity: 0;
+ 
+  /* Garante que o card fique acima das setas */
+  z-index: 2;
+}
+
+.visible .cardContainer {
+  animation: entranceFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+.cardContainer:nth-child(1) { 
+  margin-left: 0; 
+  animation-delay: 0.1s; 
+ 
+}
+
+.cardContainer:nth-child(2) { 
+  margin-left: 150px; 
+  animation-delay: 0.3s; 
+ 
+}
+
+.cardContainer:nth-child(3) { 
+  margin-left: 300px; 
+  animation-delay: 0.5s; 
+ 
+}
+
+.cardContainer:nth-child(4) { 
+  margin-left: 450px; 
+  animation-delay: 0.7s; 
+
+}
+
+.cardContainer:nth-child(5) { 
+  margin-left: 600px; 
+  animation-delay: 0.9s; 
+  
+}
+
+
+
+.cardContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+}
+
+
+.cardContainer:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.imageWrapper {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Overlay sutil para dar um ar cinematográfico à imagem */
+.imageWrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3));
+  z-index: -1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.content {
+  padding: 30px;
+  background: var(--card-bg);
+  flex-grow: 1;
+}
+
+.title {
+  font-family: 'Playfair Display', serif; /* Importe no index.css */
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* A linha dourada que "cresce" no hover */
+.goldLine {
+  width: 40px;
+    height: 2px;
+    background: #d4af37; /* Dourado ESUP */
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cardContainer:hover .goldLine {
+  width: 100%;
+}
+
+/* Detalhe de borda interna para parecer um certificado/quadro */
+
+/*imagens*/
+
 /* --- 8. MENUS DESKTOP --- */
 /* --- 8. MENUS DESKTOP --- */
 /* --- 8. MENUS DESKTOP --- */
@@ -1052,6 +1198,17 @@
   }
 }
 
+
+@keyframes entranceFade {
+  from {
+    opacity: 0;
+    transform: translate(-50px, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
 /* --- 11. ANIMAÇÕES --- */
