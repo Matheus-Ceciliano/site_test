@@ -172,7 +172,11 @@
   min-width: 50px;
   border-radius: 8px;
   font-variant-numeric: tabular-nums;
+<<<<<<< HEAD
   
+=======
+  backdrop-filter: blur(5px);
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
 }
 
 .cta-timer-label {

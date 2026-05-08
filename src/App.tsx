@@ -5,14 +5,22 @@ import {
   FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft,
   FaBriefcase, FaLightbulb, FaUsers, FaAward, FaGraduationCap} from 'react-icons/fa';
 import { StructureSection } from './structureSection';
+<<<<<<< HEAD
 import { TestimonialsSection } from './testimonialSection';
+=======
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
 // Hook de Animação (Deve ser instalado: npm install react-intersection-observer)
 import { useInView } from 'react-intersection-observer';
 // Estilos e Componentes
 import styles from './Menu.module.css';
 import TerminalPortfolio from './TerminalPortfolio';
 import { ThemeContext } from './themeContext';
+<<<<<<< HEAD
 import ThemeSwitch from './themeSwitch'; 
+=======
+import ThemeSwitch from './themeSwitch'; // Verifique se o nome do arquivo é themeSwitch ou ThemeSwitch
+
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
 // Imagens
 import logoLightMode from './assets/logo-esup.png';
 import logoDarkMode from './assets/logo-esup-white.png';
@@ -409,6 +417,7 @@ const App = () => {
             </div>
           </section>
 
+<<<<<<< HEAD
         
 
           <StructureSection />
@@ -525,6 +534,27 @@ const App = () => {
   );
 
 
+=======
+          <h2 style={{
+            textAlign:'center',
+            fontFamily:'serif',
+            marginTop:'80px',
+            marginBottom: '40px',
+            fontSize: '2.5rem'
+          }}>
+            Nossa estrutura
+          </h2>
+
+          <StructureSection />
+        </main>
+
+        <footer className={styles.rodape}>
+          <p>© 2025 Grupo ESUP - Todos os direitos reservados.</p>
+        </footer>
+      </div>
+    </ThemeContext.Provider>
+  );
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
 };
 
 export default App;

@@ -15,11 +15,16 @@ interface CardProps {
   imageUrl: string;
 }
 
+<<<<<<< HEAD
 
 
 const Card: React.FC<CardProps> = ({ title, description, imageUrl }) => {
   return (
     
+=======
+const Card: React.FC<CardProps> = ({ title, description, imageUrl }) => {
+  return (
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
     <div className={styles.cardContainer}>
       <div className={styles.imageWrapper}>
         <img 
@@ -77,10 +82,13 @@ export const StructureSection: React.FC = () => {
     ref={sectionRef}
     className={`${styles.waterfallContainer} ${isVisible ? styles.visible : ''}`}
     >
+<<<<<<< HEAD
 
       {/* Título adicionado aqui */}
     <h2 className={styles.mainTitle}>Nossa Estrutura</h2>
 
+=======
+>>>>>>> 30c236a64c68cfbcb8e8efd610aea6cd7b6e4d3a
       {dados.map((item, i) => (
         <Card 
           key={i} 
