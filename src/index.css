@@ -1,0 +1,37 @@
+/* src/index.css */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* Deixa o fundo do site todo escuro para combinar com seu menu */
+
+  color: #ffffffde;
+}
+
+:root {
+  /* 1. Variável da Sombra (Baseada no amarelo #f3f160) */
+  --backdrop-shadow: rgba(243, 241, 96, 0.4);
+
+  /* 2. Gradiente do TEMA CLARO (Padrão) */
+  --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
+}
+
+/* 3. Gradiente do TEMA ESCURO 
+   O CSS vai usar isso quando o elemento pai (body ou html) tiver a classe 'dark' 
+   ou o atributo data-theme='dark'. Ajuste o seletor conforme seu projeto.
+*/
+
+
+
+
+body {
+  margin: 0;
+  /* Remove a borda branca ao redor do site */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+::-webkit-textfield-decoration-container:hover {
+  cursor: pointer;
+  color: rgb(30, 56, 47);
+}

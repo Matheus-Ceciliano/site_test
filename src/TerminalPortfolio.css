@@ -1,0 +1,265 @@
+
+
+
+.div-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 6%;
+  z-index: 1;
+  position: relative;
+}
+
+/* O PAI RELATIVO (A Moldura) */
+.notebook-container {
+  position: relative; /* Isso prende a tela preta aqui dentro */
+  width: 100%;
+  z-index: 10;
+  max-width: 800px; /* Tamanho máximo do notebook */
+  animation: slideNotebook 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  /* Começa na posição original */
+  transform: translateX(0);
+
+}
+
+/* A Imagem do Notebook */
+.notebook-frame {
+  width: 100%;
+  display: block;
+  z-index: 1;
+  
+}
+
+/* A Tela Preta (O FILHO) */
+.notebook-screen {
+ position: absolute;
+  z-index: 2;
+  background-color: #151515; 
+  border-radius: 2px;
+  overflow: hidden; /* Importante para cortar a imagem se vazar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Seus valores de calibração (mantenha os que ajustou) */
+  top: 4%;       
+  left: 11%;     
+  width: 78.3%;    
+  height: 81%;
+}
+
+.screen-background {
+  position: absolute; /* Fixa atrás do terminal */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Fica atrás do terminal */
+  background-size: cover;
+  background-position: center;
+  /* A MÁGICA AQUI: Controle a opacidade só da imagem */
+  opacity: 0.4; /* 0.1 (quase invisível) até 1.0 (totalmente visível) */
+  /* Opcional: Filtro para deixar preto e branco ou desfocado */
+  filter: grayscale(100%);
+}
+
+/* top: 4%;       
+    left: 11%;     
+    width: 78.3%;    
+     height: 81%;
+
+/* -- Estilos Internos --- */
+.terminal-window { 
+  width: 90%;  /* Ocupa 90% da largura da tela */
+  height: 80%;
+  display: flex;
+  border-radius: 9px;
+  flex-direction: column;
+  font-family: 'Courier New', monospace;
+  background-color:rgba(20, 20, 20, 0.85);
+}
+
+.terminal-header {
+  background-color: #2d2d2d;
+  height: 25px; /* Barra mais fina para parecer tela cheia */
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.window-buttons { display: flex; gap: 6px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; } /* Bolinhas menores */
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.terminal-title {
+    flex-grow: 1; text-align: center; color: #888; font-size: 13px;
+    position: relative;
+}
+
+.terminal-body {
+  padding: 15px;
+  color: #00ff00;
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.prompt-line { display: flex; flex-wrap: wrap; }
+.prompt-user { color: #bd93f9; margin-right: 10px; font-weight: bold; }
+.typing-text { color: #f8f8f2; }
+.cursor { display: inline-block; animation: blink 1s step-end infinite; }
+
+
+
+.backdrop-decoration {
+  position: absolute;
+  z-index: 0;
+  
+  /* Dimensões */
+  width: 500px;
+  height: 400px; /* Ajustei um pouco para caber o conteúdo */
+  /* Estilo Dourado (Gradiente) */
+  background: var(--bg-page-135);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px var(--backdrop-shadow);
+  
+  /* Comportamento de layout */
+  display: flex;
+  justify-content: flex-end; /* Centraliza o conteudo do CTA */
+  align-items: center;
+  padding: 50px;
+  
+  /* Animação */
+  opacity: 0;
+  animation: slideBackdrop 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+.cta-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif; /* Use a fonte do seu site */
+}
+
+.cta-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.cta-timer-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.cta-timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-timer-number {
+  background: rgba(0, 0, 0, 0.1);
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  min-width: 50px;
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+  
+}
+
+.cta-timer-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.cta-button {
+  background-color: #000;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   KEYFRAMES (ANIMAÇÕES)
+   ========================================= */
+
+
+@keyframes blink { 50% { opacity: 0; } }
+
+@keyframes slideBackdrop {
+  0% {
+    opacity: 0;
+    transform: translateX(0) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+   
+    transform: translateX(-410px) 
+  }
+}
+
+/* Animação do Notebook (Vai pra esquerda) */
+@keyframes slideNotebook {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move 80px para a esquerda */
+    transform: translateX(470px); 
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0; /* Começa invisível */
+    transform: translateX(150px); /* Começa 100px deslocado para a DIREITA */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px); /* Termina na posição original (FINAL) */
+  }
+}
+/*responsividade*/
+/*responsividade*/
+/*responsividade*/
+
+@media (max-width: 1919px) {
+
+  /* 1. Esconde a decoração de fundo (O quadrado e o texto DEV) */
+  .backdrop-decoration {
+    display: none !important;
+  }
+
+  .notebook-container {
+    /* AQUI ESTÁ O TRUQUE:
+       Ao redefinir a propriedade 'animation' aqui dentro, 
+       o navegador CANCELA a 'slideNotebook' e roda apenas a 'slideFromRight'.
+    */
+    animation: slideFromRight 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+  
+} 
