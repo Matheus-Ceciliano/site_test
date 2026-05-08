@@ -777,6 +777,9 @@
   font-family: 'Playfair Display', serif; /* Importe no index.css */
   font-size: 1.5rem;
   color: var(--text-nav);
+
+  color: var(--text-primary);
+
   margin-bottom: 12px;
   letter-spacing: -0.01em;
 }
@@ -1738,7 +1741,7 @@
    ============================ */
 
 .rodape {
-  background-color: var(--bg-page1);
+  background-color: var(--bg-page);
   border-top: 1px solid var(--border-color);
   padding: 60px 40px 0;
   color: var(--text-footer);
