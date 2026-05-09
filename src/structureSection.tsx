@@ -44,10 +44,22 @@ const dados = [
   const changeSection = useCallback((nextIndex: number) => {
     setIsScrolling(true);
     setActiveIndex(nextIndex);
-    setTimeout(() => setIsScrolling(false), 430); // Tempo da transição
+    setTimeout(() => setIsScrolling(false), 430);
   }, []);
 
+  // Lógica de Clique (Para Mobile)
+  const handleImageClick = () => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      const nextIndex = activeIndex < dados.length - 1 ? activeIndex + 1 : 0;
+      changeSection(nextIndex);
+    }
+  };
+
   const handleWheel = useCallback((e: WheelEvent) => {
+    // Só trava o scroll se NÃO for mobile
+    if (window.innerWidth <= 768) return;
+
     if (isScrolling) {
       if (e.cancelable) e.preventDefault();
       return;
@@ -72,12 +84,13 @@ const dados = [
 
   return (
     <section ref={containerRef} className={styles.compactContainer}>
-      {/* Título fixo que nunca some */}
       <h2 className={styles.mainTitle}>Nossa Estrutura</h2>
 
       <div className={styles.contentWrapper} key={activeIndex}>
-        <div className={styles.imageSide}>
+        {/* Adicionamos o onClick aqui */}
+        <div className={styles.imageSide} onClick={handleImageClick}>
           <img src={dados[activeIndex].img} alt="" className={styles.displayImage} />
+          <span className={styles.mobileHint}>Toque para mudar</span>
         </div>
 
         <div className={styles.textSide}>
