@@ -414,8 +414,8 @@ const App = () => {
           <StructureSection />
 
           
-        {/* Espaçador opcional entre as seções */}
-        <div style={{ height: '40px' }}></div>
+        
+       
 
         {/* Seção de Depoimentos */}
         <TestimonialsSection/>
