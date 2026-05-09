@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Ícones
 import { 
   FaWhatsapp, FaUser, FaLaptop, FaCalendarAlt, FaBook, FaBars, FaTimes, 
-  FaChevronDown, FaChevronUp, FaChevronRight, FaChevronLeft,
-  FaBriefcase, FaLightbulb, FaUsers, FaAward, FaGraduationCap} from 'react-icons/fa';
+  FaChevronDown, FaChevronUp,
+  FaBriefcase, FaLightbulb, 
+  FaUsers, FaAward, FaGraduationCap} from 'react-icons/fa';
 import { StructureSection } from './structureSection';
 import { TestimonialsSection } from './testimonialSection';
 // Hook de Animação (Deve ser instalado: npm install react-intersection-observer)
@@ -154,7 +155,9 @@ const App = () => {
   // Estados do Carrossel
   const [indexAtual, setIndexAtual] = useState(0);
   const [itensVisiveis, setItensVisiveis] = useState(3);
+  const [estaPausado, setEstaPausado] = useState(false);
   const totalSlides = slidesContent.length;
+  const [, setLarguraJanela] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   // 2. FUNÇÕES AUXILIARES
 
@@ -165,7 +168,38 @@ const App = () => {
   const toggleSubmenuMobile = (index: number) => {
     setExpandedMenuIndex(expandedMenuIndex === index ? null : index);
   };
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
+ 
+  const minSwipeDistance = 50;
+
+
+  const onTouchStart = (e: React.TouchEvent) => {
+      setTouchEnd(null); // Reseta o fim do toque
+      setTouchStart(e.targetTouches[0].clientX);
+    };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+      setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+  const onTouchEnd = () => {
+      if (!touchStart || !touchEnd) return;
+      
+      const distance = touchStart - touchEnd;
+      const isLeftSwipe = distance > minSwipeDistance;
+      const isRightSwipe = distance < -minSwipeDistance;
+
+      if (isLeftSwipe) {
+        avancarSlide();
+      } else if (isRightSwipe) {
+        voltarSlide();
+      }
+
+      setTouchStart(null);
+      setTouchEnd(null);
+    };
   // Resize Listener (Responsividade do Carrossel)
   useEffect(() => {
     const handleResize = () => {
@@ -187,11 +221,35 @@ const App = () => {
   };
 
   const voltarSlide = () => {
-    const maxIndex = totalSlides - itensVisiveis;
-    setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
-  };
+  const maxIndex = totalSlides - itensVisiveis;
+  setIndexAtual((prev) => (prev === 0 ? maxIndex : prev - 1));
+};
 
-  // 3. RENDERIZAÇÃO (JSX)
+  useEffect(() => {
+    const verificarSeEhMobile = () => window.innerWidth < 768;
+
+   let intervalo: number;
+
+  // Só inicia o autoplay se NÃO estiver pausado E NÃO for mobile
+  if (!estaPausado && !verificarSeEhMobile()) {
+    intervalo = setInterval(() => {
+      avancarSlide();
+    }, 2000);
+  }
+
+  return () => {
+    if (intervalo) clearInterval(intervalo);
+  };
+}, );
+
+useEffect(() => {
+  const handleResize = () => setLarguraJanela(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+
+    // 3. RENDERIZAÇÃO (JSX)
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       <div className={`${styles.layoutPrincipal} ${isDarkMode ? styles.temaEscuro : styles.temaClaro}`}>
@@ -314,6 +372,9 @@ const App = () => {
           </div>
 
           {/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+          {/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+          {/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+    
           <section
             ref={sectionRef}
             className={`${styles.sectionCarrossel} ${sectionVisible ? styles.animarEntrada : ''}`}
@@ -329,16 +390,21 @@ const App = () => {
                 </span>
               ))}
             </h2>
+              
+              <div 
+                className={styles.janelaCarrossel}>
+                
+            </div>
 
-            <div className={styles.janelaCarrossel}>
-              {/* Botões do Carrossel */}
-              <button className={`${styles.botaoCarrossel} ${styles.botaoEsquerda} ${styles.botaoAnimado}`} onClick={voltarSlide}>
-                <FaChevronLeft />
-              </button>
-              <button className={`${styles.botaoCarrossel} ${styles.botaoDireita} ${styles.botaoAnimado}`} onClick={avancarSlide}>
-                <FaChevronRight />
-              </button>
 
+            <div className={styles.janelaCarrossel}
+                onMouseEnter={() => setEstaPausado(true)}
+                onMouseLeave={() => setEstaPausado(false)}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+            >
+          
               <div
                 className={styles.trilhoImagens}
                 style={{ transform: `translateX(-${indexAtual * (100 / itensVisiveis)}%)` }}
@@ -358,23 +424,37 @@ const App = () => {
                     }
 
                   return (
-                    <div key={index} className={styles.cardSlide}>
-                      <div className={`${styles.cardInterior} ${animationClass}`}>
-                        <div className={styles.wrapperImagem}>
-                          <img src={item.image} alt={item.titulo} className={styles.imagemSlide} />
+                        <div 
+                          key={index} 
+                          className={styles.cardSlide}
+                          // 🟢 INTEGRADO AQUI: Agora a pausa só ativa no balão
+                          onMouseEnter={() => setEstaPausado(true)} 
+                          onMouseLeave={() => setEstaPausado(false)}
+                        >
+                          <div className={`${styles.cardInterior} ${animationClass}`}>
+                            <div className={styles.wrapperImagem}>
+                              <img src={item.image} alt={item.titulo} className={styles.imagemSlide} />
+                            </div>
+                            <div className={styles.conteudoCard}>
+                              <h3 className={styles.tituloCard}>{item.titulo}</h3>
+                              <p className={styles.descricaoCard}>{item.descricao}</p>
+                              <a href={item.link} className={styles.linkCard}>Saiba Mais →</a>
+                            </div>
+                          </div>
                         </div>
-                        <div className={styles.conteudoCard}>
-                           <h3 className={styles.tituloCard}>{item.titulo}</h3>
-                           <p className={styles.descricaoCard}>{item.descricao}</p>
-                           <a href={item.link} className={styles.linkCard}>Saiba Mais →</a>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+
+{/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+{/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+{/* --- SEÇÃO CARROSSEL (Corrigida) --- */}
+
+
+
+
 
           {/* --- SEÇÃO DIFERENCIAIS --- */}
           <section className={styles.sectionDiferenciais}>

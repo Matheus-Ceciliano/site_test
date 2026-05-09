@@ -392,6 +392,8 @@
   /* Corta o que está fora da tela */
   position: relative;
   padding-bottom: 45px;
+  touch-action: pan-y; /* Permite scroll vertical, mas bloqueia o horizontal nativo */
+  overflow: hidden;
 }
 
 .trilhoImagens {
