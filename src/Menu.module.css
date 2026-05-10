@@ -721,7 +721,8 @@
   justify-content: space-between;
   gap: 60px; /* Espaço entre a foto e o texto */
   width: 100%;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
 }
 
 .fadeIn {
@@ -731,7 +732,7 @@
 
 .fadeOut {
   opacity: 0;
-  transform: translateX(-20px); /* Leve movimento lateral na saída */
+  transform: translateX(-10px); /* Leve movimento lateral na saída */
 }
 
 .imageSide {

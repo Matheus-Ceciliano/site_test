@@ -53,7 +53,7 @@
       setInProp(true); // Inicia animação de entrada (fadeIn)
       setIsScrolling(false);
     }, 400); // Tempo deve bater com o CSS transition
-  }, [isScrolling]);
+  }, [isScrolling,, activeIndex]);
 
     // Lógica de Clique (Para Mobile)
     const handleImageClick = () => {
@@ -89,6 +89,19 @@
       }
       return () => section?.removeEventListener('wheel', handleWheel);
     }, [handleWheel]);
+    
+
+    useEffect(() => {
+    // Calcula qual é o próximo índice (se for o último, volta pro primeiro)
+    const nextIndex = (activeIndex + 1) % dados.length;
+    const nextImgUrl = dados[nextIndex].img;
+
+    // Cria um objeto de imagem "invisível" para forçar o download pelo browser
+    const img = new Image();
+    img.src = nextImgUrl;
+  }, [activeIndex]);
+
+  
 
 
 
