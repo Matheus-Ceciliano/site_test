@@ -10,12 +10,15 @@ interface TerminalPortfolioProps {
   deletingSpeed?: number;
 }
 
-const TARGET_DATE = new Date(2026, 1, 20).getTime(); // 20 de Fev de 2026
+// 20 de Fev de 2026
 
 const CtaPanel = () => {
-  const [timeLeft, setTimeLeft] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
-
-  useEffect(() => {
+  
+    const tempoEmMs = (1 * 60 + 20) * 60 * 1000;
+    const [timeLeft, setTimeLeft] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+    useEffect(() => {
+    
+    const TARGET_DATE = new Date().getTime() + tempoEmMs;
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
@@ -28,6 +31,7 @@ const CtaPanel = () => {
         });
       } else {
         setTimeLeft({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+        clearInterval(timer); // Para o intervalo quando chegar a zero
       }
     };
     const timer = setInterval(calculateTimeLeft, 1000);
@@ -39,7 +43,7 @@ const CtaPanel = () => {
 
   return (
     <div className="cta-content">
-      <h3 className="cta-title">Últimos dias para sua Bolsa</h3>
+      <h3 className="cta-title">Últimos dias para sua Bolsa!</h3>
       <p className="cta-subtitle">A condição especial encerra em:</p>
 
       <div className="cta-timer-container">

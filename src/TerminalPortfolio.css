@@ -115,25 +115,19 @@
 .backdrop-decoration {
   position: absolute;
   z-index: 0;
-  
-  /* Dimensões */
   width: 500px;
   height: 400px; /* Ajustei um pouco para caber o conteúdo */
-  /* Estilo Dourado (Gradiente) */
-  background: var(--bg-page-135);
+  background: var(--bg-page-135) ;
   border-radius: 16px;
-  box-shadow: 0 10px 25px var(--backdrop-shadow);
   
-  /* Comportamento de layout */
   display: flex;
   justify-content: flex-end; /* Centraliza o conteudo do CTA */
   align-items: center;
   padding: 50px;
-  
-  /* Animação */
   opacity: 0;
   animation: slideBackdrop 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
   animation-delay: 0.4s;
+   
 }
 
 .cta-title {

@@ -22,7 +22,7 @@
   --bg-page2:linear-gradient(to bottom, #f8f6ead9, #f4f4f5);
   --bg-page: #f4f4f5;
   --bg-hover: #cfd15b;
-  --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
+  --bg-page-135: linear-gradient(-150deg, #f4f4f5 32%, #364041d5 90%);
   /* Cor clara *
   /* Fundo da página */
   --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
@@ -53,7 +53,7 @@
   --bg-page2: linear-gradient(to top, #121212, #2c2b2bd0 );
   --bg-page: #121212;
   --bg-hover: #1f6bc2;
-  --bg-page-135: linear-gradient(-135deg, #121212 20%, #f3f160d5 100%);
+   --bg-page-135: linear-gradient(-135deg, #121212 32%, #3064c5a6 90%);
   /* Fundo preto suave */
   --bg-barra-topo: linear-gradient(to right, #0077aacc, #047ea7);
   /* Azul escuro */
@@ -327,40 +327,6 @@
   
 }
 
-.botaoCarrossel {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  /* Centraliza verticalmente exato */
-  background-color: #004aad;
-  /* Azul ESUP */
-  color: white;
-  border: none;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  /* Faz ficar redondo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  /* Garante que fique acima das imagens */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  
-  font-size: 1.2rem;
-}
-
-.botaoEsquerda {
-  left: 5px;
-  /* Distância da borda esquerda */
-  ;
-}
-
-.botaoDireita {
-  right: 5px;
-  /* Distância da borda direita */
-}
 
 
 

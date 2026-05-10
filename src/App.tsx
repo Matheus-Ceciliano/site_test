@@ -592,7 +592,7 @@ useEffect(() => {
             </div>
           </div>
         </footer>
-      </div>
+      </div>  
 
   
         
