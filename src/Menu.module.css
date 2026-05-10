@@ -663,7 +663,6 @@
   color:var(--text-nav) !important; 
   font-weight: 800;
   margin-bottom: 40px;
-
   letter-spacing: 1px;
   position: relative;
 }
@@ -695,7 +694,7 @@
 
 
 
-/* Exceto as imagens, claro */
+
 
 
 .mainTitle {
@@ -706,55 +705,60 @@
 }
 
 .contentWrapper {
-  z-index: 2;
-  display: flex;
-  max-width: 1000px;
   width: 100%;
-  gap: 50px;
+  max-width: 1200px; /* Limita a largura para não espalhar demais em monitores grandes */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
   align-items: center;
   padding: 0 20px;
-  /* ANIMAÇÃO PRINCIPAL */
-  animation: ultraSmoothSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity; 
 }
 
-@keyframes ultraSmoothSlide {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    filter: blur(4px); /* Começa levemente desfocado */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0); /* Termina nítido */
-  }
+.slideContent {
+  display: flex;
+  flex-direction: row; /* Força o alinhamento horizontal */
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px; /* Espaço entre a foto e o texto */
+  width: 100%;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateX(-20px); /* Leve movimento lateral na saída */
 }
 
 .imageSide {
   flex: 1;
-  max-width: 500px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column; /* Isso faz o span ir para baixo da imagem */
+  align-items: center;    /* Centraliza a imagem e o texto */
+  gap: 12px;              /* Cria o espaço entre a foto e o texto automaticamente */
+  cursor: pointer;
+  position: relative;
+
 }
 
 .displayImage {
   width: 100%;
-  height: 350px;
+  height: 400px;
   object-fit: cover;
   border-radius: 20px;
-  /* Sombra inicial sutil e cinza */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  /* Adicionamos transform e box-shadow na transição */
-  transition: filter 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
-  cursor: pointer;
+  transition: all 0.4s ease;
 }
 
 .displayImage:hover {
-  /* Efeito de brilho azul (glow) */
-  box-shadow: 0 0 10px var(--bg-hover) ;
-  /* Leve aumento para destacar a imagem */
+  box-shadow: 0 0 20px var(--bg-hover);
   transform: scale(1.02);
-  /* Caso queira um leve brilho na própria foto */
-  filter: brightness(1.1);
+  filter: brightness(1.05);
 }
 
 .textSide {
@@ -762,21 +766,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: left;
 }
 
 .itemTitle {
-  font-size: 2rem;
+  font-size: 2.2rem; /* Um pouco maior para hierarquia */
   font-weight: 800;
-  letter-spacing: -0.02em;
   color: var(--text-nav);
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   
 }
 
 .itemDescription {
-  font-size: 1.05rem;
-  color:var(--text-nav);
-  line-height: 1.6;
+  font-size: 1.1rem;
+  color: var(--text-nav);
+  line-height: 1.7;
+  max-width: 500px;
 }
 
 .goldLine {
@@ -786,50 +791,53 @@
   margin-top: 20px;
 }
 
-
-
-
-/*MOBILE*/
-/*MOBILE*/
-/*MOBILE*/
-
-
-
 .mobileHint {
-  display: none; /* Escondido por padrão */
-}
+  display: none;/* Garante que apareça */
+  }
+  
+
+
+
+/*MOBILE*/
+/*MOBILE*/
+/*MOBILE*/
+
+
 
 @media (max-width: 768px) {
-  .compactContainer {
-    height: auto; /* No mobile, deixa a página rolar normalmente */
-    padding: 40px 20px;
-  }
-
-  .contentWrapper {
-    flex-direction: column; /* Empilha imagem e texto */
-    gap: 20px;
-    animation: ultraSmoothSlide 0.6s ease-out forwards; /* Animação mais rápida no mobile */
-  }
-
-  .imageSide {
-    width: 100%;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .mobileHint {
-    display: block;
+  .slideContent {
+    flex-direction: column; /* Empilha no mobile */
+    gap: 30px;
     text-align: center;
-    font-size: 0.8rem;
-    color: #0066ff;
-    margin-top: 8px;
-    font-weight: bold;
-    text-transform: uppercase;
+  }
+
+  .textSide {
+    align-items: center; /* Centraliza a linha dourada e o texto no mobile */
+    text-align: center;
   }
 
   .displayImage {
-    height: 250px; /* Menor no mobile */
-    /* Mantém o seu hover azul que já configuramos */
+    height: 280px; /* Imagem menor no celular */
+  }
+
+  .itemDescription {
+    font-size: 1rem;
+    
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .mobileHint {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--bg-hover);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 12px;
   }
 }
 
