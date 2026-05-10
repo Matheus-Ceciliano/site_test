@@ -1802,8 +1802,9 @@
 
 .rodapeColuna {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex-direction: column; /* Empilha os elementos um em cima do outro */
+  align-items: center;    /* Centraliza todos os filhos horizontalmente */
+  text-align: center;
 }
 
 .rodapeLogo {
