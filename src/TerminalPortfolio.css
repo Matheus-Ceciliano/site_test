@@ -13,6 +13,7 @@
 
 /* O PAI RELATIVO (A Moldura) */
 .notebook-container {
+  
   position: relative; /* Isso prende a tela preta aqui dentro */
   width: 100%;
   z-index: 10;
@@ -119,7 +120,6 @@
   height: 400px; /* Ajustei um pouco para caber o conteúdo */
   background: var(--bg-page-135) ;
   border-radius: 16px;
-  
   display: flex;
   justify-content: flex-end; /* Centraliza o conteudo do CTA */
   align-items: center;
@@ -204,26 +204,26 @@
 
 @keyframes blink { 50% { opacity: 0; } }
 
-@keyframes slideBackdrop {
+@keyframes slideNotebook {
   0% {
+    transform: translateX(100px); /* Começa um pouco recuado */
     opacity: 0;
-    transform: translateX(0) scale(0.8);
   }
   100% {
+    transform: translateX(0); /* Para na posição original dele */
     opacity: 1;
-   
-    transform: translateX(-410px) 
   }
 }
 
-/* Animação do Notebook (Vai pra esquerda) */
-@keyframes slideNotebook {
+/* Animação da Bolsa (Backdrop): Ela vem da esquerda para o centro */
+@keyframes slideBackdrop {
   0% {
-    transform: translateX(0);
+    opacity: 0;
+    transform: translateX(-100px); /* Começa recuado na esquerda */
   }
   100% {
-    /* Move 80px para a esquerda */
-    transform: translateX(470px); 
+    opacity: 1;
+    transform: translateX(0); /* Para na posição original */
   }
 }
 
@@ -237,23 +237,216 @@
     transform: translateX(0px); /* Termina na posição original (FINAL) */
   }
 }
+/*formulario*/
+/*formulario*/
+/*formulario*/
+
+/* O Fundo Escurecido e Transparente */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Transparência preta */
+  backdrop-filter: blur(8px); /* Desfoque opcional para dar um ar moderno */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que fique acima do notebook */
+  animation: fadeIn 0.3s ease;
+}
+
+/* A Aba Branca Centralizada */
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  animation: scaleUp 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Animações */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*formulario*/
+/*formulario*/
+/*formulario*/
+
+
+
 /*responsividade*/
 /*responsividade*/
 /*responsividade*/
 
-@media (max-width: 1919px) {
-
-  /* 1. Esconde a decoração de fundo (O quadrado e o texto DEV) */
-  .backdrop-decoration {
+@media (max-width: 768px) {
+  
+  /* 1. Esconde o Notebook completamente */
+  .notebook-container {
     display: none !important;
   }
 
-  .notebook-container {
-    /* AQUI ESTÁ O TRUQUE:
-       Ao redefinir a propriedade 'animation' aqui dentro, 
-       o navegador CANCELA a 'slideNotebook' e roda apenas a 'slideFromRight'.
-    */
-    animation: slideFromRight 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  /* 2. Transforma o Backdrop no conteúdo principal */
+  .backdrop-decoration {
+    display: flex !important; /* Força a exibição */
+    position: relative; /* Remove o posicionamento absoluto que o jogava pra longe */
+    opacity: 1;
+    transform: none !important; /* Remove as animações de slide que tiram ele da tela */
+    animation: slideFromRight 1s ease-out forwards; /* Uma animação mais simples de entrada */
+    
+    /* Ajustes de tamanho para celular */
+    width: 95%; 
+    max-width: 400px;
+    height: auto;
+    min-height: 350px;
+    padding: 30px 20px;
+    flex-direction: column; /* Empilha os itens (título, timer, botão) */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto; /* Centraliza na tela */
   }
-  
-} 
+
+  /* 3. Ajuste do Título e Timer para caber em telas pequenas */
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-timer-container {
+    gap: 8px;
+  }
+
+  .cta-timer-number {
+    font-size: 1.4rem;
+    min-width: 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+
+    .notebook-container {
+        display: block; /* O notebook reaparece */
+        animation: slideNotebook 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    .backdrop-decoration {
+        position: absolute; /* Volta a ser absoluto para ficar "atrás" do note */
+        display: flex;
+        animation: slideBackdrop 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        animation-delay: 0.4s;
+    }
+    
+    /* Se houver algum conflito de posicionamento na animação original, 
+       garanta que o transform inicial seja resetado aqui */
+}
+
+@media (min-width: 770px) {
+  .backdrop-decoration {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1420px) {
+  /* Garante que o container alinhe os dois no centro */
+  .div-container {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    overflow: hidden;
+  }
+
+  /* Faz a Bolsa (Backdrop) aparecer e sair para a esquerda */
+  .backdrop-decoration {
+    display: flex !important;
+    position: relative; 
+    opacity: 1;
+    margin: 0;
+    animation: slideOutLeft 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  /* Faz o Notebook aparecer e sair para a direita */
+  .notebook-container {
+    display: block !important;
+    animation: slideOutRight 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+}
+
+/* Animação: Sai do centro para a ESQUERDA */
+@keyframes slideOutLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100px); /* Começa mais perto do centro */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50px); /* Empurra para a esquerda */
+  }
+}
+
+/* Animação: Sai do centro para a DIREITA */
+@keyframes slideOutRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px); /* Começa mais perto do centro */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(60px); /* Empurra para a direita */
+  }
+}
