@@ -304,26 +304,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*formulario*/
 /*formulario*/
 /*formulario*/
@@ -396,7 +376,7 @@
 }
 
 @media (min-width: 770px) {
-  .backdrop-decoration {
+  .notebook-container {
     display: none !important;
   }
 }
