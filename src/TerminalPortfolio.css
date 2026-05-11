@@ -61,7 +61,7 @@
   /* A MÁGICA AQUI: Controle a opacidade só da imagem */
   opacity: 0.4; /* 0.1 (quase invisível) até 1.0 (totalmente visível) */
   /* Opcional: Filtro para deixar preto e branco ou desfocado */
-  filter: grayscale(100%);
+  
 }
 
 /* top: 4%;       
@@ -196,6 +196,11 @@
 .cta-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-overlay {
+    /* ... seu código ... */
+    touch-action: none; /* Diz ao navegador para não processar gestos de toque nesta camada */
 }
 
 /* =========================================

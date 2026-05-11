@@ -63,6 +63,7 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
   typingSpeed = 100,
   deletingSpeed = 50,
 }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const texts: string[] = [
         "Matrículas abertas para 2026.",
         "Garanta já a sua vaga.",
@@ -102,12 +103,28 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
 
   // 2. Efeito para Travar Scroll (Aba Transparente)
   useEffect(() => {
+    const preventDefault = (e: TouchEvent) => {
+      // Se o modal estiver aberto, impede o scroll no toque (Safari)
+      if (isModalOpen) {
+        e.preventDefault();
+      }
+    };
+
     if (isModalOpen) {
+      // Trava para Desktop e outros mobiles
       document.body.style.overflow = 'hidden';
+      
+      // Trava específica para Safari Mobile (bloqueia o evento de arrastar)
+      window.addEventListener('touchmove', preventDefault, { passive: false });
     } else {
       document.body.style.overflow = 'unset';
+      window.removeEventListener('touchmove', preventDefault);
     }
-    return () => { document.body.style.overflow = 'unset'; };
+
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('touchmove', preventDefault);
+    };
   }, [isModalOpen]);
 
   // FUNÇÕES DE MANIPULAÇÃO
@@ -122,7 +139,8 @@ const TerminalPortfolio: React.FC<TerminalPortfolioProps> = ({
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost/api_esup/salvar_contato.php', {
+      const response = await fetch('http://localhost/api_esup/salvar_contato.php', //URL do servidor local//
+        {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
