@@ -1,37 +1,63 @@
-/* src/index.css */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 18px;
   line-height: 1.5;
   font-weight: 400;
-  /* Deixa o fundo do site todo escuro para combinar com seu menu */
-
-  color: #ffffffde;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  /* 1. Variável da Sombra (Baseada no amarelo #f3f160) */
-  --backdrop-shadow: rgba(243, 241, 96, 0.4);
-
-  /* 2. Gradiente do TEMA CLARO (Padrão) */
-  --bg-page-135: linear-gradient(-135deg, #f4f4f5 10%, #f3f160d5 100%);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* 3. Gradiente do TEMA ESCURO 
-   O CSS vai usar isso quando o elemento pai (body ou html) tiver a classe 'dark' 
-   ou o atributo data-theme='dark'. Ajuste o seletor conforme seu projeto.
-*/
-
-
-
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  /* Remove a borda branca ao redor do site */
   min-width: 320px;
+  min-height: 100vh;
+  background: #f6f8fb;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
   min-height: 100vh;
 }
 
-::-webkit-textfield-decoration-container:hover {
-  cursor: pointer;
-  color: rgb(30, 56, 47);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
