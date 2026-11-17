@@ -9,28 +9,54 @@
 <body>
     <div id="bg"></div>
 
-    <header class="topo">
-        <div>
-            <div id="saudacao" class="saudacao">Olá</div>
-            <div id="data" class="data"></div>
+    <div id="conteudo">
+        <header class="topo">
+            <div>
+                <div id="saudacao" class="saudacao">Olá</div>
+                <div id="data" class="data"></div>
+            </div>
+            <div class="topo-dir">
+                <div id="clima" class="clima">
+                    <div id="clima-temp" class="clima-temp">--°</div>
+                    <div>
+                        <div id="clima-desc" class="clima-desc">Carregando clima…</div>
+                        <div id="clima-extra" class="clima-extra"></div>
+                    </div>
+                </div>
+                <div id="relogio" class="relogio">--:--</div>
+            </div>
+        </header>
+
+        <section class="linha" data-linha="favoritos">
+            <h2>Favoritos <span class="dica">aperte o número ou o botão colorido do controle para abrir direto</span></h2>
+            <div id="favoritos" class="trilho"></div>
+        </section>
+
+        <section class="linha" data-linha="filmes">
+            <h2>Filmes em alta esta semana</h2>
+            <div id="filmes" class="trilho trilho-alto"></div>
+        </section>
+
+        <section class="linha" data-linha="uso">
+            <h2>Seu uso da TV</h2>
+            <div id="uso" class="trilho"></div>
+        </section>
+
+        <section class="linha" data-linha="todos">
+            <h2>Todos os apps</h2>
+            <div id="todos" class="trilho"></div>
+        </section>
+    </div>
+
+    <div id="detalhe" class="detalhe">
+        <img id="detalhe-poster" alt="">
+        <div class="detalhe-texto">
+            <div id="detalhe-titulo" class="detalhe-titulo"></div>
+            <div id="detalhe-info" class="detalhe-info"></div>
+            <div id="detalhe-sinopse" class="detalhe-sinopse"></div>
+            <div class="detalhe-voltar">Aperte VOLTAR para fechar</div>
         </div>
-        <div id="relogio" class="relogio">--:--</div>
-    </header>
-
-    <section class="destaque">
-        <div class="destaque-titulo">O que vamos assistir hoje?</div>
-        <div class="destaque-sub">Use as setas do controle e aperte OK para abrir</div>
-    </section>
-
-    <section class="linha">
-        <h2>Favoritos</h2>
-        <div id="favoritos" class="trilho"></div>
-    </section>
-
-    <section class="linha">
-        <h2>Todos os apps</h2>
-        <div id="todos" class="trilho"></div>
-    </section>
+    </div>
 
     <div id="aviso" class="aviso"></div>
 
