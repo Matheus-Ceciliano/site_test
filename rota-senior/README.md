@@ -54,3 +54,7 @@ Todo o conteúdo está em `dados/`, em listas fáceis de mudar:
 O perfil (nome, data do casamento, contexto) não fica no repositório: o app pergunta na primeira vez que abre.
 
 Links, prazos de vagas, Selic e valores foram conferidos em 17/11/2026. Prazos e páginas mudam: confira sempre no site oficial antes de se inscrever.
+
+## Próxima versão
+
+`docs/prompt-plataforma-v2.md` é o prompt (em inglês, para o Claude Code) que descreve a versão profissional para dois usuários: trilhas com questionário, radar de vagas diário, laboratório de negócios com ClickUp, analisador de currículo, LinkedIn e GitHub, e agentes de teste automatizados.
