@@ -14,16 +14,16 @@ A professional, private, two-user platform for studying, career growth and incom
 
 <users_and_access>
 - Exactly two accounts, invited by email from an allowlist kept in configuration. No public sign-up.
-- One shared workspace. Shared data (job feed, leads/CRM, course catalog, idea catalog, QA projects) is visible to both users.
+- One shared workspace. Shared data (job feed, prospected companies and CRM, course catalog, idea catalog, QA projects) is visible to both users.
 - Personal data (study progress, application statuses, resumes, LinkedIn exports, analyses, AI Mentor history) belongs to each user and is private to them unless they choose to share it.
-- Each item that two people can act on (a job, a lead) shows who is handling it.
+- Each item that two people can act on (a job, a prospected company) shows who is handling it.
 </users_and_access>
 
 <modules>
 Build these modules. Keep each one usable on a phone.
 
 1. Dashboard ("Hoje")
-   Keep the daily dashboard concept from Rota Sênior: today's study blocks with times, next step of each track, a quiz question of the day, an English phrase of the day, streak, and a weekly view. Add for each user: new jobs since yesterday, leads waiting for action, and the latest QA run results.
+   Keep the daily dashboard concept from Rota Sênior: today's study blocks with times, next step of each track, a quiz question of the day, an English phrase of the day, streak, and a weekly view. Add for each user: new jobs since yesterday, prospected companies waiting for action, and the latest QA run results.
 
 2. Free study tracks with a topic questionnaire
    - Keep the existing tracks, steps, quiz, interview questions, English cards and AI Mentor prompt templates (except anything about the wedding).
@@ -45,28 +45,33 @@ Build these modules. Keep each one usable on a phone.
    - Case stories with a short summary and practical lessons: Ronald Read; Warren Buffett's US$1 million bet on index funds vs. hedge funds; Luiz Barsi Filho's dividend portfolio; the Dutch tulip mania (1637).
    - Keep the existing calculators (50-30-20 budget, emergency fund, monthly contribution for a dated goal).
 
-5. Business lab
-   - Sellable project ideas: the 300 existing ideas plus a catalog of digital services we can sell (websites, landing pages, simple systems), searchable and filterable.
-   - Daily prospecting robot: once a day it searches local businesses by niche and neighborhood (both editable in the interface), and adds them to a shared CRM table with: business name, address, category, rating, whether it has a website, a digital-presence diagnosis and a suggested proposal. Show "Última atualização" and a "Forçar atualização agora" button.
-   - CRM pipeline: Novo → Contatado → Interessado → Bom cliente → Proposta → Fechado / Perdido, with owner (which of us) and notes.
-   - ClickUp integration: when a lead is marked "Bom cliente", create a task in a ClickUp List chosen in Settings, with the lead's data, diagnosis, proposal and a link back to the lead. Store the ClickUp task URL on the lead. If ClickUp webhooks are practical, sync the task status back.
-   - Local pricing table: editable price ranges for institutional sites, landing pages and digital services, each row with its source and date. Do not invent market prices; start with empty rows and fields for us to fill in.
-   - Outreach scripts: ready-to-adapt messages, in person and on WhatsApp, for businesses without a site and businesses with an outdated one. Every script ends with a clear way to opt out. Sending stays manual.
+5. Business ideas ("Ideias de negócio")
+   This module is only about what we could build or sell. It does not contain the companies found by the prospecting robot; those live in the next module, with their own menu entry and their own tables.
+   - The 300 existing ideas (200 SaaS ideas and 100 problem/solution ideas by industry), searchable, filterable, with favorites per user and a button to turn an idea into a project plan.
+   - A catalog of digital services we can sell (institutional sites, landing pages, simple systems), each with what it includes and who it fits.
    - Differentiated product page: NFC tags and plaques that open the business's Google review page with one tap, with a backup QR code, a click-metrics dashboard, premium branded design, and an optional bundle with a new website.
 
-6. Job radar (configurable)
+6. Client prospecting ("Prospecção de clientes")
+   A separate module for real local businesses and our sales pipeline.
+   - Daily prospecting robot: once a day it searches local businesses by niche and neighborhood (both editable in this module), and adds them to a shared company table with: business name, address, category, rating, whether it has a website, a digital-presence diagnosis and a suggested proposal. The proposal points to services from the catalog in the Business ideas module; companies are never stored as ideas. Show "Última atualização" and a "Forçar atualização agora" button.
+   - CRM pipeline: Novo → Contatado → Interessado → Bom cliente → Proposta → Fechado / Perdido, with owner (which of us) and notes.
+   - ClickUp integration: when a company is marked "Bom cliente", create a task in a ClickUp List chosen in Settings, with the company's data, diagnosis, proposal and a link back to it. Store the ClickUp task URL on the company record. If ClickUp webhooks are practical, sync the task status back.
+   - Local pricing table: editable price ranges for institutional sites, landing pages and digital services, each row with its source and date. Do not invent market prices; start with empty rows and fields for us to fill in.
+   - Outreach scripts: ready-to-adapt messages, in person and on WhatsApp, for businesses without a site and businesses with an outdated one. Every script ends with a clear way to opt out. Sending stays manual.
+
+7. Job radar (configurable)
    - Settings panel at the top of the page, editable at any time: keywords and roles (e.g. Desenvolvedor Júnior, Cibersegurança, Pentest, Suporte TI, Freelance Web), mode (remote, hybrid, on-site), experience level and location. Search profiles are shared; each user can have extra personal filters.
    - Daily feed built from those settings: title, company, source, posting date, a compatibility score for each user (based on their profile and study progress, with the reasons shown) and a direct link to apply.
    - Per-user application status: Nova, Salva, Aplicada, Entrevista, Oferta, Descartada.
    - Deduplicate jobs that appear in more than one source.
 
-7. Career analyzer
+8. Career analyzer
    - Resume: each user uploads a PDF. Analyze it against a target role, or against a specific job from the feed, and return a score per criterion, strengths, gaps, missing keywords and rewritten bullet points. Never invent experience, skills or numbers; when something is missing, say what to study or build instead.
    - LinkedIn: the user uploads the PDF that LinkedIn exports from their own profile, or pastes the sections. Suggest a better headline, About section, experience descriptions and skills.
    - GitHub summary: for each user (and combined, "nosso GitHub"), read public repositories through the GitHub API and summarize languages, recent activity, README quality, tests and CI, deployed demos and licenses. Return a prioritized list of improvements. Refresh weekly and on demand.
    - Keep a history so users can compare versions over time.
 
-8. QA lab (automated test agents)
+9. QA lab (automated test agents)
    For the platform itself and for every app or site we build, register a project (GitHub repository plus preview URL) and run tests on each pull request, nightly and on demand:
    - lint and type check; unit and integration tests;
    - end-to-end tests of critical flows with Playwright on desktop and mobile viewports;
@@ -76,10 +81,10 @@ Build these modules. Keep each one usable on a phone.
    - an exploratory AI agent that navigates the preview like a user, tries edge cases and opens a GitHub issue for each problem with steps to reproduce, screenshots and severity.
    Show run history, failures and trends in the platform. Never scan or test sites we do not own.
 
-9. AI Mentor
-   Keep the 13 prompt templates and the "ask Claude here" option. Add templates for the new modules: lead proposal, resume bullet, GitHub README review.
+10. AI Mentor
+   Keep the 13 prompt templates and the "ask Claude here" option. Add templates for the new modules: proposal for a prospected company, resume bullet, GitHub README review.
 
-10. Settings
+11. Settings
     Users, invitations, ClickUp connection, robot schedules and filters, monthly budget, data export, and account deletion with all personal data.
 </modules>
 
@@ -89,7 +94,7 @@ These limits exist because breaking a platform's terms can get our accounts bann
 - Local businesses come from the official Google Places API (Text Search, New), not from scraping Google Maps. Request only the fields needed through the field mask; the `websiteUri` field moves the request to a pricier tier, so batch and cache the requests.
 - Jobs come from sources that allow automated access: official APIs, RSS feeds, and community job boards on GitHub such as `frontendbr/vagas` and `backend-br/vagas` through the GitHub API. Before adding any source, record its terms of use, its rate limits and how you checked them in `docs/sources.md`. GitHub Jobs no longer exists; do not use it. Gupy has no official public API that I could confirm, so include it only if you find permitted access, and otherwise link to its search page.
 - ClickUp is accessed through its official API v2 (create task: `POST /api/v2/list/{list_id}/task`) with a token stored only on the server.
-- Collect and keep only the data each feature needs. Leads are business information; resumes and analyses are personal data under Brazil's LGPD: store them privately and delete them on request.
+- Collect and keep only the data each feature needs. Prospected companies are business information; resumes and analyses are personal data under Brazil's LGPD: store them privately and delete them on request.
 - Outreach is never automated in bulk. The app prepares messages; a person sends them.
 </data_sources_and_legal_limits>
 
@@ -104,14 +109,14 @@ We accept a low monthly cost with a hard limit. Default limit: R$ 50 per month f
 - Warn both users at 80% of the limit and stop paid jobs at 100% until the next month or until we raise the limit.
 - Prefer free tiers. Cache external results. Keep stable prompt prefixes so prompt caching works, and use the Message Batches API for non-urgent work such as daily job scoring.
 - Claude API: use the official TypeScript SDK and follow the `claude-api` skill for current SDK usage and model IDs; do not guess API shapes. Make the model an environment variable, default `claude-opus-5-5` with low effort for routine analyses, and use structured outputs for anything the app parses.
-- Before Phase 1, estimate the monthly cost of each paid feature at our expected usage (2 users, about 50 leads and 200 jobs per day).
+- Before Phase 1, estimate the monthly cost of each paid feature at our expected usage (2 users, about 50 prospected companies and 200 jobs per day).
 </budget>
 
 <architecture_defaults>
 These are defaults, not mandates. If something else is clearly better, propose it in an ADR during Phase 0 and wait for our approval.
 - Next.js (App Router) with TypeScript, Tailwind CSS and shadcn/ui.
 - Supabase: Postgres, Auth, Storage and Row Level Security on every table.
-- Hosting on Vercel or Netlify (we already use both). Check whether the free plan's terms allow our use, given the Business lab, and say so.
+- Hosting on Vercel or Netlify (we already use both). Check whether the free plan's terms allow our use, given the Client prospecting module, and say so.
 - Scheduled jobs on GitHub Actions. Cron expressions are in UTC: 08:00 in Brasília is `0 11 * * *`. "Forçar atualização agora" triggers the same workflow through `workflow_dispatch`.
 - Secrets only on the server or in GitHub Actions secrets, never in client code.
 - Tests: Vitest, Playwright with @axe-core/playwright, Lighthouse CI. The exploratory agent can use the Claude Code GitHub Action or Claude with a Playwright-driven browser; pick one in Phase 0 and explain why.
@@ -141,8 +146,8 @@ Course catalog, topic questionnaire and recommendations, per-user plans and chec
 Phase 3 — Job radar
 Settings panel, source adapters, daily job, deduplication, compatibility scores with reasons, per-user statuses. Done when the scheduled run fills the feed with real jobs and "Forçar atualização agora" works.
 
-Phase 4 — Business lab and ClickUp
-Prospecting robot with the Places API, CRM pipeline, ClickUp task creation, pricing table, scripts, NFC product page. Done when marking a lead "Bom cliente" creates the ClickUp task and stores its link, within the budget.
+Phase 4 — Business ideas and client prospecting (two separate modules)
+Business ideas: services catalog and NFC product page (the 300 ideas already arrived in Phase 1). Client prospecting: robot with the Places API, company table, CRM pipeline, ClickUp task creation, pricing table and scripts. Done when the two modules have separate menu entries and data, and marking a company "Bom cliente" creates the ClickUp task and stores its link, within the budget.
 
 Phase 5 — Career analyzer
 Resume and LinkedIn analysis, GitHub summary, history. Done when each of us receives an analysis we can act on and no suggestion invents facts about us.
