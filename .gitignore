@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Pacote gerado da TV
+tv-launcher/*.wgt
+tv-launcher/.buildResult

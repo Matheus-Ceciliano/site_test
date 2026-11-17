@@ -1,0 +1,134 @@
+/*
+ * Feito para o navegador das Samsung de 2015 (Tizen 2.3, WebKit antigo):
+ * sem variáveis CSS, sem grid, sem "gap", com prefixos -webkit-.
+ * Tela fixa de 1920x1080.
+ */
+* { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html { background: #0b0d14; }
+html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    color: #f2f3f7;
+    font-family: "SamsungOne", "Samsung Sans", Arial, sans-serif;
+}
+
+#bg {
+    position: absolute;
+    left: 0; top: 0; width: 1920px; height: 1080px;
+    background: #0b0d14;
+    background-image: -webkit-radial-gradient(15% 10%, circle, #2a3a8c 0%, rgba(42,58,140,0) 45%),
+                      -webkit-radial-gradient(90% 90%, circle, #6a2a7c 0%, rgba(106,42,124,0) 45%);
+    background-image: radial-gradient(circle at 15% 10%, #2a3a8c 0%, rgba(42,58,140,0) 45%),
+                      radial-gradient(circle at 90% 90%, #6a2a7c 0%, rgba(106,42,124,0) 45%);
+    z-index: 0;
+}
+.topo, .destaque, .linha, .aviso { position: relative; z-index: 1; }
+
+/* ---------- Topo ---------- */
+.topo {
+    display: -webkit-box; display: -webkit-flex; display: flex;
+    -webkit-box-pack: justify; -webkit-justify-content: space-between; justify-content: space-between;
+    -webkit-box-align: center; -webkit-align-items: center; align-items: center;
+    padding: 56px 96px 0 96px;
+}
+.saudacao { font-size: 44px; font-weight: bold; }
+.data { font-size: 26px; color: #a9afc4; margin-top: 6px; }
+.relogio { font-size: 72px; font-weight: 300; letter-spacing: 2px; }
+
+/* ---------- Destaque ---------- */
+.destaque { padding: 64px 96px 24px 96px; }
+.destaque-titulo { font-size: 64px; font-weight: bold; }
+.destaque-sub { font-size: 28px; color: #a9afc4; margin-top: 12px; }
+
+/* ---------- Linhas de cartões ---------- */
+.linha { padding: 24px 0 0 96px; }
+.linha h2 { font-size: 30px; font-weight: normal; color: #c9cddc; margin-bottom: 18px; }
+
+.trilho {
+    white-space: nowrap;
+    height: 250px;
+    padding-top: 14px;
+    -webkit-transition: -webkit-transform 0.25s ease-out;
+    transition: transform 0.25s ease-out;
+}
+
+.cartao {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: 200px;
+    margin-right: 28px;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    background: #1b1f2e;
+    border: 4px solid transparent;
+    -webkit-transition: -webkit-transform 0.18s ease-out, border-color 0.18s;
+    transition: transform 0.18s ease-out, border-color 0.18s;
+}
+.cartao.foco {
+    border-color: #ffffff;
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+    -webkit-box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+
+/* Cartão de favorito: cor da marca + nome grande */
+.cartao .nome-grande {
+    position: absolute;
+    left: 0; right: 0; top: 62px;
+    text-align: center;
+    font-size: 46px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+.cartao .rotulo {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 12px 18px;
+    font-size: 22px;
+    background: rgba(0,0,0,0.28);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cartao.indisponivel { opacity: 0.45; }
+
+/* Cartão de "todos os apps": ícone do sistema */
+.cartao.pequeno { width: 220px; height: 200px; background: #20253a; }
+.cartao.pequeno img {
+    position: absolute;
+    left: 50%; top: 34px;
+    width: 110px; height: 110px;
+    margin-left: -55px;
+}
+.cartao.pequeno .letra {
+    position: absolute;
+    left: 50%; top: 34px;
+    width: 110px; height: 110px; line-height: 110px;
+    margin-left: -55px;
+    border-radius: 24px;
+    text-align: center;
+    font-size: 54px;
+    font-weight: bold;
+    background: #3a4266;
+}
+.cartao.pequeno .rotulo { background: transparent; text-align: center; font-size: 20px; color: #c9cddc; }
+
+/* ---------- Aviso ---------- */
+.aviso {
+    position: absolute !important;
+    left: 50%; bottom: 48px;
+    width: 900px; margin-left: -450px;
+    padding: 18px 28px;
+    border-radius: 14px;
+    background: rgba(20,22,32,0.92);
+    font-size: 24px;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+.aviso.visivel { opacity: 1; }
